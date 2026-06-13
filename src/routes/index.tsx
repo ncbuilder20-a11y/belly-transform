@@ -442,15 +442,10 @@ function VisceralProblem() {
         </Reveal>
 
         <Reveal>
-          <div className="mt-14 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 max-w-3xl mx-auto">
-            {[
-              { src: visceral1, alt: "Organes abdominaux entourés de graisse viscérale" },
-              { src: visceral2, alt: "Comparaison anatomique : organes sains et organes entourés de graisse" },
-            ].map((img, n) => (
-              <div key={n} className="aspect-square overflow-hidden border border-[rgba(193,122,90,0.25)]" style={{ background: "var(--color-surface)" }}>
-                <img src={img.src} alt={img.alt} width={1024} height={1024} loading="lazy" className="w-full h-full object-cover" />
-              </div>
-            ))}
+          <div className="mt-14 max-w-2xl mx-auto">
+            <div className="aspect-square overflow-hidden border border-[rgba(193,122,90,0.25)]" style={{ background: "var(--color-surface)" }}>
+              <img src={visceral2} alt="Comparaison anatomique : organes sains et organes entourés de graisse viscérale" width={1024} height={1024} loading="lazy" className="w-full h-full object-cover" />
+            </div>
           </div>
           <p className="mt-6 text-center text-sm italic" style={{ color: "var(--color-ink-muted)" }}>
             La graisse viscérale — un ennemi silencieux de votre santé
