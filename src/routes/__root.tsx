@@ -109,13 +109,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         children: `#stcm-wrapper {
   --boxShadow: -5px 5px 10px 0px #00000012, 0px 0px 50px 0px #0000001a;
   --fontFamily: Helvetica Neue, Segoe UI, Arial, sans-serif;
-  --primaryColor: #FFF7CC;
-  --backgroundColor: #050505;
-  --textColor: #f4f0df;
+  --primaryColor: #523400;
+  --backgroundColor: #fffceb;
+  --textColor: #000000;
   --backdropBackgroundColor: #c9b6b633;
   --backdropBackgroundBlur: 0px;
-  --iconColor: #F4F0DF;
-  --iconBackgroundColor: #050505;
+  --iconColor: #523400;
+  --iconBackgroundColor: #fffceb;
 }`,
       },
     ],
