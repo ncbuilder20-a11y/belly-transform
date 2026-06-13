@@ -1049,10 +1049,52 @@ function Footer() {
   );
 }
 
+/* ---------- STICKY BOTTOM BUY BAR ---------- */
+function StickyBuyBar() {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const onScroll = () => {
+      const hero = document.getElementById("top");
+      const threshold = hero ? hero.offsetTop + hero.offsetHeight - 80 : 600;
+      setVisible(window.scrollY > threshold);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  return (
+    <div
+      className={`fixed bottom-0 left-0 right-0 z-50 transition-all duration-300 ${
+        visible ? "translate-y-0 opacity-100" : "translate-y-full opacity-0 pointer-events-none"
+      }`}
+      style={{
+        background: "var(--color-bg)",
+        borderTop: "1px solid rgba(193,122,90,0.25)",
+        boxShadow: "0 -8px 24px rgba(28,26,24,0.08)",
+      }}
+    >
+      <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between gap-3">
+        <div className="flex items-baseline gap-2 min-w-0">
+          <span className="font-display text-xl md:text-2xl" style={{ color: "var(--color-terra)" }}>9,99 €</span>
+          <span className="text-xs md:text-sm line-through" style={{ color: "var(--color-ink-muted)" }}>99 €</span>
+          <span className="hidden sm:inline text-xs uppercase tracking-wider" style={{ color: "var(--color-ink-muted)" }}>· Accès immédiat</span>
+        </div>
+        <a
+          href="#buy"
+          className="btn-primary btn-primary-hover shrink-0"
+          style={{ padding: "12px 18px", fontSize: "0.72rem" }}
+        >
+          Acheter pour 9,99 €
+        </a>
+      </div>
+    </div>
+  );
+}
+
 /* ---------- PAGE ---------- */
 function LandingPage() {
   return (
-    <main className="min-h-screen" style={{ background: "var(--color-bg)" }}>
+    <main className="min-h-screen pb-20 md:pb-0" style={{ background: "var(--color-bg)" }}>
       <PreHeaderStrip />
       <Header />
       <Hero />
@@ -1079,6 +1121,7 @@ function LandingPage() {
       <FinalCTA />
       <FAQ />
       <Footer />
+      <StickyBuyBar />
     </main>
   );
 }
