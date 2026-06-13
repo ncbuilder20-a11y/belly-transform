@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import {
@@ -1091,7 +1091,7 @@ function FinalCTA() {
 
 /* ---------- FAQ ---------- */
 const faqs = [
-  { q: "Je ne parviens pas à accéder à la plateforme, que faire ?", a: "Contactez notre support à support@victoriakorshak.com — nous vous répondons sous 24h." },
+  { q: "Je ne parviens pas à accéder à la plateforme, que faire ?", a: "Contactez notre support à support@vimoreau.com — nous vous répondons sous 24h." },
   { q: "Quels moyens de paiement acceptez-vous ?", a: "Paiement par carte bancaire (Visa, Mastercard) ou PayPal. Si vous rencontrez une difficulté, écrivez-nous." },
   { q: "Je n'aurai pas le temps de tout voir en 30 jours.", a: "L'accès peut être prolongé sur simple demande. Nous nous adaptons à votre rythme." },
   { q: "Ce programme convient-il aux hommes ?", a: "Absolument. Les techniques sont efficaces pour tous les corps." },
@@ -1132,20 +1132,26 @@ function Footer() {
       <div className="mx-auto max-w-6xl px-6">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <p className="font-display text-2xl text-white">Victoire Moreau</p>
+          <a href="mailto:support@vimoreau.com" className="text-sm hover:text-white">support@vimoreau.com</a>
         </div>
         <hr className="my-8 border-white/15" />
-        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 text-sm">
-          <div className="space-y-2">
-            <p>support@victoriakorshak.com</p>
-            <p className="text-xs text-white/50">Victoire Moreau (données légales du prestataire)</p>
+        <div className="grid gap-8 md:grid-cols-2 text-sm">
+          <div className="space-y-1 text-xs text-white/60 leading-relaxed">
+            <p className="text-white/80 text-sm font-medium mb-2">Victoire Moreau — Entrepreneur individuel</p>
+            <p>67 Avenue Gambetta, 92400 Courbevoie, France</p>
+            <p>SIREN : 899 736 226 · SIRET : 899 736 226 00016</p>
+            <p>Code APE : 58.11Z — Édition de livres</p>
+            <p>TVA intracommunautaire : FR96899736226</p>
+            <p>Email : support@vimoreau.com</p>
           </div>
-          <div className="flex flex-wrap gap-x-5 gap-y-2 text-xs">
-            <a href="#" className="hover:text-white">Politique de confidentialité</a>
-            <a href="#" className="hover:text-white">Contrat d'offre</a>
-            <a href="#" className="hover:text-white">Mentions légales</a>
+          <div className="flex flex-wrap gap-x-5 gap-y-2 text-xs md:justify-end md:items-start">
+            <Link to="/mentions-legales" className="hover:text-white">Mentions légales</Link>
+            <Link to="/confidentialite" className="hover:text-white">Politique de confidentialité</Link>
+            <Link to="/cgv" className="hover:text-white">CGV</Link>
+            <Link to="/remboursement" className="hover:text-white">Remboursement</Link>
           </div>
         </div>
-        <p className="mt-10 text-xs text-white/40">© 2025 Victoire Moreau. Tous droits réservés.</p>
+        <p className="mt-10 text-xs text-white/40">© 2026 Victoire Moreau. Tous droits réservés.</p>
       </div>
     </footer>
   );
