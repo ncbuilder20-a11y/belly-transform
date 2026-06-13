@@ -8,6 +8,13 @@ import {
   Instagram, Youtube, ChevronLeft, ChevronRight, Gift, MessageCircle,
 } from "lucide-react";
 import victoriaHero from "@/assets/victoria-hero.jpg";
+import symptomWaist from "@/assets/symptom-waist.jpg";
+import symptomBloating from "@/assets/symptom-bloating.jpg";
+import symptomFatigue from "@/assets/symptom-fatigue.jpg";
+import symptomHeart from "@/assets/symptom-heart.jpg";
+import symptomHormones from "@/assets/symptom-hormones.jpg";
+import symptomInsulin from "@/assets/symptom-insulin.jpg";
+import symptomStress from "@/assets/symptom-stress.jpg";
 
 export const Route = createFileRoute("/")({
   component: LandingPage,
