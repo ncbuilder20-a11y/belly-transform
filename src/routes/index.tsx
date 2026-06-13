@@ -28,6 +28,13 @@ import authorS2 from "@/assets/author-s2.png.asset.json";
 import authorS3 from "@/assets/author-s3.png.asset.json";
 import authorS4 from "@/assets/author-s4.png.asset.json";
 import resultWaist from "@/assets/result-waist.png.asset.json";
+import do0 from "@/assets/do0.jpg.asset.json";
+import do1 from "@/assets/do1.jpg.asset.json";
+import do2 from "@/assets/do2.jpg.asset.json";
+import do3 from "@/assets/do3.jpg.asset.json";
+import do4 from "@/assets/do4.jpg.asset.json";
+import do5 from "@/assets/do5.jpg.asset.json";
+import do6 from "@/assets/do6.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   component: LandingPage,
@@ -921,17 +928,76 @@ const reviews2 = [
   { name: "Émilie P.", city: "Nantes", quote: "Discret, doux, mais terriblement efficace. Cinq minutes par jour ont changé ma relation à mon corps." },
 ];
 function SecondCarousel() {
+  const images = [do6, do0, do5, do4, do3, do2, do1];
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "center" });
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    const onSelect = () => setSelectedIndex(emblaApi.selectedScrollSnap());
+    emblaApi.on("select", onSelect);
+    onSelect();
+    return () => { emblaApi.off("select", onSelect); };
+  }, [emblaApi]);
+
   return (
     <section className="py-20 md:py-28">
-      <div className="mx-auto max-w-6xl px-6">
+      <div className="mx-auto max-w-5xl px-6">
         <Reveal>
           <div className="text-center max-w-2xl mx-auto">
-            <Eyebrow>Témoignages</Eyebrow>
-            <h2 className="mt-4 text-3xl md:text-[2.25rem]">Ce qu'elles en disent</h2>
+            <Eyebrow>Avant / Après</Eyebrow>
+            <h2 className="mt-4 text-3xl md:text-[2.25rem]">Les résultats de nos participantes</h2>
+            <p className="mt-4 text-[var(--color-ink-muted)]">
+              Des transformations réelles obtenues avec la méthode.
+            </p>
           </div>
         </Reveal>
-        <div className="mt-14">
-          <TestimonialCarousel items={reviews2} />
+
+        <div className="mt-12 relative">
+          <div className="overflow-hidden rounded-lg" ref={emblaRef}>
+            <div className="flex">
+              {images.map((img, i) => (
+                <div key={i} className="min-w-0 shrink-0 grow-0 basis-full px-2">
+                  <div className="mx-auto max-w-2xl bg-[var(--color-surface)] rounded-lg overflow-hidden">
+                    <img
+                      src={img.url}
+                      alt={`Transformation avant après ${i + 1}`}
+                      className="w-full h-auto object-contain"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <button
+            onClick={() => emblaApi?.scrollPrev()}
+            aria-label="Précédent"
+            className="absolute left-0 md:-left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white shadow-md flex items-center justify-center hover:bg-[var(--color-terra)] hover:text-white transition"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <button
+            onClick={() => emblaApi?.scrollNext()}
+            aria-label="Suivant"
+            className="absolute right-0 md:-right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white shadow-md flex items-center justify-center hover:bg-[var(--color-terra)] hover:text-white transition"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+
+          <div className="flex justify-center gap-2 mt-6">
+            {images.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => emblaApi?.scrollTo(i)}
+                aria-label={`Aller à l'image ${i + 1}`}
+                className={`h-2 rounded-full transition-all ${
+                  i === selectedIndex ? "w-8 bg-[var(--color-terra)]" : "w-2 bg-[var(--color-ink-muted)]/30"
+                }`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
