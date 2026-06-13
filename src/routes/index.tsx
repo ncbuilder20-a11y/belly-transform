@@ -187,7 +187,7 @@ function Hero() {
         className="absolute inset-0 md:hidden pointer-events-none"
         style={{
           background:
-            "linear-gradient(180deg, rgba(245,240,232,0.94) 0%, rgba(245,240,232,0.6) 32%, rgba(245,240,232,0.15) 58%, rgba(245,240,232,0.9) 100%)",
+            "linear-gradient(180deg, rgba(245,240,232,0.96) 0%, rgba(245,240,232,0.88) 30%, rgba(245,240,232,0.7) 55%, rgba(245,240,232,0.35) 75%, rgba(245,240,232,0.1) 100%)",
         }}
       />
       <div
