@@ -8,6 +8,7 @@ import {
   Instagram, Youtube, ChevronLeft, ChevronRight, Gift, MessageCircle,
 } from "lucide-react";
 import victoriaHero from "@/assets/victoria-hero.jpg";
+import heroWaistBg from "@/assets/hero-waist-bg.jpg";
 import symptomWaist from "@/assets/symptom-waist.jpg";
 import symptomBloating from "@/assets/symptom-bloating.jpg";
 import symptomFatigue from "@/assets/symptom-fatigue.jpg";
@@ -19,6 +20,7 @@ import authorS1 from "@/assets/author-s1.png.asset.json";
 import authorS2 from "@/assets/author-s2.png.asset.json";
 import authorS3 from "@/assets/author-s3.png.asset.json";
 import authorS4 from "@/assets/author-s4.png.asset.json";
+import resultWaist from "@/assets/result-waist.png.asset.json";
 
 export const Route = createFileRoute("/")({
   component: LandingPage,
@@ -112,12 +114,12 @@ function Header() {
   ];
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-[var(--color-bg)]/95 backdrop-blur shadow-[0_1px_0_rgba(193,122,90,0.15)]" : "bg-transparent"
+      className={`sticky top-0 z-50 transition-all duration-300 ${
+        scrolled ? "bg-[var(--color-bg)]/95 backdrop-blur shadow-[0_1px_0_rgba(193,122,90,0.15)]" : "bg-[var(--color-bg)]"
       }`}
     >
-      <div className="mx-auto max-w-6xl px-6 h-16 flex items-center justify-between">
-        <a href="#top" className="font-display text-lg md:text-xl tracking-tight" style={{ color: "var(--color-ink)" }}>
+      <div className="mx-auto max-w-6xl px-5 md:px-6 h-14 md:h-16 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3">
+        <a href="#top" className="font-display text-base md:text-xl tracking-tight truncate" style={{ color: "var(--color-ink)" }}>
           Victoria Korshak
         </a>
         <nav className="hidden md:flex items-center gap-8">
@@ -134,7 +136,7 @@ function Header() {
             </a>
           )}
         </div>
-        <button onClick={() => setOpen((v) => !v)} className="md:hidden p-2 -mr-2" aria-label="Menu">
+        <button onClick={() => setOpen((v) => !v)} className="md:hidden p-2 -mr-2 shrink-0" aria-label="Menu">
           {open ? <X size={22} /> : <Menu size={22} />}
         </button>
       </div>
@@ -170,67 +172,62 @@ function PreHeaderStrip() {
 /* ---------- HERO ---------- */
 function Hero() {
   return (
-    <section id="top" className="pt-6 md:pt-10 pb-16 md:pb-24">
-      <div className="mx-auto max-w-6xl px-6 grid md:grid-cols-[1.15fr_1fr] gap-10 md:gap-16 items-center">
-        <div className="order-1">
+    <section
+      id="top"
+      className="relative overflow-hidden"
+      style={{
+        backgroundImage: `url(${heroWaistBg})`,
+        backgroundSize: "cover",
+        backgroundPosition: "70% center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      {/* Wash for text legibility */}
+      <div
+        className="absolute inset-0 md:hidden pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(245,240,232,0.96) 0%, rgba(245,240,232,0.88) 30%, rgba(245,240,232,0.7) 55%, rgba(245,240,232,0.35) 75%, rgba(245,240,232,0.1) 100%)",
+        }}
+      />
+      <div
+        className="absolute inset-0 hidden md:block pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(90deg, rgba(245,240,232,0.96) 0%, rgba(245,240,232,0.85) 38%, rgba(245,240,232,0.25) 68%, transparent 100%)",
+        }}
+      />
+
+      <div className="relative z-10 mx-auto max-w-6xl px-6 pt-10 md:pt-20 pb-16 md:pb-28 min-h-[88vh] md:min-h-[80vh] flex items-center">
+        <div className="w-full md:max-w-[34rem]">
           <Reveal>
             <Eyebrow>
               Programme en ligne · 14 jours · Début le {tomorrowFr()}
             </Eyebrow>
 
-            {/* Compact mobile portrait — small, inline, doesn't dominate the fold */}
-            <div className="md:hidden mt-5 flex items-center gap-4">
-              <div className="shrink-0 w-20 h-24 overflow-hidden" style={{ background: "var(--color-surface)" }}>
-                <img
-                  src={victoriaHero}
-                  alt="Victoria Korshak"
-                  width={160}
-                  height={192}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="text-xs leading-snug" style={{ color: "var(--color-ink-muted)" }}>
-                <span className="font-display text-base block" style={{ color: "var(--color-ink)" }}>Victoria Korshak</span>
-                Thérapeute · réhabilitation viscérale
-              </div>
-            </div>
-
-            <h1 className="mt-6 text-[2.4rem] sm:text-5xl md:text-[3.6rem] leading-[1.05]">
+            <h1 className="mt-5 text-[2.5rem] sm:text-5xl md:text-[3.6rem] leading-[1.02] font-display">
               <span style={{ color: "var(--color-terra)" }}>Transformation</span>
               <br />
               <span>de la taille</span>
             </h1>
-            <p className="mt-6 text-base md:text-[1.0625rem] max-w-[34rem]" style={{ color: "var(--color-ink-muted)" }}>
+            <p className="mt-5 text-base md:text-[1.0625rem] max-w-[32rem]" style={{ color: "var(--color-ink-muted)" }}>
               Éliminez la graisse viscérale, réveillez vos muscles profonds et retrouvez un ventre plat
               grâce à des techniques de massage et de respiration — seulement 5 minutes par jour.
             </p>
 
-            <div className="mt-8 flex flex-col sm:flex-row sm:items-end gap-6">
+            <div className="mt-7">
               <PriceBlock />
             </div>
 
-            <div className="mt-7">
+            <div className="mt-6">
               <CTA>Je commence le cours</CTA>
             </div>
 
-            <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-xs md:text-sm" style={{ color: "var(--color-ink-muted)" }}>
-              <li className="flex items-center gap-1.5"><CheckCircle2 size={14} style={{ color: "var(--color-sage)" }} /> Accès pendant 30 jours</li>
-              <li className="flex items-center gap-1.5"><CheckCircle2 size={14} style={{ color: "var(--color-sage)" }} /> Satisfait ou remboursé 14 jours</li>
-              <li className="flex items-center gap-1.5"><CheckCircle2 size={14} style={{ color: "var(--color-sage)" }} /> Sur mobile et tablette</li>
+            <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-xs md:text-sm" style={{ color: "var(--color-ink-muted)" }}>
+              <li className="flex items-center gap-1.5"><CheckCircle2 size={14} style={{ color: "var(--color-sage)" }} /> Accès 30 jours</li>
+              <li className="flex items-center gap-1.5"><CheckCircle2 size={14} style={{ color: "var(--color-sage)" }} /> Satisfait ou remboursé</li>
+              <li className="flex items-center gap-1.5"><CheckCircle2 size={14} style={{ color: "var(--color-sage)" }} /> Mobile & tablette</li>
             </ul>
-          </Reveal>
-        </div>
-        <div className="order-2 hidden md:block">
-          <Reveal>
-            <div className="relative aspect-[4/5] overflow-hidden" style={{ background: "var(--color-surface)" }}>
-              <img
-                src={victoriaHero}
-                alt="Victoria Korshak — thérapeute en réhabilitation viscérale"
-                width={896}
-                height={1152}
-                className="w-full h-full object-cover"
-              />
-            </div>
           </Reveal>
         </div>
       </div>
@@ -528,19 +525,20 @@ function BeforeAfter() {
         </Reveal>
         <div className="mt-14 grid md:grid-cols-2 gap-8">
           <Reveal>
-            <div className="border border-[rgba(193,122,90,0.2)]">
-              <div className="grid grid-cols-2">
-                {["Avant", "Après"].map((label) => (
-                  <div key={label} className="aspect-[3/4] flex items-end justify-center relative" style={{ background: "var(--color-surface)" }}>
-                    <span className="absolute top-3 left-3 label-eyebrow" style={{ color: "var(--color-terra)" }}>{label}</span>
-                    <svg viewBox="0 0 100 140" className="h-3/4" stroke="var(--color-ink-muted)" fill="none" strokeWidth="1">
-                      <circle cx="50" cy="25" r="12" />
-                      <path d={label === "Avant" ? "M30 50 Q50 45 70 50 L75 100 Q50 110 25 100 Z" : "M35 50 Q50 48 65 50 L68 100 Q50 105 32 100 Z"} />
-                    </svg>
-                  </div>
-                ))}
+            <div className="border border-[rgba(193,122,90,0.2)] bg-white overflow-hidden">
+              <div className="relative">
+                <img
+                  src={resultWaist.url}
+                  alt="Résultat client — avant et après le programme"
+                  width={996}
+                  height={650}
+                  loading="lazy"
+                  className="w-full h-auto block"
+                />
+                <span className="absolute top-3 left-3 label-eyebrow px-2.5 py-1 bg-white/90" style={{ color: "var(--color-terra)" }}>Avant</span>
+                <span className="absolute top-3 right-3 label-eyebrow px-2.5 py-1 bg-white/90" style={{ color: "var(--color-terra)" }}>Après</span>
               </div>
-              <div className="p-5 bg-white">
+              <div className="p-5">
                 <p className="text-sm italic" style={{ color: "var(--color-ink)" }}>
                   « −15 cm de tour de taille en 6 mois de pratique régulière. »
                 </p>
