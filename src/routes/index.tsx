@@ -243,39 +243,58 @@ function SignatureBand() {
 function BonusOffer() {
   return (
     <section className="py-20 md:py-28" style={{ background: "var(--color-surface)" }}>
-      <div className="mx-auto max-w-3xl px-6 text-center">
+      <div className="mx-auto max-w-4xl px-6 text-center">
         <Reveal>
           <Eyebrow>Offre limitée</Eyebrow>
-          <h2 className="mt-4 text-3xl md:text-[2.25rem]">Offre de lancement exclusive</h2>
-          <p className="mt-6 md:text-[1.0625rem]" style={{ color: "var(--color-ink-muted)" }}>
-            En vous inscrivant aujourd'hui, vous recevez gratuitement l'accès à la méditation audio
-            <em> « Respiration Anti-Stress »</em> (valeur 39 €) — une technique de respiration profonde
-            pour libérer les tensions du diaphragme en 10 minutes.
+          <h2 className="mt-4 text-3xl md:text-[2.25rem]">Deux bonus offerts à l'inscription</h2>
+          <p className="mt-6 md:text-[1.0625rem] max-w-2xl mx-auto" style={{ color: "var(--color-ink-muted)" }}>
+            En vous inscrivant aujourd'hui, vous recevez deux cadeaux exclusifs qui
+            accompagnent votre transformation au-delà du programme principal.
           </p>
 
-          <div className="mt-10 p-8 md:p-10 bg-white border border-[rgba(193,122,90,0.25)] text-left max-w-xl mx-auto">
-            <div className="flex items-start gap-4">
-              <div className="shrink-0 w-12 h-12 flex items-center justify-center" style={{ background: "var(--color-terra)" }}>
-                <Gift size={22} className="text-white" strokeWidth={1.5} />
+          <div className="mt-10 grid md:grid-cols-2 gap-5 text-left">
+            <div className="p-7 md:p-8 bg-white border border-[rgba(193,122,90,0.25)]">
+              <div className="flex items-start gap-4">
+                <div className="shrink-0 w-12 h-12 flex items-center justify-center" style={{ background: "var(--color-terra)" }}>
+                  <Gift size={22} className="text-white" strokeWidth={1.5} />
+                </div>
+                <div>
+                  <p className="label-eyebrow" style={{ color: "var(--color-terra)" }}>Bonus n°1 — offert (valeur 39 €)</p>
+                  <h3 className="font-display text-xl md:text-[1.4rem] mt-1 leading-snug">Méditation « Respiration Anti-Stress »</h3>
+                  <p className="mt-3 text-sm" style={{ color: "var(--color-ink-muted)" }}>
+                    Une technique de respiration profonde pour libérer les tensions du
+                    diaphragme en 10 minutes.
+                  </p>
+                </div>
               </div>
-              <div>
-                <p className="label-eyebrow" style={{ color: "var(--color-terra)" }}>Bonus inclus — offert (valeur 39 €)</p>
-                <h3 className="font-display text-xl md:text-2xl mt-1">Méditation « Respiration Anti-Stress »</h3>
-                <p className="mt-2 text-sm" style={{ color: "var(--color-ink-muted)" }}>
-                  Offert lors de votre inscription aujourd'hui.
-                </p>
+            </div>
+
+            <div className="p-7 md:p-8 bg-white border border-[rgba(193,122,90,0.25)]">
+              <div className="flex items-start gap-4">
+                <div className="shrink-0 w-12 h-12 flex items-center justify-center" style={{ background: "var(--color-terra)" }}>
+                  <Play size={20} className="text-white" strokeWidth={1.5} />
+                </div>
+                <div>
+                  <p className="label-eyebrow" style={{ color: "var(--color-terra)" }}>Bonus n°2 — offert (valeur 49 €)</p>
+                  <h3 className="font-display text-xl md:text-[1.4rem] mt-1 leading-snug">Cours ouvert en direct avec Victoria</h3>
+                  <p className="mt-3 text-sm" style={{ color: "var(--color-ink-muted)" }}>
+                    Une session live exclusive pour poser vos questions, pratiquer
+                    ensemble et recevoir des conseils personnalisés.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
 
           <div className="mt-10">
-            <CTA>Obtenir le bonus + le cours — 9,99 €</CTA>
+            <CTA>Obtenir les bonus + le cours — 9,99 €</CTA>
           </div>
         </Reveal>
       </div>
     </section>
   );
 }
+
 
 /* ---------- GUARANTEE ---------- */
 function Guarantee() {
