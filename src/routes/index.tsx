@@ -5,7 +5,7 @@ import {
   Shield, Star, Ruler, Wind, BatteryLow, Heart, Activity, TrendingUp, Brain,
   Clock, Repeat, Smartphone, CheckCircle2, Scissors, Dumbbell, HandHeart, Baby,
   CreditCard, UserCircle, Play, Calendar, Menu, X, ChevronDown, ArrowRight,
-  Instagram, Youtube, ChevronLeft, ChevronRight, Gift, MessageCircle,
+  ChevronLeft, ChevronRight, Gift, MessageCircle,
 } from "lucide-react";
 import victoriaHero from "@/assets/victoria-hero.jpg";
 import heroWaistBg from "@/assets/hero-waist-bg.jpg";
@@ -16,6 +16,13 @@ import symptomHeart from "@/assets/symptom-heart.jpg";
 import symptomHormones from "@/assets/symptom-hormones.jpg";
 import symptomInsulin from "@/assets/symptom-insulin.jpg";
 import symptomStress from "@/assets/symptom-stress.jpg";
+import visceral1 from "@/assets/visceral-1.jpg";
+import visceral2 from "@/assets/visceral-2.jpg";
+import benefitWaist from "@/assets/benefit-waist.jpg";
+import benefitDigestion from "@/assets/benefit-digestion.jpg";
+import benefitPosture from "@/assets/benefit-posture.jpg";
+import benefitCirculation from "@/assets/benefit-circulation.jpg";
+import benefitVitality from "@/assets/benefit-vitality.jpg";
 import authorS1 from "@/assets/author-s1.png.asset.json";
 import authorS2 from "@/assets/author-s2.png.asset.json";
 import authorS3 from "@/assets/author-s3.png.asset.json";
