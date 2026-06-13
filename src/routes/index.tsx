@@ -186,14 +186,14 @@ function Hero() {
           className="absolute inset-0 md:hidden"
           style={{
             background:
-              "linear-gradient(180deg, var(--color-bg) 0%, rgba(245,240,232,0.72) 28%, rgba(245,240,232,0.4) 58%, rgba(245,240,232,0.95) 100%)",
+              "linear-gradient(180deg, rgba(245,240,232,0.92) 0%, rgba(245,240,232,0.55) 35%, rgba(245,240,232,0.15) 60%, rgba(245,240,232,0.85) 100%)",
           }}
         />
         <div
           className="absolute inset-0 hidden md:block"
           style={{
             background:
-              "linear-gradient(90deg, var(--color-bg) 0%, rgba(245,240,232,0.94) 38%, rgba(245,240,232,0.4) 68%, transparent 100%)",
+              "linear-gradient(90deg, rgba(245,240,232,0.96) 0%, rgba(245,240,232,0.85) 38%, rgba(245,240,232,0.25) 68%, transparent 100%)",
           }}
         />
       </div>
