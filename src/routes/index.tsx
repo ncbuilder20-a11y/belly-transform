@@ -32,9 +32,11 @@ import do0 from "@/assets/do0.jpg.asset.json";
 import do1 from "@/assets/do1.jpg.asset.json";
 import do2 from "@/assets/do2.jpg.asset.json";
 import do3 from "@/assets/do3.jpg.asset.json";
-import do4 from "@/assets/do4.jpg.asset.json";
+import do4a from "@/assets/do4a.jpg.asset.json";
+import do4b from "@/assets/do4b.jpg.asset.json";
 import do5 from "@/assets/do5.jpg.asset.json";
-import do6 from "@/assets/do6.jpg.asset.json";
+import do6a from "@/assets/do6a.jpg.asset.json";
+import do6b from "@/assets/do6b.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   component: LandingPage,
@@ -928,7 +930,7 @@ const reviews2 = [
   { name: "Émilie P.", city: "Nantes", quote: "Discret, doux, mais terriblement efficace. Cinq minutes par jour ont changé ma relation à mon corps." },
 ];
 function SecondCarousel() {
-  const images = [do6, do0, do5, do4, do3, do2, do1];
+  const images = [do6a, do6b, do0, do5, do4a, do4b, do3, do2, do1];
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "center" });
   const [selectedIndex, setSelectedIndex] = useState(0);
 
