@@ -93,7 +93,89 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      { rel: "preconnect", href: "https://cdn.jsdelivr.net", crossOrigin: "" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" },
+      {
+        rel: "stylesheet",
+        id: "silktide-consent-manager-css",
+        href: "https://cdn.jsdelivr.net/gh/silktide/consent-manager@v2.0.0/silktide-consent-manager.css",
+        integrity: "sha384-IO1E/jCrQXyH5rwcI0SXP7OXw47JFqQNDQcKhbFvqnL2IunBxxwE2Ne5XyAmCqKs",
+        crossOrigin: "anonymous",
+      },
+    ],
+    styles: [
+      {
+        id: "silktide-consent-manager-overrides",
+        children: `#stcm-wrapper {
+  --boxShadow: -5px 5px 10px 0px #00000012, 0px 0px 50px 0px #0000001a;
+  --fontFamily: Helvetica Neue, Segoe UI, Arial, sans-serif;
+  --primaryColor: #FFF7CC;
+  --backgroundColor: #050505;
+  --textColor: #f4f0df;
+  --backdropBackgroundColor: #c9b6b633;
+  --backdropBackgroundBlur: 0px;
+  --iconColor: #F4F0DF;
+  --iconBackgroundColor: #050505;
+}`,
+      },
+    ],
+    scripts: [
+      {
+        src: "https://cdn.jsdelivr.net/gh/silktide/consent-manager@v2.0.0/silktide-consent-manager.js",
+        integrity: "sha384-j4NIMOecmtzMWe9GJADIIe5hTlHG63aiTQ/2XorW10RNyQJg+IU+xwFVDy45wBah",
+        crossOrigin: "anonymous",
+      },
+      {
+        children: `window.addEventListener('load', function() {
+  if (!window.silktideConsentManager) return;
+  window.silktideConsentManager.init({
+    backdrop: { show: true },
+    icon: { position: "bottomLeft" },
+    prompt: { position: "bottomRight" },
+    consentTypes: [
+      {
+        id: "essential",
+        label: "Essential",
+        description: "<p>These cookies are necessary for the website to function properly and cannot be switched off. They help with things like logging in and setting your privacy preferences.</p>",
+        required: true,
+        onAccept: function() {}
+      },
+      {
+        id: "analytics",
+        label: "Analytics",
+        description: "<p>These cookies help us improve the site by tracking which pages are most popular and how visitors move around the site.</p>",
+        defaultValue: true,
+        gtag: "analytics_storage"
+      },
+      {
+        id: "marketing",
+        label: "Marketing",
+        description: "<p>These cookies are used by us and our advertising partners to show you relevant ads on this site and elsewhere, and to measure how those campaigns perform.</p>",
+        gtag: ["ad_storage", "ad_user_data", "ad_personalization"]
+      }
+    ],
+    text: {
+      prompt: {
+        description: "<p>We use cookies on our site to enhance your user experience, provide personalized content, and analyze our traffic.</p>",
+        acceptAllButtonText: "Accept all",
+        acceptAllButtonAccessibleLabel: "Accept all cookies",
+        rejectNonEssentialButtonText: "Reject non-essential",
+        rejectNonEssentialButtonAccessibleLabel: "Reject all non-essential cookies",
+        preferencesButtonText: "Preferences",
+        preferencesButtonAccessibleLabel: "Toggle preferences"
+      },
+      preferences: {
+        title: "Customize your cookie preferences",
+        description: "<p>We respect your right to privacy. You can choose not to allow some types of cookies. Your cookie preferences will apply across our website.</p>",
+        saveButtonText: "Save and close",
+        saveButtonAccessibleLabel: "Save your cookie preferences",
+        creditLinkText: "Get this banner for free",
+        creditLinkAccessibleLabel: "Get this banner for free"
+      }
+    }
+  });
+});`,
+      },
     ],
   }),
   shellComponent: RootShell,
