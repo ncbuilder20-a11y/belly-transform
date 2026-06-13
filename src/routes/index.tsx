@@ -8,6 +8,7 @@ import {
   Instagram, Youtube, ChevronLeft, ChevronRight, Gift, MessageCircle,
 } from "lucide-react";
 import victoriaHero from "@/assets/victoria-hero.jpg";
+import heroWaistBg from "@/assets/hero-waist-bg.jpg";
 import symptomWaist from "@/assets/symptom-waist.jpg";
 import symptomBloating from "@/assets/symptom-bloating.jpg";
 import symptomFatigue from "@/assets/symptom-fatigue.jpg";
@@ -19,6 +20,7 @@ import authorS1 from "@/assets/author-s1.png.asset.json";
 import authorS2 from "@/assets/author-s2.png.asset.json";
 import authorS3 from "@/assets/author-s3.png.asset.json";
 import authorS4 from "@/assets/author-s4.png.asset.json";
+import resultWaist from "@/assets/result-waist.png.asset.json";
 
 export const Route = createFileRoute("/")({
   component: LandingPage,
