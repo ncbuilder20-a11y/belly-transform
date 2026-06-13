@@ -172,9 +172,9 @@ function PreHeaderStrip() {
 /* ---------- HERO ---------- */
 function Hero() {
   return (
-    <section id="top" className="relative overflow-hidden">
+    <section id="top" className="relative overflow-hidden isolate">
       {/* Background image */}
-      <div className="absolute inset-0 -z-10">
+      <div className="absolute inset-0 z-0">
         <img
           src={heroWaistBg}
           alt=""
@@ -186,7 +186,7 @@ function Hero() {
           className="absolute inset-0 md:hidden"
           style={{
             background:
-              "linear-gradient(180deg, var(--color-bg) 0%, rgba(245,240,232,0.78) 32%, rgba(245,240,232,0.55) 60%, rgba(245,240,232,0.92) 100%)",
+              "linear-gradient(180deg, var(--color-bg) 0%, rgba(245,240,232,0.72) 28%, rgba(245,240,232,0.4) 58%, rgba(245,240,232,0.95) 100%)",
           }}
         />
         <div
