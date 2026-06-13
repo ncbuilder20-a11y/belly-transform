@@ -417,9 +417,6 @@ function SocialProof() {
         <div className="mt-14">
           <TestimonialCarousel items={reviews1} />
         </div>
-        <p className="mt-6 text-center text-xs" style={{ color: "var(--color-ink-muted)" }}>
-          Témoignages reçus via WhatsApp de nos participantes francophones
-        </p>
       </div>
     </section>
   );
