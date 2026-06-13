@@ -740,11 +740,11 @@ function ForWho() {
 
 /* ---------- PROBLEMS GRID ---------- */
 const problems = [
-  { title: "Silhouette & taille", text: "Réduction des rondeurs abdominales.", svg: <circle cx="50" cy="50" r="30" /> },
-  { title: "Digestion & hormones", text: "Moins de ballonnements, meilleur transit.", svg: <path d="M30 50 Q50 20 70 50 T30 50" /> },
-  { title: "Posture & dos", text: "Soulagement des douleurs lombaires et cervicales.", svg: <path d="M40 20 L40 80 M60 20 L60 80 M30 50 L70 50" /> },
-  { title: "Circulation & œdèmes", text: "Jambes légères, visage dégonflé.", svg: <path d="M30 30 Q50 50 30 70 M70 30 Q50 50 70 70" /> },
-  { title: "Vie intime", text: "Regain de vitalité et de sensations.", svg: <path d="M50 30 L30 60 L50 70 L70 60 Z" /> },
+  { title: "Silhouette & taille", text: "Réduction des rondeurs abdominales.", img: benefitWaist },
+  { title: "Digestion & hormones", text: "Moins de ballonnements, meilleur transit.", img: benefitDigestion },
+  { title: "Posture & dos", text: "Soulagement des douleurs lombaires et cervicales.", img: benefitPosture },
+  { title: "Circulation & œdèmes", text: "Jambes légères, visage dégonflé.", img: benefitCirculation },
+  { title: "Vie intime", text: "Regain de vitalité et de sensations.", img: benefitVitality },
 ];
 function ProblemsGrid() {
   return (
@@ -759,11 +759,9 @@ function ProblemsGrid() {
         <div className="mt-14 grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-5">
           {problems.map((p, i) => (
             <Reveal key={i}>
-              <div className="border border-[rgba(193,122,90,0.18)] h-full">
-                <div className="aspect-square flex items-center justify-center" style={{ background: "var(--color-surface)" }}>
-                  <svg viewBox="0 0 100 100" className="w-1/2 h-1/2" stroke="var(--color-terra)" fill="none" strokeWidth="1.3">
-                    {p.svg}
-                  </svg>
+              <div className="border border-[rgba(193,122,90,0.18)] h-full flex flex-col">
+                <div className="aspect-square overflow-hidden" style={{ background: "var(--color-surface)" }}>
+                  <img src={p.img} alt={p.title} width={1024} height={1024} loading="lazy" className="w-full h-full object-cover" />
                 </div>
                 <div className="p-4 bg-white">
                   <h3 className="font-display text-base md:text-lg">{p.title}</h3>
