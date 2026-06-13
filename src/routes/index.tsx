@@ -15,6 +15,10 @@ import symptomHeart from "@/assets/symptom-heart.jpg";
 import symptomHormones from "@/assets/symptom-hormones.jpg";
 import symptomInsulin from "@/assets/symptom-insulin.jpg";
 import symptomStress from "@/assets/symptom-stress.jpg";
+import authorS1 from "@/assets/author-s1.png.asset.json";
+import authorS2 from "@/assets/author-s2.png.asset.json";
+import authorS3 from "@/assets/author-s3.png.asset.json";
+import authorS4 from "@/assets/author-s4.png.asset.json";
 
 export const Route = createFileRoute("/")({
   component: LandingPage,
@@ -631,8 +635,14 @@ function AuthorQuote() {
 
 /* ---------- AUTHOR BIO ---------- */
 function AuthorBio() {
-  const [emblaRef, embla] = useEmblaCarousel({ loop: true });
-  const photos = [1, 2, 3, 4];
+  const [emblaRef, embla] = useEmblaCarousel({ loop: true, align: "start" });
+  const photos = [
+    { src: authorS1.url, alt: "Résultat de participante — transformation de la taille, vue face" },
+    { src: authorS2.url, alt: "Résultat de participante — transformation de la taille, profil" },
+    { src: authorS3.url, alt: "Résultat de participante — transformation de la taille, avant et après" },
+    { src: authorS4.url, alt: "Résultat de participante — collage de résultats du programme" },
+  ];
+
   return (
     <section id="auteure" className="py-20 md:py-28">
       <div className="mx-auto max-w-6xl px-6 grid md:grid-cols-[1fr_1.1fr] gap-12 md:gap-16 items-start">
@@ -640,24 +650,27 @@ function AuthorBio() {
           <div className="relative">
             <div className="overflow-hidden" ref={emblaRef}>
               <div className="flex">
-                {photos.map((p) => (
-                  <div key={p} className="shrink-0 grow-0 basis-full">
-                    <div className="aspect-[4/5] flex items-center justify-center" style={{ background: "var(--color-surface)" }}>
-                      {p === 1 ? (
-                        <img src={victoriaHero} alt="Victoria" className="w-full h-full object-cover" loading="lazy" />
-                      ) : (
-                        <span className="label-eyebrow" style={{ color: "var(--color-ink-muted)" }}>Photo {p}</span>
-                      )}
+                {photos.map((photo) => (
+                  <div key={photo.src} className="shrink-0 grow-0 basis-full">
+                    <div className="aspect-[4/5] overflow-hidden border border-[rgba(193,122,90,0.15)]" style={{ background: "var(--color-surface)" }}>
+                      <img
+                        src={photo.src}
+                        alt={photo.alt}
+                        width={900}
+                        height={1125}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                      />
                     </div>
                   </div>
                 ))}
               </div>
             </div>
             <div className="absolute bottom-4 right-4 flex gap-2">
-              <button onClick={() => embla?.scrollPrev()} className="w-9 h-9 bg-white/90 flex items-center justify-center" aria-label="Précédent">
+              <button onClick={() => embla?.scrollPrev()} className="w-9 h-9 bg-white/90 border border-[rgba(193,122,90,0.2)] flex items-center justify-center" aria-label="Précédent">
                 <ChevronLeft size={16} style={{ color: "var(--color-terra)" }} />
               </button>
-              <button onClick={() => embla?.scrollNext()} className="w-9 h-9 bg-white/90 flex items-center justify-center" aria-label="Suivant">
+              <button onClick={() => embla?.scrollNext()} className="w-9 h-9 bg-white/90 border border-[rgba(193,122,90,0.2)] flex items-center justify-center" aria-label="Suivant">
                 <ChevronRight size={16} style={{ color: "var(--color-terra)" }} />
               </button>
             </div>
