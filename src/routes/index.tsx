@@ -464,13 +464,13 @@ function VisceralProblem() {
 
 /* ---------- SYMPTOMS ---------- */
 const symptoms = [
-  { Icon: Ruler, title: "Tour de taille en expansion", text: "Silhouette en « pomme », > 80 cm chez la femme." },
-  { Icon: Wind, title: "Ballonnements & transit perturbé", text: "Inconfort digestif chronique, constipation." },
-  { Icon: BatteryLow, title: "Fatigue persistante", text: "Épuisement sans cause apparente, manque d'énergie." },
-  { Icon: Heart, title: "Tension & cholestérol", text: "Risques cardiovasculaires accrus." },
-  { Icon: Activity, title: "Déséquilibres hormonaux", text: "Variations de poids inexpliquées, cycles irréguliers." },
-  { Icon: TrendingUp, title: "Résistance à l'insuline", text: "Envies de sucre intenses, difficultés à mincir." },
-  { Icon: Brain, title: "Stress chronique & cortisol", text: "Anxiété, insomnies, inflammation silencieuse." },
+  { img: symptomWaist, title: "Tour de taille en expansion", text: "Silhouette en « pomme », > 80 cm chez la femme." },
+  { img: symptomBloating, title: "Ballonnements & transit perturbé", text: "Inconfort digestif chronique, constipation." },
+  { img: symptomFatigue, title: "Fatigue persistante", text: "Épuisement sans cause apparente, manque d'énergie." },
+  { img: symptomHeart, title: "Tension & cholestérol", text: "Risques cardiovasculaires accrus." },
+  { img: symptomHormones, title: "Déséquilibres hormonaux", text: "Variations de poids inexpliquées, cycles irréguliers." },
+  { img: symptomInsulin, title: "Résistance à l'insuline", text: "Envies de sucre intenses, difficultés à mincir." },
+  { img: symptomStress, title: "Stress chronique & cortisol", text: "Anxiété, insomnies, inflammation silencieuse." },
 ];
 
 function Symptoms() {
@@ -484,12 +484,23 @@ function Symptoms() {
           </div>
         </Reveal>
         <div className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-6">
-          {symptoms.map(({ Icon, title, text }, i) => (
+          {symptoms.map(({ img, title, text }, i) => (
             <Reveal key={i}>
-              <div className="bg-white p-6 md:p-7 h-full border border-[rgba(193,122,90,0.15)]">
-                <Icon size={26} strokeWidth={1.3} style={{ color: "var(--color-terra)" }} />
-                <h3 className="font-display text-lg md:text-xl mt-4">{title}</h3>
-                <p className="mt-2 text-sm" style={{ color: "var(--color-ink-muted)" }}>{text}</p>
+              <div className="bg-white h-full border border-[rgba(193,122,90,0.15)] flex flex-col">
+                <div className="aspect-square overflow-hidden" style={{ background: "var(--color-bg)" }}>
+                  <img
+                    src={img}
+                    alt={title}
+                    width={1024}
+                    height={1024}
+                    loading="lazy"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="p-5 md:p-6">
+                  <h3 className="font-display text-lg md:text-xl">{title}</h3>
+                  <p className="mt-2 text-sm" style={{ color: "var(--color-ink-muted)" }}>{text}</p>
+                </div>
               </div>
             </Reveal>
           ))}
@@ -498,6 +509,7 @@ function Symptoms() {
     </section>
   );
 }
+
 
 /* ---------- BEFORE / AFTER ---------- */
 function BeforeAfter() {
