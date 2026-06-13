@@ -161,11 +161,29 @@ function Hero() {
   return (
     <section id="top" className="pt-6 md:pt-10 pb-16 md:pb-24">
       <div className="mx-auto max-w-6xl px-6 grid md:grid-cols-[1.15fr_1fr] gap-10 md:gap-16 items-center">
-        <div className="md:order-1 order-2">
+        <div className="order-1">
           <Reveal>
             <Eyebrow>
               Programme en ligne · 14 jours · Début le {tomorrowFr()}
             </Eyebrow>
+
+            {/* Compact mobile portrait — small, inline, doesn't dominate the fold */}
+            <div className="md:hidden mt-5 flex items-center gap-4">
+              <div className="shrink-0 w-20 h-24 overflow-hidden" style={{ background: "var(--color-surface)" }}>
+                <img
+                  src={victoriaHero}
+                  alt="Victoria Korshak"
+                  width={160}
+                  height={192}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="text-xs leading-snug" style={{ color: "var(--color-ink-muted)" }}>
+                <span className="font-display text-base block" style={{ color: "var(--color-ink)" }}>Victoria Korshak</span>
+                Thérapeute · réhabilitation viscérale
+              </div>
+            </div>
+
             <h1 className="mt-6 text-[2.4rem] sm:text-5xl md:text-[3.6rem] leading-[1.05]">
               <span style={{ color: "var(--color-terra)" }}>Transformation</span>
               <br />
@@ -191,7 +209,7 @@ function Hero() {
             </ul>
           </Reveal>
         </div>
-        <div className="md:order-2 order-1">
+        <div className="order-2 hidden md:block">
           <Reveal>
             <div className="relative aspect-[4/5] overflow-hidden" style={{ background: "var(--color-surface)" }}>
               <img
@@ -208,6 +226,7 @@ function Hero() {
     </section>
   );
 }
+
 
 /* ---------- SIGNATURE BAND ---------- */
 function SignatureBand() {
