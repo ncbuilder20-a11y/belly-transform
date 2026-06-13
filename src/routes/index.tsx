@@ -525,19 +525,20 @@ function BeforeAfter() {
         </Reveal>
         <div className="mt-14 grid md:grid-cols-2 gap-8">
           <Reveal>
-            <div className="border border-[rgba(193,122,90,0.2)]">
-              <div className="grid grid-cols-2">
-                {["Avant", "Après"].map((label) => (
-                  <div key={label} className="aspect-[3/4] flex items-end justify-center relative" style={{ background: "var(--color-surface)" }}>
-                    <span className="absolute top-3 left-3 label-eyebrow" style={{ color: "var(--color-terra)" }}>{label}</span>
-                    <svg viewBox="0 0 100 140" className="h-3/4" stroke="var(--color-ink-muted)" fill="none" strokeWidth="1">
-                      <circle cx="50" cy="25" r="12" />
-                      <path d={label === "Avant" ? "M30 50 Q50 45 70 50 L75 100 Q50 110 25 100 Z" : "M35 50 Q50 48 65 50 L68 100 Q50 105 32 100 Z"} />
-                    </svg>
-                  </div>
-                ))}
+            <div className="border border-[rgba(193,122,90,0.2)] bg-white overflow-hidden">
+              <div className="relative">
+                <img
+                  src={resultWaist.url}
+                  alt="Résultat client — avant et après le programme"
+                  width={996}
+                  height={650}
+                  loading="lazy"
+                  className="w-full h-auto block"
+                />
+                <span className="absolute top-3 left-3 label-eyebrow px-2.5 py-1 bg-white/90" style={{ color: "var(--color-terra)" }}>Avant</span>
+                <span className="absolute top-3 right-3 label-eyebrow px-2.5 py-1 bg-white/90" style={{ color: "var(--color-terra)" }}>Après</span>
               </div>
-              <div className="p-5 bg-white">
+              <div className="p-5">
                 <p className="text-sm italic" style={{ color: "var(--color-ink)" }}>
                   « −15 cm de tour de taille en 6 mois de pratique régulière. »
                 </p>
