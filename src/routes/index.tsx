@@ -949,11 +949,11 @@ function FinalCTA() {
     <section id="buy" className="py-24 md:py-32" style={{ background: "var(--color-black-bg)" }}>
       <div className="mx-auto max-w-3xl px-6 text-center text-white">
         <Reveal>
-          <h2 className="font-display text-[2.25rem] md:text-5xl leading-tight">
+          <h2 className="font-display text-[2.25rem] md:text-5xl leading-tight text-white" style={{ color: "#FFFFFF" }}>
             Votre ventre est le centre <br className="hidden md:inline" />
             de votre force et de votre beauté.
             <br />
-            <em className="font-normal" style={{ color: "var(--color-terra)" }}>Commencez aujourd'hui.</em>
+            <em className="font-normal" style={{ color: "#E8A07F" }}>Commencez aujourd'hui.</em>
           </h2>
 
           <div className="mt-12 flex flex-col items-center gap-8">
