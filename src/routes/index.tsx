@@ -114,9 +114,7 @@ function Header() {
   ];
   return (
     <header
-      className={`sticky top-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-[var(--color-bg)]/95 backdrop-blur shadow-[0_1px_0_rgba(193,122,90,0.15)]" : "bg-[var(--color-bg)]"
-      }`}
+      className="relative z-40 bg-[var(--color-bg)] border-b border-[rgba(193,122,90,0.12)]"
     >
       <div className="mx-auto max-w-6xl px-5 md:px-6 h-14 md:h-16 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3">
         <a href="#top" className="font-display text-base md:text-xl tracking-tight truncate" style={{ color: "var(--color-ink)" }}>
