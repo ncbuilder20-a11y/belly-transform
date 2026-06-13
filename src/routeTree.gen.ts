@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as RemboursementRouteImport } from './routes/remboursement'
+import { Route as PaiementEchoueRouteImport } from './routes/paiement-echoue'
 import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
 import { Route as ConfidentialiteRouteImport } from './routes/confidentialite'
 import { Route as CgvRouteImport } from './routes/cgv'
@@ -18,6 +19,11 @@ import { Route as IndexRouteImport } from './routes/index'
 const RemboursementRoute = RemboursementRouteImport.update({
   id: '/remboursement',
   path: '/remboursement',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PaiementEchoueRoute = PaiementEchoueRouteImport.update({
+  id: '/paiement-echoue',
+  path: '/paiement-echoue',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MentionsLegalesRoute = MentionsLegalesRouteImport.update({
@@ -46,6 +52,7 @@ export interface FileRoutesByFullPath {
   '/cgv': typeof CgvRoute
   '/confidentialite': typeof ConfidentialiteRoute
   '/mentions-legales': typeof MentionsLegalesRoute
+  '/paiement-echoue': typeof PaiementEchoueRoute
   '/remboursement': typeof RemboursementRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +60,7 @@ export interface FileRoutesByTo {
   '/cgv': typeof CgvRoute
   '/confidentialite': typeof ConfidentialiteRoute
   '/mentions-legales': typeof MentionsLegalesRoute
+  '/paiement-echoue': typeof PaiementEchoueRoute
   '/remboursement': typeof RemboursementRoute
 }
 export interface FileRoutesById {
@@ -61,6 +69,7 @@ export interface FileRoutesById {
   '/cgv': typeof CgvRoute
   '/confidentialite': typeof ConfidentialiteRoute
   '/mentions-legales': typeof MentionsLegalesRoute
+  '/paiement-echoue': typeof PaiementEchoueRoute
   '/remboursement': typeof RemboursementRoute
 }
 export interface FileRouteTypes {
@@ -70,15 +79,23 @@ export interface FileRouteTypes {
     | '/cgv'
     | '/confidentialite'
     | '/mentions-legales'
+    | '/paiement-echoue'
     | '/remboursement'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/cgv' | '/confidentialite' | '/mentions-legales' | '/remboursement'
+  to:
+    | '/'
+    | '/cgv'
+    | '/confidentialite'
+    | '/mentions-legales'
+    | '/paiement-echoue'
+    | '/remboursement'
   id:
     | '__root__'
     | '/'
     | '/cgv'
     | '/confidentialite'
     | '/mentions-legales'
+    | '/paiement-echoue'
     | '/remboursement'
   fileRoutesById: FileRoutesById
 }
@@ -87,6 +104,7 @@ export interface RootRouteChildren {
   CgvRoute: typeof CgvRoute
   ConfidentialiteRoute: typeof ConfidentialiteRoute
   MentionsLegalesRoute: typeof MentionsLegalesRoute
+  PaiementEchoueRoute: typeof PaiementEchoueRoute
   RemboursementRoute: typeof RemboursementRoute
 }
 
@@ -97,6 +115,13 @@ declare module '@tanstack/react-router' {
       path: '/remboursement'
       fullPath: '/remboursement'
       preLoaderRoute: typeof RemboursementRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/paiement-echoue': {
+      id: '/paiement-echoue'
+      path: '/paiement-echoue'
+      fullPath: '/paiement-echoue'
+      preLoaderRoute: typeof PaiementEchoueRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/mentions-legales': {
@@ -135,8 +160,19 @@ const rootRouteChildren: RootRouteChildren = {
   CgvRoute: CgvRoute,
   ConfidentialiteRoute: ConfidentialiteRoute,
   MentionsLegalesRoute: MentionsLegalesRoute,
+  PaiementEchoueRoute: PaiementEchoueRoute,
   RemboursementRoute: RemboursementRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
