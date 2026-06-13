@@ -5,7 +5,7 @@ import {
   Shield, Star, Ruler, Wind, BatteryLow, Heart, Activity, TrendingUp, Brain,
   Clock, Repeat, Smartphone, CheckCircle2, Scissors, Dumbbell, HandHeart, Baby,
   CreditCard, UserCircle, Play, Calendar, Menu, X, ChevronDown, ArrowRight,
-  Instagram, Youtube, ChevronLeft, ChevronRight, Gift, MessageCircle,
+  ChevronLeft, ChevronRight, Gift, MessageCircle,
 } from "lucide-react";
 import victoriaHero from "@/assets/victoria-hero.jpg";
 import heroWaistBg from "@/assets/hero-waist-bg.jpg";
@@ -16,6 +16,13 @@ import symptomHeart from "@/assets/symptom-heart.jpg";
 import symptomHormones from "@/assets/symptom-hormones.jpg";
 import symptomInsulin from "@/assets/symptom-insulin.jpg";
 import symptomStress from "@/assets/symptom-stress.jpg";
+import visceral1 from "@/assets/visceral-1.jpg";
+import visceral2 from "@/assets/visceral-2.jpg";
+import benefitWaist from "@/assets/benefit-waist.jpg";
+import benefitDigestion from "@/assets/benefit-digestion.jpg";
+import benefitPosture from "@/assets/benefit-posture.jpg";
+import benefitCirculation from "@/assets/benefit-circulation.jpg";
+import benefitVitality from "@/assets/benefit-vitality.jpg";
 import authorS1 from "@/assets/author-s1.png.asset.json";
 import authorS2 from "@/assets/author-s2.png.asset.json";
 import authorS3 from "@/assets/author-s3.png.asset.json";
@@ -118,7 +125,7 @@ function Header() {
     >
       <div className="mx-auto max-w-6xl px-5 md:px-6 h-14 md:h-16 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3">
         <a href="#top" className="font-display text-base md:text-xl tracking-tight truncate" style={{ color: "var(--color-ink)" }}>
-          Victoria Korshak
+          Victoire Moreau
         </a>
         <nav className="hidden md:flex items-center gap-8">
           {navItems.map((n) => (
@@ -282,7 +289,7 @@ function BonusOffer() {
                 </div>
                 <div>
                   <p className="label-eyebrow" style={{ color: "var(--color-terra)" }}>Bonus n°2 — offert (valeur 49 €)</p>
-                  <h3 className="font-display text-xl md:text-[1.4rem] mt-1 leading-snug">Cours ouvert en direct avec Victoria</h3>
+                  <h3 className="font-display text-xl md:text-[1.4rem] mt-1 leading-snug">Cours ouvert en direct avec Victoire</h3>
                   <p className="mt-3 text-sm" style={{ color: "var(--color-ink-muted)" }}>
                     Une session live exclusive pour poser vos questions, pratiquer
                     ensemble et recevoir des conseils personnalisés.
@@ -316,7 +323,7 @@ function Guarantee() {
             Si le programme ne vous convient pas, je vous rembourse intégralement dans les 14 jours.
             Sans question. Sans condition.
           </p>
-          <p className="mt-4 font-display italic text-lg">— Victoria Korshak</p>
+          <p className="mt-4 font-display italic text-lg">— Victoire Moreau</p>
         </Reveal>
       </div>
     </section>
@@ -389,7 +396,7 @@ const reviews1 = [
   { name: "Sophie M.", city: "Paris", quote: "En 3 semaines, mon ventre est plus plat et j'ai retrouvé une vraie énergie. Les exercices sont si simples." },
   { name: "Isabelle T.", city: "Lyon", quote: "Je souffrais de ballonnements depuis des années. Tout a changé dès la première semaine du programme." },
   { name: "Marie-Claire B.", city: "Bordeaux", quote: "J'ai 52 ans et je n'avais plus d'espoir. 5 minutes par jour ont suffi à transformer ma silhouette." },
-  { name: "Nathalie R.", city: "Marseille", quote: "La respiration apprise avec Victoria m'a libérée d'un stress chronique. Mon sommeil s'est apaisé." },
+  { name: "Nathalie R.", city: "Marseille", quote: "La respiration apprise avec Victoire m'a libérée d'un stress chronique. Mon sommeil s'est apaisé." },
   { name: "Caroline D.", city: "Toulouse", quote: "Une méthode douce, intelligente et profondément efficace. Je recommande à toutes mes amies." },
   { name: "Hélène V.", city: "Strasbourg", quote: "Après ma grossesse, je n'arrivais pas à retrouver mon ventre. En 14 jours, j'ai senti la différence." },
 ];
@@ -410,9 +417,6 @@ function SocialProof() {
         <div className="mt-14">
           <TestimonialCarousel items={reviews1} />
         </div>
-        <p className="mt-6 text-center text-xs" style={{ color: "var(--color-ink-muted)" }}>
-          Témoignages reçus via WhatsApp de nos participantes francophones
-        </p>
       </div>
     </section>
   );
@@ -438,17 +442,13 @@ function VisceralProblem() {
         </Reveal>
 
         <Reveal>
-          <div className="mt-14 grid grid-cols-2 gap-6 md:gap-10 max-w-3xl mx-auto">
-            {[1, 2].map((n) => (
-              <div key={n} className="aspect-square flex items-center justify-center border border-[rgba(193,122,90,0.25)]" style={{ background: "var(--color-surface)" }}>
-                <svg viewBox="0 0 200 200" className="w-3/4 h-3/4" stroke="var(--color-terra)" fill="none" strokeWidth="1.2">
-                  <ellipse cx="100" cy="110" rx="55" ry="70" />
-                  <path d="M60 110 Q100 80 140 110" />
-                  <path d="M70 130 Q100 115 130 130" />
-                  <circle cx="85" cy={n === 1 ? 105 : 115} r="6" fill="var(--color-terra)" opacity="0.5" />
-                  <circle cx="115" cy={n === 1 ? 120 : 100} r="5" fill="var(--color-terra)" opacity="0.4" />
-                  <circle cx="100" cy={n === 1 ? 90 : 130} r="4" fill="var(--color-terra)" opacity="0.6" />
-                </svg>
+          <div className="mt-14 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 max-w-3xl mx-auto">
+            {[
+              { src: visceral1, alt: "Organes abdominaux entourés de graisse viscérale" },
+              { src: visceral2, alt: "Comparaison anatomique : organes sains et organes entourés de graisse" },
+            ].map((img, n) => (
+              <div key={n} className="aspect-square overflow-hidden border border-[rgba(193,122,90,0.25)]" style={{ background: "var(--color-surface)" }}>
+                <img src={img.src} alt={img.alt} width={1024} height={1024} loading="lazy" className="w-full h-full object-cover" />
               </div>
             ))}
           </div>
@@ -622,7 +622,7 @@ function AuthorQuote() {
             et en thérapie viscérale. Mais aussi sur mon propre parcours : je vis sans vésicule biliaire
             depuis 15 ans. Chaque technique a été testée sur moi-même avant d'être enseignée à mes clientes. »
           </p>
-          <p className="mt-8 label-eyebrow" style={{ color: "var(--color-terra)" }}>— Victoria Korshak</p>
+          <p className="mt-8 label-eyebrow" style={{ color: "var(--color-terra)" }}>— Victoire Moreau</p>
         </Reveal>
       </div>
     </section>
@@ -675,7 +675,7 @@ function AuthorBio() {
 
         <Reveal>
           <Eyebrow>L'auteure</Eyebrow>
-          <h2 className="mt-4 text-3xl md:text-[2.25rem]">Victoria Korshak</h2>
+          <h2 className="mt-4 text-3xl md:text-[2.25rem]">Victoire Moreau</h2>
           <p className="mt-2 font-display italic text-lg" style={{ color: "var(--color-ink-muted)" }}>
             Thérapeute en réhabilitation & thérapie viscérale
           </p>
@@ -740,11 +740,11 @@ function ForWho() {
 
 /* ---------- PROBLEMS GRID ---------- */
 const problems = [
-  { title: "Silhouette & taille", text: "Réduction des rondeurs abdominales.", svg: <circle cx="50" cy="50" r="30" /> },
-  { title: "Digestion & hormones", text: "Moins de ballonnements, meilleur transit.", svg: <path d="M30 50 Q50 20 70 50 T30 50" /> },
-  { title: "Posture & dos", text: "Soulagement des douleurs lombaires et cervicales.", svg: <path d="M40 20 L40 80 M60 20 L60 80 M30 50 L70 50" /> },
-  { title: "Circulation & œdèmes", text: "Jambes légères, visage dégonflé.", svg: <path d="M30 30 Q50 50 30 70 M70 30 Q50 50 70 70" /> },
-  { title: "Vie intime", text: "Regain de vitalité et de sensations.", svg: <path d="M50 30 L30 60 L50 70 L70 60 Z" /> },
+  { title: "Silhouette & taille", text: "Réduction des rondeurs abdominales.", img: benefitWaist },
+  { title: "Digestion & hormones", text: "Moins de ballonnements, meilleur transit.", img: benefitDigestion },
+  { title: "Posture & dos", text: "Soulagement des douleurs lombaires et cervicales.", img: benefitPosture },
+  { title: "Circulation & œdèmes", text: "Jambes légères, visage dégonflé.", img: benefitCirculation },
+  { title: "Vie intime", text: "Regain de vitalité et de sensations.", img: benefitVitality },
 ];
 function ProblemsGrid() {
   return (
@@ -759,11 +759,9 @@ function ProblemsGrid() {
         <div className="mt-14 grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-5">
           {problems.map((p, i) => (
             <Reveal key={i}>
-              <div className="border border-[rgba(193,122,90,0.18)] h-full">
-                <div className="aspect-square flex items-center justify-center" style={{ background: "var(--color-surface)" }}>
-                  <svg viewBox="0 0 100 100" className="w-1/2 h-1/2" stroke="var(--color-terra)" fill="none" strokeWidth="1.3">
-                    {p.svg}
-                  </svg>
+              <div className="border border-[rgba(193,122,90,0.18)] h-full flex flex-col">
+                <div className="aspect-square overflow-hidden" style={{ background: "var(--color-surface)" }}>
+                  <img src={p.img} alt={p.title} width={1024} height={1024} loading="lazy" className="w-full h-full object-cover" />
                 </div>
                 <div className="p-4 bg-white">
                   <h3 className="font-display text-base md:text-lg">{p.title}</h3>
@@ -923,7 +921,7 @@ function Simplicity() {
 /* ---------- SECOND CAROUSEL ---------- */
 const reviews2 = [
   { name: "Anne-Sophie L.", city: "Nice", quote: "Une révélation. Je n'avais jamais imaginé que la respiration puisse autant transformer mon corps." },
-  { name: "Valérie M.", city: "Lille", quote: "Élégant, intelligent, profond. Victoria nous offre bien plus qu'un programme — une nouvelle hygiène de vie." },
+  { name: "Valérie M.", city: "Lille", quote: "Élégant, intelligent, profond. Victoire nous offre bien plus qu'un programme — une nouvelle hygiène de vie." },
   { name: "Christine B.", city: "Rennes", quote: "Ma taille s'est affinée, mon humeur s'est éclaircie. Je me sens à nouveau féminine et vivante." },
   { name: "Émilie P.", city: "Nantes", quote: "Discret, doux, mais terriblement efficace. Cinq minutes par jour ont changé ma relation à mon corps." },
 ];
@@ -951,11 +949,11 @@ function FinalCTA() {
     <section id="buy" className="py-24 md:py-32" style={{ background: "var(--color-black-bg)" }}>
       <div className="mx-auto max-w-3xl px-6 text-center text-white">
         <Reveal>
-          <h2 className="font-display text-[2.25rem] md:text-5xl leading-tight">
+          <h2 className="font-display text-[2.25rem] md:text-5xl leading-tight text-white" style={{ color: "#FFFFFF" }}>
             Votre ventre est le centre <br className="hidden md:inline" />
             de votre force et de votre beauté.
             <br />
-            <em className="font-normal" style={{ color: "var(--color-terra)" }}>Commencez aujourd'hui.</em>
+            <em className="font-normal" style={{ color: "#E8A07F" }}>Commencez aujourd'hui.</em>
           </h2>
 
           <div className="mt-12 flex flex-col items-center gap-8">
@@ -1021,21 +1019,13 @@ function Footer() {
     <footer className="py-16 text-white/70" style={{ background: "var(--color-ink)" }}>
       <div className="mx-auto max-w-6xl px-6">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-          <p className="font-display text-2xl text-white">Victoria Korshak</p>
-          <div className="flex items-center gap-4">
-            <a href="#" aria-label="Instagram" className="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-white/10 transition">
-              <Instagram size={16} />
-            </a>
-            <a href="#" aria-label="YouTube" className="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-white/10 transition">
-              <Youtube size={16} />
-            </a>
-          </div>
+          <p className="font-display text-2xl text-white">Victoire Moreau</p>
         </div>
         <hr className="my-8 border-white/15" />
         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 text-sm">
           <div className="space-y-2">
             <p>support@victoriakorshak.com</p>
-            <p className="text-xs text-white/50">FOP Korshak Victoria (données légales du prestataire)</p>
+            <p className="text-xs text-white/50">Victoire Moreau (données légales du prestataire)</p>
           </div>
           <div className="flex flex-wrap gap-x-5 gap-y-2 text-xs">
             <a href="#" className="hover:text-white">Politique de confidentialité</a>
@@ -1043,7 +1033,7 @@ function Footer() {
             <a href="#" className="hover:text-white">Mentions légales</a>
           </div>
         </div>
-        <p className="mt-10 text-xs text-white/40">© 2025 Victoria Korshak. Tous droits réservés.</p>
+        <p className="mt-10 text-xs text-white/40">© 2025 Victoire Moreau. Tous droits réservés.</p>
       </div>
     </footer>
   );
