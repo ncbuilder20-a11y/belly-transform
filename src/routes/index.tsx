@@ -16,7 +16,7 @@ import symptomHeart from "@/assets/symptom-heart.jpg";
 import symptomHormones from "@/assets/symptom-hormones.jpg";
 import symptomInsulin from "@/assets/symptom-insulin.jpg";
 import symptomStress from "@/assets/symptom-stress.jpg";
-import visceral1 from "@/assets/visceral-1.jpg";
+
 import visceral2 from "@/assets/visceral-2.jpg";
 import benefitWaist from "@/assets/benefit-waist.jpg";
 import benefitDigestion from "@/assets/benefit-digestion.jpg";
