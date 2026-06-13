@@ -340,22 +340,18 @@ function Guarantee() {
 }
 
 /* ---------- TESTIMONIAL CARD + CAROUSEL ---------- */
-function TestimonialCard({ name, city, quote }: { name: string; city: string; quote: string }) {
+function TestimonialCard({ quote }: { quote: string }) {
   return (
     <div className="shrink-0 grow-0 basis-full md:basis-1/2 lg:basis-1/3 pl-6">
-      <div className="p-7 h-full border border-[rgba(193,122,90,0.18)]" style={{ background: "var(--color-surface)" }}>
+      <div className="p-7 h-full border border-[rgba(193,122,90,0.18)] flex flex-col" style={{ background: "var(--color-surface)" }}>
         <div className="flex items-center gap-2 mb-4">
           <MessageCircle size={16} style={{ color: "var(--color-sage)" }} />
           <span className="label-eyebrow" style={{ color: "var(--color-sage)" }}>WhatsApp</span>
         </div>
-        <p className="text-[0.95rem] leading-relaxed" style={{ color: "var(--color-ink)" }}>
-          “{quote}”
+        <p className="text-[0.95rem] leading-relaxed whitespace-pre-line flex-1" style={{ color: "var(--color-ink)" }}>
+          {quote}
         </p>
-        <div className="mt-5 pt-5 border-t border-[rgba(193,122,90,0.18)] flex items-center justify-between">
-          <div>
-            <p className="font-medium text-sm">{name}</p>
-            <p className="text-xs" style={{ color: "var(--color-ink-muted)" }}>{city}</p>
-          </div>
+        <div className="mt-5 pt-5 border-t border-[rgba(193,122,90,0.18)] flex items-center justify-end">
           <div className="flex gap-0.5">
             {Array.from({ length: 5 }).map((_, i) => (
               <Star key={i} size={14} fill="var(--color-terra)" stroke="var(--color-terra)" />
@@ -367,7 +363,7 @@ function TestimonialCard({ name, city, quote }: { name: string; city: string; qu
   );
 }
 
-function TestimonialCarousel({ items }: { items: { name: string; city: string; quote: string }[] }) {
+function TestimonialCarousel({ items }: { items: { quote: string }[] }) {
   const [emblaRef, embla] = useEmblaCarousel({ align: "start", loop: true });
   return (
     <div className="relative">
@@ -402,12 +398,14 @@ function TestimonialCarousel({ items }: { items: { name: string; city: string; q
 
 /* ---------- SOCIAL PROOF ---------- */
 const reviews1 = [
-  { name: "Sophie M.", city: "Paris", quote: "En 3 semaines, mon ventre est plus plat et j'ai retrouvé une vraie énergie. Les exercices sont si simples." },
-  { name: "Isabelle T.", city: "Lyon", quote: "Je souffrais de ballonnements depuis des années. Tout a changé dès la première semaine du programme." },
-  { name: "Marie-Claire B.", city: "Bordeaux", quote: "J'ai 52 ans et je n'avais plus d'espoir. 5 minutes par jour ont suffi à transformer ma silhouette." },
-  { name: "Nathalie R.", city: "Marseille", quote: "La respiration apprise avec Victoire m'a libérée d'un stress chronique. Mon sommeil s'est apaisé." },
-  { name: "Caroline D.", city: "Toulouse", quote: "Une méthode douce, intelligente et profondément efficace. Je recommande à toutes mes amies." },
-  { name: "Hélène V.", city: "Strasbourg", quote: "Après ma grossesse, je n'arrivais pas à retrouver mon ventre. En 14 jours, j'ai senti la différence." },
+  { quote: "Bon, j'avoue — tes entraînements sont vraiment magiques 🤩\n\nQuand je suis rentrée chez moi j'ai pris une photo, et encore ce matin. Avant j'avais des ballonnements constants, et là je me sens tellement légère !!\n\nIl reste encore du travail — le poids, les abdos — mais pour moi l'essentiel c'est de me sentir bien, et ensuite paraître belle 😊" },
+  { quote: "Bonjour 💗\nJe voulais vous dire que c'est le premier programme qui a vraiment transformé mon ventre 😍\n\nAvant, je faisais des abdos, je buvais assez d'eau, j'évitais les aliments qui gonflent… mais rien ne changeait vraiment.\n\nMaintenant c'est une tout autre histoire — les exercices réguliers combinés au massage et à la respiration ont changé mon ventre ✨ Merci infiniment 🙏" },
+  { quote: "Vika bonjour, je voulais vous remercier pour le programme Transformation de la taille — c'est vraiment incroyable 🤩\n\nHonnêtement, je ne peux plus commencer ma matinée sans cette routine, j'adore ça — et cette sensation de légèreté, c'est trop bien 🥰\n\nÇa fait environ trois semaines, je vois déjà des résultats — et ce n'est que le début, imaginez la suite 🔥🔥🔥\nMerci infiniment 🥹💗💗" },
+  { quote: "Vika, bonsoir\nJe voulais partager mes nouvelles observations. L'année dernière j'ai eu la coqueluche, je toussais pendant trois mois, et même après, lors d'une inspiration plus profonde, ça repartait. Après une semaine d'exercices, j'ai remarqué que mes côtes sont devenues plus mobiles, je retiens ma respiration sans problème et je NE TOUSSE PLUS ! Et en bonus –2,5 kg.\n\nLa graisse est encore là bien sûr, mais elle était dure, et maintenant la peau sur le ventre est souple comme de la pâte. Je faisais les exercices de mémoire, mais maintenant je mets la vidéo à chaque fois — avec vous c'est plus agréable et plus rigoureux. Merci beaucoup !" },
+  { quote: "Je fais les exercices de drainage lymphatique et la leçon suivante depuis deux jours déjà, et c'est tout simplement de la magie 🤩 J'ai une telle quantité d'énergie 🤩 hier je me disais que c'était une coïncidence, et aujourd'hui j'ai compris que pas du tout 🤯 merci" },
+  { quote: "J'ai fait les exercices de votre programme pendant seulement une semaine et je suis vraiment satisfaite, j'imagine l'effet si on les pratique régulièrement sur le long terme. Pendant mes règles, je ne fais pas de sport ni d'exercices, mais j'ai des douleurs intenses à cette période à cause d'un canal cervical étroit — seule la prise d'hormones changeait quelque chose, et maintenant je n'en prends plus depuis déjà 3 ans, donc je le vis souvent vraiment difficilement. Mais les exercices doux du ventre et une alimentation plus saine m'aident à atténuer les symptômes, et il s'avère que cette fois la douleur est à nouveau plus faible, après une semaine de travail sur le ventre, je pense que ce n'est pas une coïncidence 😊" },
+  { quote: "Je veux laisser un avis 10 positif 💗 Je viens juste de commencer ce programme. C'est intéressant, facile, agréable. Je n'avais jamais rien fait de tel, donc j'espère que le résultat sera bien ressenti. Votre travail m'est vraiment utile. Merci pour ce programme !" },
+  { quote: "Je viens d'acheter le programme et j'écoute encore la première leçon, mais je suis déjà ravie ! Je comprends que je vous cherchais depuis si longtemps ! Aujourd'hui je commence les exercices 💗 merci !" },
 ];
 
 function SocialProof() {
