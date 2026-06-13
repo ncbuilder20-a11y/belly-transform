@@ -172,33 +172,33 @@ function PreHeaderStrip() {
 /* ---------- HERO ---------- */
 function Hero() {
   return (
-    <section id="top" className="relative overflow-hidden isolate">
-      {/* Background image */}
-      <div className="absolute inset-0 z-0">
-        <img
-          src={heroWaistBg}
-          alt=""
-          aria-hidden="true"
-          className="w-full h-full object-cover object-center md:object-[70%_center]"
-        />
-        {/* Layered washes for text legibility */}
-        <div
-          className="absolute inset-0 md:hidden"
-          style={{
-            background:
-              "linear-gradient(180deg, rgba(245,240,232,0.92) 0%, rgba(245,240,232,0.55) 35%, rgba(245,240,232,0.15) 60%, rgba(245,240,232,0.85) 100%)",
-          }}
-        />
-        <div
-          className="absolute inset-0 hidden md:block"
-          style={{
-            background:
-              "linear-gradient(90deg, rgba(245,240,232,0.96) 0%, rgba(245,240,232,0.85) 38%, rgba(245,240,232,0.25) 68%, transparent 100%)",
-          }}
-        />
-      </div>
+    <section
+      id="top"
+      className="relative overflow-hidden"
+      style={{
+        backgroundImage: `url(${heroWaistBg})`,
+        backgroundSize: "cover",
+        backgroundPosition: "70% center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      {/* Wash for text legibility */}
+      <div
+        className="absolute inset-0 md:hidden pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(245,240,232,0.94) 0%, rgba(245,240,232,0.6) 32%, rgba(245,240,232,0.15) 58%, rgba(245,240,232,0.9) 100%)",
+        }}
+      />
+      <div
+        className="absolute inset-0 hidden md:block pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(90deg, rgba(245,240,232,0.96) 0%, rgba(245,240,232,0.85) 38%, rgba(245,240,232,0.25) 68%, transparent 100%)",
+        }}
+      />
 
-      <div className="relative z-10 mx-auto max-w-6xl px-6 pt-10 md:pt-20 pb-20 md:pb-28 min-h-[88vh] md:min-h-[80vh] flex items-center">
+      <div className="relative z-10 mx-auto max-w-6xl px-6 pt-10 md:pt-20 pb-16 md:pb-28 min-h-[88vh] md:min-h-[80vh] flex items-center">
         <div className="w-full md:max-w-[34rem]">
           <Reveal>
             <Eyebrow>
