@@ -930,7 +930,7 @@ const reviews2 = [
   { name: "Émilie P.", city: "Nantes", quote: "Discret, doux, mais terriblement efficace. Cinq minutes par jour ont changé ma relation à mon corps." },
 ];
 function SecondCarousel() {
-  const images = [do6, do0, do5, do4, do3, do2, do1];
+  const images = [do6a, do6b, do0, do5, do4a, do4b, do3, do2, do1];
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "center" });
   const [selectedIndex, setSelectedIndex] = useState(0);
 
