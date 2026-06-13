@@ -114,9 +114,7 @@ function Header() {
   ];
   return (
     <header
-      className={`sticky top-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-[var(--color-bg)]/95 backdrop-blur shadow-[0_1px_0_rgba(193,122,90,0.15)]" : "bg-[var(--color-bg)]"
-      }`}
+      className="relative z-40 bg-[var(--color-bg)] border-b border-[rgba(193,122,90,0.12)]"
     >
       <div className="mx-auto max-w-6xl px-5 md:px-6 h-14 md:h-16 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3">
         <a href="#top" className="font-display text-base md:text-xl tracking-tight truncate" style={{ color: "var(--color-ink)" }}>
@@ -187,14 +185,14 @@ function Hero() {
         className="absolute inset-0 md:hidden pointer-events-none"
         style={{
           background:
-            "linear-gradient(180deg, rgba(245,240,232,0.96) 0%, rgba(245,240,232,0.88) 30%, rgba(245,240,232,0.7) 55%, rgba(245,240,232,0.35) 75%, rgba(245,240,232,0.1) 100%)",
+            "linear-gradient(180deg, rgba(250,247,244,0.99) 0%, rgba(250,247,244,0.97) 45%, rgba(250,247,244,0.85) 65%, rgba(250,247,244,0.45) 85%, rgba(250,247,244,0.15) 100%)",
         }}
       />
       <div
         className="absolute inset-0 hidden md:block pointer-events-none"
         style={{
           background:
-            "linear-gradient(90deg, rgba(245,240,232,0.96) 0%, rgba(245,240,232,0.85) 38%, rgba(245,240,232,0.25) 68%, transparent 100%)",
+            "linear-gradient(90deg, rgba(250,247,244,0.98) 0%, rgba(250,247,244,0.9) 42%, rgba(250,247,244,0.35) 70%, transparent 100%)",
         }}
       />
 
@@ -1051,10 +1049,52 @@ function Footer() {
   );
 }
 
+/* ---------- STICKY BOTTOM BUY BAR ---------- */
+function StickyBuyBar() {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const onScroll = () => {
+      const hero = document.getElementById("top");
+      const threshold = hero ? hero.offsetTop + hero.offsetHeight - 80 : 600;
+      setVisible(window.scrollY > threshold);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  return (
+    <div
+      className={`fixed bottom-0 left-0 right-0 z-50 transition-all duration-300 ${
+        visible ? "translate-y-0 opacity-100" : "translate-y-full opacity-0 pointer-events-none"
+      }`}
+      style={{
+        background: "var(--color-bg)",
+        borderTop: "1px solid rgba(193,122,90,0.25)",
+        boxShadow: "0 -8px 24px rgba(28,26,24,0.08)",
+      }}
+    >
+      <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between gap-3">
+        <div className="flex items-baseline gap-2 min-w-0">
+          <span className="font-display text-xl md:text-2xl" style={{ color: "var(--color-terra)" }}>9,99 €</span>
+          <span className="text-xs md:text-sm line-through" style={{ color: "var(--color-ink-muted)" }}>99 €</span>
+          <span className="hidden sm:inline text-xs uppercase tracking-wider" style={{ color: "var(--color-ink-muted)" }}>· Accès immédiat</span>
+        </div>
+        <a
+          href="#buy"
+          className="btn-primary btn-primary-hover shrink-0"
+          style={{ padding: "12px 18px", fontSize: "0.72rem" }}
+        >
+          Acheter pour 9,99 €
+        </a>
+      </div>
+    </div>
+  );
+}
+
 /* ---------- PAGE ---------- */
 function LandingPage() {
   return (
-    <main className="min-h-screen" style={{ background: "var(--color-bg)" }}>
+    <main className="min-h-screen pb-20 md:pb-0" style={{ background: "var(--color-bg)" }}>
       <PreHeaderStrip />
       <Header />
       <Hero />
@@ -1081,6 +1121,7 @@ function LandingPage() {
       <FinalCTA />
       <FAQ />
       <Footer />
+      <StickyBuyBar />
     </main>
   );
 }
