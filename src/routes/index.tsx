@@ -340,22 +340,18 @@ function Guarantee() {
 }
 
 /* ---------- TESTIMONIAL CARD + CAROUSEL ---------- */
-function TestimonialCard({ name, city, quote }: { name: string; city: string; quote: string }) {
+function TestimonialCard({ quote }: { quote: string }) {
   return (
     <div className="shrink-0 grow-0 basis-full md:basis-1/2 lg:basis-1/3 pl-6">
-      <div className="p-7 h-full border border-[rgba(193,122,90,0.18)]" style={{ background: "var(--color-surface)" }}>
+      <div className="p-7 h-full border border-[rgba(193,122,90,0.18)] flex flex-col" style={{ background: "var(--color-surface)" }}>
         <div className="flex items-center gap-2 mb-4">
           <MessageCircle size={16} style={{ color: "var(--color-sage)" }} />
           <span className="label-eyebrow" style={{ color: "var(--color-sage)" }}>WhatsApp</span>
         </div>
-        <p className="text-[0.95rem] leading-relaxed" style={{ color: "var(--color-ink)" }}>
-          “{quote}”
+        <p className="text-[0.95rem] leading-relaxed whitespace-pre-line flex-1" style={{ color: "var(--color-ink)" }}>
+          {quote}
         </p>
-        <div className="mt-5 pt-5 border-t border-[rgba(193,122,90,0.18)] flex items-center justify-between">
-          <div>
-            <p className="font-medium text-sm">{name}</p>
-            <p className="text-xs" style={{ color: "var(--color-ink-muted)" }}>{city}</p>
-          </div>
+        <div className="mt-5 pt-5 border-t border-[rgba(193,122,90,0.18)] flex items-center justify-end">
           <div className="flex gap-0.5">
             {Array.from({ length: 5 }).map((_, i) => (
               <Star key={i} size={14} fill="var(--color-terra)" stroke="var(--color-terra)" />
