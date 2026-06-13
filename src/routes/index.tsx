@@ -172,67 +172,62 @@ function PreHeaderStrip() {
 /* ---------- HERO ---------- */
 function Hero() {
   return (
-    <section id="top" className="pt-6 md:pt-10 pb-16 md:pb-24">
-      <div className="mx-auto max-w-6xl px-6 grid md:grid-cols-[1.15fr_1fr] gap-10 md:gap-16 items-center">
-        <div className="order-1">
+    <section id="top" className="relative overflow-hidden">
+      {/* Background image */}
+      <div className="absolute inset-0 -z-10">
+        <img
+          src={heroWaistBg}
+          alt=""
+          aria-hidden="true"
+          className="w-full h-full object-cover object-center md:object-[70%_center]"
+        />
+        {/* Layered washes for text legibility */}
+        <div
+          className="absolute inset-0 md:hidden"
+          style={{
+            background:
+              "linear-gradient(180deg, var(--color-bg) 0%, rgba(245,240,232,0.78) 32%, rgba(245,240,232,0.55) 60%, rgba(245,240,232,0.92) 100%)",
+          }}
+        />
+        <div
+          className="absolute inset-0 hidden md:block"
+          style={{
+            background:
+              "linear-gradient(90deg, var(--color-bg) 0%, rgba(245,240,232,0.94) 38%, rgba(245,240,232,0.4) 68%, transparent 100%)",
+          }}
+        />
+      </div>
+
+      <div className="mx-auto max-w-6xl px-6 pt-10 md:pt-20 pb-20 md:pb-28 min-h-[88vh] md:min-h-[80vh] flex items-center">
+        <div className="w-full md:max-w-[34rem]">
           <Reveal>
             <Eyebrow>
               Programme en ligne · 14 jours · Début le {tomorrowFr()}
             </Eyebrow>
 
-            {/* Compact mobile portrait — small, inline, doesn't dominate the fold */}
-            <div className="md:hidden mt-5 flex items-center gap-4">
-              <div className="shrink-0 w-20 h-24 overflow-hidden" style={{ background: "var(--color-surface)" }}>
-                <img
-                  src={victoriaHero}
-                  alt="Victoria Korshak"
-                  width={160}
-                  height={192}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="text-xs leading-snug" style={{ color: "var(--color-ink-muted)" }}>
-                <span className="font-display text-base block" style={{ color: "var(--color-ink)" }}>Victoria Korshak</span>
-                Thérapeute · réhabilitation viscérale
-              </div>
-            </div>
-
-            <h1 className="mt-6 text-[2.4rem] sm:text-5xl md:text-[3.6rem] leading-[1.05]">
+            <h1 className="mt-5 text-[2.5rem] sm:text-5xl md:text-[3.6rem] leading-[1.02] font-display">
               <span style={{ color: "var(--color-terra)" }}>Transformation</span>
               <br />
               <span>de la taille</span>
             </h1>
-            <p className="mt-6 text-base md:text-[1.0625rem] max-w-[34rem]" style={{ color: "var(--color-ink-muted)" }}>
+            <p className="mt-5 text-base md:text-[1.0625rem] max-w-[32rem]" style={{ color: "var(--color-ink-muted)" }}>
               Éliminez la graisse viscérale, réveillez vos muscles profonds et retrouvez un ventre plat
               grâce à des techniques de massage et de respiration — seulement 5 minutes par jour.
             </p>
 
-            <div className="mt-8 flex flex-col sm:flex-row sm:items-end gap-6">
+            <div className="mt-7">
               <PriceBlock />
             </div>
 
-            <div className="mt-7">
+            <div className="mt-6">
               <CTA>Je commence le cours</CTA>
             </div>
 
-            <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-xs md:text-sm" style={{ color: "var(--color-ink-muted)" }}>
-              <li className="flex items-center gap-1.5"><CheckCircle2 size={14} style={{ color: "var(--color-sage)" }} /> Accès pendant 30 jours</li>
-              <li className="flex items-center gap-1.5"><CheckCircle2 size={14} style={{ color: "var(--color-sage)" }} /> Satisfait ou remboursé 14 jours</li>
-              <li className="flex items-center gap-1.5"><CheckCircle2 size={14} style={{ color: "var(--color-sage)" }} /> Sur mobile et tablette</li>
+            <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-xs md:text-sm" style={{ color: "var(--color-ink-muted)" }}>
+              <li className="flex items-center gap-1.5"><CheckCircle2 size={14} style={{ color: "var(--color-sage)" }} /> Accès 30 jours</li>
+              <li className="flex items-center gap-1.5"><CheckCircle2 size={14} style={{ color: "var(--color-sage)" }} /> Satisfait ou remboursé</li>
+              <li className="flex items-center gap-1.5"><CheckCircle2 size={14} style={{ color: "var(--color-sage)" }} /> Mobile & tablette</li>
             </ul>
-          </Reveal>
-        </div>
-        <div className="order-2 hidden md:block">
-          <Reveal>
-            <div className="relative aspect-[4/5] overflow-hidden" style={{ background: "var(--color-surface)" }}>
-              <img
-                src={victoriaHero}
-                alt="Victoria Korshak — thérapeute en réhabilitation viscérale"
-                width={896}
-                height={1152}
-                className="w-full h-full object-cover"
-              />
-            </div>
           </Reveal>
         </div>
       </div>
