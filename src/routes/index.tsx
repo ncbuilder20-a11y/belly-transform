@@ -442,17 +442,13 @@ function VisceralProblem() {
         </Reveal>
 
         <Reveal>
-          <div className="mt-14 grid grid-cols-2 gap-6 md:gap-10 max-w-3xl mx-auto">
-            {[1, 2].map((n) => (
-              <div key={n} className="aspect-square flex items-center justify-center border border-[rgba(193,122,90,0.25)]" style={{ background: "var(--color-surface)" }}>
-                <svg viewBox="0 0 200 200" className="w-3/4 h-3/4" stroke="var(--color-terra)" fill="none" strokeWidth="1.2">
-                  <ellipse cx="100" cy="110" rx="55" ry="70" />
-                  <path d="M60 110 Q100 80 140 110" />
-                  <path d="M70 130 Q100 115 130 130" />
-                  <circle cx="85" cy={n === 1 ? 105 : 115} r="6" fill="var(--color-terra)" opacity="0.5" />
-                  <circle cx="115" cy={n === 1 ? 120 : 100} r="5" fill="var(--color-terra)" opacity="0.4" />
-                  <circle cx="100" cy={n === 1 ? 90 : 130} r="4" fill="var(--color-terra)" opacity="0.6" />
-                </svg>
+          <div className="mt-14 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 max-w-3xl mx-auto">
+            {[
+              { src: visceral1, alt: "Organes abdominaux entourés de graisse viscérale" },
+              { src: visceral2, alt: "Comparaison anatomique : organes sains et organes entourés de graisse" },
+            ].map((img, n) => (
+              <div key={n} className="aspect-square overflow-hidden border border-[rgba(193,122,90,0.25)]" style={{ background: "var(--color-surface)" }}>
+                <img src={img.src} alt={img.alt} width={1024} height={1024} loading="lazy" className="w-full h-full object-cover" />
               </div>
             ))}
           </div>
