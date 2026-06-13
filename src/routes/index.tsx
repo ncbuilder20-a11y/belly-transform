@@ -28,6 +28,14 @@ import authorS2 from "@/assets/author-s2.png.asset.json";
 import authorS3 from "@/assets/author-s3.png.asset.json";
 import authorS4 from "@/assets/author-s4.png.asset.json";
 import resultWaist from "@/assets/result-waist.png.asset.json";
+import o1 from "@/assets/o1.png.asset.json";
+import o2 from "@/assets/o2.png.asset.json";
+import o3 from "@/assets/o3.png.asset.json";
+import o4 from "@/assets/o4.png.asset.json";
+import o5 from "@/assets/o5.png.asset.json";
+import o6 from "@/assets/o6.png.asset.json";
+import o7 from "@/assets/o7.png.asset.json";
+import o8 from "@/assets/o8.png.asset.json";
 import do0 from "@/assets/do0.jpg.asset.json";
 import do1 from "@/assets/do1.jpg.asset.json";
 import do2 from "@/assets/do2.jpg.asset.json";
@@ -422,10 +430,53 @@ function SocialProof() {
           </div>
         </Reveal>
         <div className="mt-14">
-          <TestimonialCarousel items={reviews1} />
+          <ReviewImagesCarousel />
         </div>
       </div>
     </section>
+  );
+}
+
+function ReviewImagesCarousel() {
+  const images = [o1, o2, o3, o4, o5, o6, o7, o8];
+  const [emblaRef, embla] = useEmblaCarousel({ align: "start", loop: true });
+  return (
+    <div className="relative">
+      <div className="overflow-hidden -ml-6" ref={emblaRef}>
+        <div className="flex">
+          {images.map((img, i) => (
+            <div key={i} className="shrink-0 grow-0 basis-full md:basis-1/2 lg:basis-1/3 pl-6">
+              <div className="p-4 h-full border border-[rgba(193,122,90,0.18)] flex items-center justify-center" style={{ background: "var(--color-surface)" }}>
+                <img
+                  src={img.url}
+                  alt={`Témoignage WhatsApp ${i + 1}`}
+                  className="w-full h-auto object-contain"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="mt-8 flex items-center justify-center gap-3">
+        <button
+          aria-label="Précédent"
+          onClick={() => embla?.scrollPrev()}
+          className="w-10 h-10 border flex items-center justify-center hover:bg-[var(--color-surface)] transition"
+          style={{ borderColor: "var(--color-terra)" }}
+        >
+          <ChevronLeft size={18} style={{ color: "var(--color-terra)" }} />
+        </button>
+        <button
+          aria-label="Suivant"
+          onClick={() => embla?.scrollNext()}
+          className="w-10 h-10 border flex items-center justify-center hover:bg-[var(--color-surface)] transition"
+          style={{ borderColor: "var(--color-terra)" }}
+        >
+          <ChevronRight size={18} style={{ color: "var(--color-terra)" }} />
+        </button>
+      </div>
+    </div>
   );
 }
 
