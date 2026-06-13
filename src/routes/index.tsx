@@ -930,7 +930,7 @@ function Simplicity() {
 /* ---------- SECOND CAROUSEL ---------- */
 const reviews2 = [
   { name: "Anne-Sophie L.", city: "Nice", quote: "Une révélation. Je n'avais jamais imaginé que la respiration puisse autant transformer mon corps." },
-  { name: "Valérie M.", city: "Lille", quote: "Élégant, intelligent, profond. Victoria nous offre bien plus qu'un programme — une nouvelle hygiène de vie." },
+  { name: "Valérie M.", city: "Lille", quote: "Élégant, intelligent, profond. Victoire nous offre bien plus qu'un programme — une nouvelle hygiène de vie." },
   { name: "Christine B.", city: "Rennes", quote: "Ma taille s'est affinée, mon humeur s'est éclaircie. Je me sens à nouveau féminine et vivante." },
   { name: "Émilie P.", city: "Nantes", quote: "Discret, doux, mais terriblement efficace. Cinq minutes par jour ont changé ma relation à mon corps." },
 ];
