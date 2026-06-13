@@ -125,7 +125,7 @@ function Header() {
     >
       <div className="mx-auto max-w-6xl px-5 md:px-6 h-14 md:h-16 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3">
         <a href="#top" className="font-display text-base md:text-xl tracking-tight truncate" style={{ color: "var(--color-ink)" }}>
-          Victoria Korshak
+          Victoire Moreau
         </a>
         <nav className="hidden md:flex items-center gap-8">
           {navItems.map((n) => (
@@ -289,7 +289,7 @@ function BonusOffer() {
                 </div>
                 <div>
                   <p className="label-eyebrow" style={{ color: "var(--color-terra)" }}>Bonus n°2 — offert (valeur 49 €)</p>
-                  <h3 className="font-display text-xl md:text-[1.4rem] mt-1 leading-snug">Cours ouvert en direct avec Victoria</h3>
+                  <h3 className="font-display text-xl md:text-[1.4rem] mt-1 leading-snug">Cours ouvert en direct avec Victoire</h3>
                   <p className="mt-3 text-sm" style={{ color: "var(--color-ink-muted)" }}>
                     Une session live exclusive pour poser vos questions, pratiquer
                     ensemble et recevoir des conseils personnalisés.
@@ -323,7 +323,7 @@ function Guarantee() {
             Si le programme ne vous convient pas, je vous rembourse intégralement dans les 14 jours.
             Sans question. Sans condition.
           </p>
-          <p className="mt-4 font-display italic text-lg">— Victoria Korshak</p>
+          <p className="mt-4 font-display italic text-lg">— Victoire Moreau</p>
         </Reveal>
       </div>
     </section>
@@ -396,7 +396,7 @@ const reviews1 = [
   { name: "Sophie M.", city: "Paris", quote: "En 3 semaines, mon ventre est plus plat et j'ai retrouvé une vraie énergie. Les exercices sont si simples." },
   { name: "Isabelle T.", city: "Lyon", quote: "Je souffrais de ballonnements depuis des années. Tout a changé dès la première semaine du programme." },
   { name: "Marie-Claire B.", city: "Bordeaux", quote: "J'ai 52 ans et je n'avais plus d'espoir. 5 minutes par jour ont suffi à transformer ma silhouette." },
-  { name: "Nathalie R.", city: "Marseille", quote: "La respiration apprise avec Victoria m'a libérée d'un stress chronique. Mon sommeil s'est apaisé." },
+  { name: "Nathalie R.", city: "Marseille", quote: "La respiration apprise avec Victoire m'a libérée d'un stress chronique. Mon sommeil s'est apaisé." },
   { name: "Caroline D.", city: "Toulouse", quote: "Une méthode douce, intelligente et profondément efficace. Je recommande à toutes mes amies." },
   { name: "Hélène V.", city: "Strasbourg", quote: "Après ma grossesse, je n'arrivais pas à retrouver mon ventre. En 14 jours, j'ai senti la différence." },
 ];
@@ -629,7 +629,7 @@ function AuthorQuote() {
             et en thérapie viscérale. Mais aussi sur mon propre parcours : je vis sans vésicule biliaire
             depuis 15 ans. Chaque technique a été testée sur moi-même avant d'être enseignée à mes clientes. »
           </p>
-          <p className="mt-8 label-eyebrow" style={{ color: "var(--color-terra)" }}>— Victoria Korshak</p>
+          <p className="mt-8 label-eyebrow" style={{ color: "var(--color-terra)" }}>— Victoire Moreau</p>
         </Reveal>
       </div>
     </section>
@@ -682,7 +682,7 @@ function AuthorBio() {
 
         <Reveal>
           <Eyebrow>L'auteure</Eyebrow>
-          <h2 className="mt-4 text-3xl md:text-[2.25rem]">Victoria Korshak</h2>
+          <h2 className="mt-4 text-3xl md:text-[2.25rem]">Victoire Moreau</h2>
           <p className="mt-2 font-display italic text-lg" style={{ color: "var(--color-ink-muted)" }}>
             Thérapeute en réhabilitation & thérapie viscérale
           </p>
@@ -1028,7 +1028,7 @@ function Footer() {
     <footer className="py-16 text-white/70" style={{ background: "var(--color-ink)" }}>
       <div className="mx-auto max-w-6xl px-6">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-          <p className="font-display text-2xl text-white">Victoria Korshak</p>
+          <p className="font-display text-2xl text-white">Victoire Moreau</p>
           <div className="flex items-center gap-4">
             <a href="#" aria-label="Instagram" className="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-white/10 transition">
               <Instagram size={16} />
@@ -1042,7 +1042,7 @@ function Footer() {
         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 text-sm">
           <div className="space-y-2">
             <p>support@victoriakorshak.com</p>
-            <p className="text-xs text-white/50">FOP Korshak Victoria (données légales du prestataire)</p>
+            <p className="text-xs text-white/50">Victoire Moreau (données légales du prestataire)</p>
           </div>
           <div className="flex flex-wrap gap-x-5 gap-y-2 text-xs">
             <a href="#" className="hover:text-white">Politique de confidentialité</a>
@@ -1050,7 +1050,7 @@ function Footer() {
             <a href="#" className="hover:text-white">Mentions légales</a>
           </div>
         </div>
-        <p className="mt-10 text-xs text-white/40">© 2025 Victoria Korshak. Tous droits réservés.</p>
+        <p className="mt-10 text-xs text-white/40">© 2025 Victoire Moreau. Tous droits réservés.</p>
       </div>
     </footer>
   );
