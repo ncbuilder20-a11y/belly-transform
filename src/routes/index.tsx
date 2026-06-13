@@ -407,7 +407,6 @@ const reviews1 = [
   { quote: "Je veux laisser un avis 10 positif 💗 Je viens juste de commencer ce programme. C'est intéressant, facile, agréable. Je n'avais jamais rien fait de tel, donc j'espère que le résultat sera bien ressenti. Votre travail m'est vraiment utile. Merci pour ce programme !" },
   { quote: "Je viens d'acheter le programme et j'écoute encore la première leçon, mais je suis déjà ravie ! Je comprends que je vous cherchais depuis si longtemps ! Aujourd'hui je commence les exercices 💗 merci !" },
 ];
-];
 
 function SocialProof() {
   return (
