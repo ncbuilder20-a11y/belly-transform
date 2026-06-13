@@ -114,12 +114,12 @@ function Header() {
   ];
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-[var(--color-bg)]/95 backdrop-blur shadow-[0_1px_0_rgba(193,122,90,0.15)]" : "bg-transparent"
+      className={`sticky top-0 z-50 transition-all duration-300 ${
+        scrolled ? "bg-[var(--color-bg)]/95 backdrop-blur shadow-[0_1px_0_rgba(193,122,90,0.15)]" : "bg-[var(--color-bg)]"
       }`}
     >
-      <div className="mx-auto max-w-6xl px-6 h-16 flex items-center justify-between">
-        <a href="#top" className="font-display text-lg md:text-xl tracking-tight" style={{ color: "var(--color-ink)" }}>
+      <div className="mx-auto max-w-6xl px-5 md:px-6 h-14 md:h-16 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3">
+        <a href="#top" className="font-display text-base md:text-xl tracking-tight truncate" style={{ color: "var(--color-ink)" }}>
           Victoria Korshak
         </a>
         <nav className="hidden md:flex items-center gap-8">
@@ -136,7 +136,7 @@ function Header() {
             </a>
           )}
         </div>
-        <button onClick={() => setOpen((v) => !v)} className="md:hidden p-2 -mr-2" aria-label="Menu">
+        <button onClick={() => setOpen((v) => !v)} className="md:hidden p-2 -mr-2 shrink-0" aria-label="Menu">
           {open ? <X size={22} /> : <Menu size={22} />}
         </button>
       </div>
