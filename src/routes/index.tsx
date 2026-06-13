@@ -1020,14 +1020,6 @@ function Footer() {
       <div className="mx-auto max-w-6xl px-6">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <p className="font-display text-2xl text-white">Victoire Moreau</p>
-          <div className="flex items-center gap-4">
-            <a href="#" aria-label="Instagram" className="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-white/10 transition">
-              <Instagram size={16} />
-            </a>
-            <a href="#" aria-label="YouTube" className="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-white/10 transition">
-              <Youtube size={16} />
-            </a>
-          </div>
         </div>
         <hr className="my-8 border-white/15" />
         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 text-sm">
