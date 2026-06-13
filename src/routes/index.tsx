@@ -185,14 +185,14 @@ function Hero() {
         className="absolute inset-0 md:hidden pointer-events-none"
         style={{
           background:
-            "linear-gradient(180deg, rgba(245,240,232,0.96) 0%, rgba(245,240,232,0.88) 30%, rgba(245,240,232,0.7) 55%, rgba(245,240,232,0.35) 75%, rgba(245,240,232,0.1) 100%)",
+            "linear-gradient(180deg, rgba(250,247,244,0.99) 0%, rgba(250,247,244,0.97) 45%, rgba(250,247,244,0.85) 65%, rgba(250,247,244,0.45) 85%, rgba(250,247,244,0.15) 100%)",
         }}
       />
       <div
         className="absolute inset-0 hidden md:block pointer-events-none"
         style={{
           background:
-            "linear-gradient(90deg, rgba(245,240,232,0.96) 0%, rgba(245,240,232,0.85) 38%, rgba(245,240,232,0.25) 68%, transparent 100%)",
+            "linear-gradient(90deg, rgba(250,247,244,0.98) 0%, rgba(250,247,244,0.9) 42%, rgba(250,247,244,0.35) 70%, transparent 100%)",
         }}
       />
 
