@@ -28,6 +28,13 @@ import authorS2 from "@/assets/author-s2.png.asset.json";
 import authorS3 from "@/assets/author-s3.png.asset.json";
 import authorS4 from "@/assets/author-s4.png.asset.json";
 import resultWaist from "@/assets/result-waist.png.asset.json";
+import do0 from "@/assets/do0.jpg.asset.json";
+import do1 from "@/assets/do1.jpg.asset.json";
+import do2 from "@/assets/do2.jpg.asset.json";
+import do3 from "@/assets/do3.jpg.asset.json";
+import do4 from "@/assets/do4.jpg.asset.json";
+import do5 from "@/assets/do5.jpg.asset.json";
+import do6 from "@/assets/do6.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   component: LandingPage,
