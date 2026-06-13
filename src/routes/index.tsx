@@ -198,7 +198,7 @@ function Hero() {
         />
       </div>
 
-      <div className="mx-auto max-w-6xl px-6 pt-10 md:pt-20 pb-20 md:pb-28 min-h-[88vh] md:min-h-[80vh] flex items-center">
+      <div className="relative z-10 mx-auto max-w-6xl px-6 pt-10 md:pt-20 pb-20 md:pb-28 min-h-[88vh] md:min-h-[80vh] flex items-center">
         <div className="w-full md:max-w-[34rem]">
           <Reveal>
             <Eyebrow>
