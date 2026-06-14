@@ -8,6 +8,11 @@ export const Route = createFileRoute("/paiement-echoue")({
       { name: "description", content: "Votre paiement n'a pas pu être traité. En cas de débit, le montant sera automatiquement remboursé sur votre carte." },
       { name: "robots", content: "noindex, nofollow" },
     ],
+    scripts: [
+      {
+        children: `if (typeof fbq === 'function') { fbq('track', 'Purchase', { value: 9.99, currency: 'EUR' }); }`,
+      },
+    ],
   }),
   component: Page,
 });
