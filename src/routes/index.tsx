@@ -97,7 +97,7 @@ function Eyebrow({ children }: { children: ReactNode }) {
 
 function CTA({ children = "Je commence le cours", className = "" }: { children?: ReactNode; className?: string }) {
   return (
-    <a href="#buy" className={`btn-primary btn-primary-hover ${className}`}>
+    <a href="https://pay.vimoreau.com/connect/form?site=pay.vimoreau.com&amount=9.99&symbol=EUR&vat=0&riderect_success=https%3A%2F%2Fvimoreau.com%2Fpaiement-echoue&riderect_failed=https%3A%2F%2Fvimoreau.com%2Fpaiement-echoue&riderect_back=https%3A%2F%2Fvimoreau.com&billing_country=FR" className={`btn-primary btn-primary-hover ${className}`}>
       {children}
       <ArrowRight size={16} strokeWidth={1.5} />
     </a>
@@ -153,7 +153,7 @@ function Header() {
         </nav>
         <div className="hidden md:block">
           {scrolled && (
-            <a href="#buy" className="btn-primary btn-primary-hover" style={{ padding: "10px 22px", fontSize: "0.72rem" }}>
+            <a href="https://pay.vimoreau.com/connect/form?site=pay.vimoreau.com&amount=9.99&symbol=EUR&vat=0&riderect_success=https%3A%2F%2Fvimoreau.com%2Fpaiement-echoue&riderect_failed=https%3A%2F%2Fvimoreau.com%2Fpaiement-echoue&riderect_back=https%3A%2F%2Fvimoreau.com&billing_country=FR" className="btn-primary btn-primary-hover" style={{ padding: "10px 22px", fontSize: "0.72rem" }}>
               Commencer le cours
             </a>
           )}
@@ -170,7 +170,7 @@ function Header() {
                 {n.label}
               </a>
             ))}
-            <a href="#buy" onClick={() => setOpen(false)} className="btn-primary btn-primary-hover mt-2 text-center">
+            <a href="https://pay.vimoreau.com/connect/form?site=pay.vimoreau.com&amount=9.99&symbol=EUR&vat=0&riderect_success=https%3A%2F%2Fvimoreau.com%2Fpaiement-echoue&riderect_failed=https%3A%2F%2Fvimoreau.com%2Fpaiement-echoue&riderect_back=https%3A%2F%2Fvimoreau.com&billing_country=FR" onClick={() => setOpen(false)} className="btn-primary btn-primary-hover mt-2 text-center">
               Commencer le cours
             </a>
           </div>
@@ -1188,7 +1188,7 @@ function StickyBuyBar() {
           <span className="hidden sm:inline text-xs uppercase tracking-wider" style={{ color: "var(--color-ink-muted)" }}>· Accès immédiat</span>
         </div>
         <a
-          href="#buy"
+          href="https://pay.vimoreau.com/connect/form?site=pay.vimoreau.com&amount=9.99&symbol=EUR&vat=0&riderect_success=https%3A%2F%2Fvimoreau.com%2Fpaiement-echoue&riderect_failed=https%3A%2F%2Fvimoreau.com%2Fpaiement-echoue&riderect_back=https%3A%2F%2Fvimoreau.com&billing_country=FR"
           className="btn-primary btn-primary-hover shrink-0"
           style={{ padding: "12px 18px", fontSize: "0.72rem" }}
         >
