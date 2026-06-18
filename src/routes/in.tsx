@@ -1129,7 +1129,7 @@ function BuyModal() {
     } finally {
       setSubmitting(false);
     }
-    window.location.href = `${PAY_URL}&id=${encodeURIComponent(value)}`;
+    window.location.href = `${PAY_URL}&order_id=${encodeURIComponent(value)}&billing_email=${encodeURIComponent(value)}`;
   };
 
   return (
