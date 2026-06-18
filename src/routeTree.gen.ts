@@ -13,6 +13,7 @@ import { Route as TermsRouteImport } from './routes/terms'
 import { Route as RemboursementRouteImport } from './routes/remboursement'
 import { Route as RefundPolicyRouteImport } from './routes/refund-policy'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
+import { Route as PaymentFailedRouteImport } from './routes/payment-failed'
 import { Route as PaiementEchoueRouteImport } from './routes/paiement-echoue'
 import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
 import { Route as LegalNoticeRouteImport } from './routes/legal-notice'
@@ -39,6 +40,11 @@ const RefundPolicyRoute = RefundPolicyRouteImport.update({
 const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
   id: '/privacy-policy',
   path: '/privacy-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PaymentFailedRoute = PaymentFailedRouteImport.update({
+  id: '/payment-failed',
+  path: '/payment-failed',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PaiementEchoueRoute = PaiementEchoueRouteImport.update({
@@ -85,6 +91,7 @@ export interface FileRoutesByFullPath {
   '/legal-notice': typeof LegalNoticeRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/paiement-echoue': typeof PaiementEchoueRoute
+  '/payment-failed': typeof PaymentFailedRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/refund-policy': typeof RefundPolicyRoute
   '/remboursement': typeof RemboursementRoute
@@ -98,6 +105,7 @@ export interface FileRoutesByTo {
   '/legal-notice': typeof LegalNoticeRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/paiement-echoue': typeof PaiementEchoueRoute
+  '/payment-failed': typeof PaymentFailedRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/refund-policy': typeof RefundPolicyRoute
   '/remboursement': typeof RemboursementRoute
@@ -112,6 +120,7 @@ export interface FileRoutesById {
   '/legal-notice': typeof LegalNoticeRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/paiement-echoue': typeof PaiementEchoueRoute
+  '/payment-failed': typeof PaymentFailedRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/refund-policy': typeof RefundPolicyRoute
   '/remboursement': typeof RemboursementRoute
@@ -127,6 +136,7 @@ export interface FileRouteTypes {
     | '/legal-notice'
     | '/mentions-legales'
     | '/paiement-echoue'
+    | '/payment-failed'
     | '/privacy-policy'
     | '/refund-policy'
     | '/remboursement'
@@ -140,6 +150,7 @@ export interface FileRouteTypes {
     | '/legal-notice'
     | '/mentions-legales'
     | '/paiement-echoue'
+    | '/payment-failed'
     | '/privacy-policy'
     | '/refund-policy'
     | '/remboursement'
@@ -153,6 +164,7 @@ export interface FileRouteTypes {
     | '/legal-notice'
     | '/mentions-legales'
     | '/paiement-echoue'
+    | '/payment-failed'
     | '/privacy-policy'
     | '/refund-policy'
     | '/remboursement'
@@ -167,6 +179,7 @@ export interface RootRouteChildren {
   LegalNoticeRoute: typeof LegalNoticeRoute
   MentionsLegalesRoute: typeof MentionsLegalesRoute
   PaiementEchoueRoute: typeof PaiementEchoueRoute
+  PaymentFailedRoute: typeof PaymentFailedRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   RefundPolicyRoute: typeof RefundPolicyRoute
   RemboursementRoute: typeof RemboursementRoute
@@ -201,6 +214,13 @@ declare module '@tanstack/react-router' {
       path: '/privacy-policy'
       fullPath: '/privacy-policy'
       preLoaderRoute: typeof PrivacyPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/payment-failed': {
+      id: '/payment-failed'
+      path: '/payment-failed'
+      fullPath: '/payment-failed'
+      preLoaderRoute: typeof PaymentFailedRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/paiement-echoue': {
@@ -263,6 +283,7 @@ const rootRouteChildren: RootRouteChildren = {
   LegalNoticeRoute: LegalNoticeRoute,
   MentionsLegalesRoute: MentionsLegalesRoute,
   PaiementEchoueRoute: PaiementEchoueRoute,
+  PaymentFailedRoute: PaymentFailedRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
   RefundPolicyRoute: RefundPolicyRoute,
   RemboursementRoute: RemboursementRoute,

@@ -45,7 +45,7 @@ import do5 from "@/assets/do5.jpg.asset.json";
 import do6a from "@/assets/do6a.jpg.asset.json";
 import do6b from "@/assets/do6b.jpg.asset.json";
 
-const PAY_URL = "https://pay.vimoreau.com/connect/form?site=pay.vimoreau.com&amount=9.99&symbol=USD&vat=0&riderect_success=https%3A%2F%2Fvimoreau.com%2Fpaiement-echoue&riderect_failed=https%3A%2F%2Fvimoreau.com%2Fpaiement-echoue&riderect_back=https%3A%2F%2Fvimoreau.com%2Fen&billing_country=US";
+const PAY_URL = "https://pay.vimoreau.com/connect/form?site=pay.vimoreau.com&amount=9.99&symbol=USD&vat=0&riderect_success=https%3A%2F%2Fvimoreau.com%2Fpayment-failed&riderect_failed=https%3A%2F%2Fvimoreau.com%2Fpayment-failed&riderect_back=https%3A%2F%2Fvimoreau.com%2Fen&billing_country=US";
 
 export const Route = createFileRoute("/en")({
   head: () => ({
