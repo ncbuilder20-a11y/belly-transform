@@ -1129,7 +1129,7 @@ function BuyModal() {
     } finally {
       setSubmitting(false);
     }
-    window.location.href = PAY_URL;
+    window.location.href = `${PAY_URL}&id=${encodeURIComponent(value)}`;
   };
 
   return (
