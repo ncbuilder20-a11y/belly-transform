@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as RemboursementRouteImport } from './routes/remboursement'
 import { Route as PaiementEchoueRouteImport } from './routes/paiement-echoue'
 import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
+import { Route as EnRouteImport } from './routes/en'
 import { Route as ConfidentialiteRouteImport } from './routes/confidentialite'
 import { Route as CgvRouteImport } from './routes/cgv'
 import { Route as IndexRouteImport } from './routes/index'
@@ -29,6 +30,11 @@ const PaiementEchoueRoute = PaiementEchoueRouteImport.update({
 const MentionsLegalesRoute = MentionsLegalesRouteImport.update({
   id: '/mentions-legales',
   path: '/mentions-legales',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnRoute = EnRouteImport.update({
+  id: '/en',
+  path: '/en',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ConfidentialiteRoute = ConfidentialiteRouteImport.update({
@@ -51,6 +57,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/cgv': typeof CgvRoute
   '/confidentialite': typeof ConfidentialiteRoute
+  '/en': typeof EnRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/paiement-echoue': typeof PaiementEchoueRoute
   '/remboursement': typeof RemboursementRoute
@@ -59,6 +66,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/cgv': typeof CgvRoute
   '/confidentialite': typeof ConfidentialiteRoute
+  '/en': typeof EnRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/paiement-echoue': typeof PaiementEchoueRoute
   '/remboursement': typeof RemboursementRoute
@@ -68,6 +76,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/cgv': typeof CgvRoute
   '/confidentialite': typeof ConfidentialiteRoute
+  '/en': typeof EnRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/paiement-echoue': typeof PaiementEchoueRoute
   '/remboursement': typeof RemboursementRoute
@@ -78,6 +87,7 @@ export interface FileRouteTypes {
     | '/'
     | '/cgv'
     | '/confidentialite'
+    | '/en'
     | '/mentions-legales'
     | '/paiement-echoue'
     | '/remboursement'
@@ -86,6 +96,7 @@ export interface FileRouteTypes {
     | '/'
     | '/cgv'
     | '/confidentialite'
+    | '/en'
     | '/mentions-legales'
     | '/paiement-echoue'
     | '/remboursement'
@@ -94,6 +105,7 @@ export interface FileRouteTypes {
     | '/'
     | '/cgv'
     | '/confidentialite'
+    | '/en'
     | '/mentions-legales'
     | '/paiement-echoue'
     | '/remboursement'
@@ -103,6 +115,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CgvRoute: typeof CgvRoute
   ConfidentialiteRoute: typeof ConfidentialiteRoute
+  EnRoute: typeof EnRoute
   MentionsLegalesRoute: typeof MentionsLegalesRoute
   PaiementEchoueRoute: typeof PaiementEchoueRoute
   RemboursementRoute: typeof RemboursementRoute
@@ -129,6 +142,13 @@ declare module '@tanstack/react-router' {
       path: '/mentions-legales'
       fullPath: '/mentions-legales'
       preLoaderRoute: typeof MentionsLegalesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en': {
+      id: '/en'
+      path: '/en'
+      fullPath: '/en'
+      preLoaderRoute: typeof EnRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/confidentialite': {
@@ -159,6 +179,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CgvRoute: CgvRoute,
   ConfidentialiteRoute: ConfidentialiteRoute,
+  EnRoute: EnRoute,
   MentionsLegalesRoute: MentionsLegalesRoute,
   PaiementEchoueRoute: PaiementEchoueRoute,
   RemboursementRoute: RemboursementRoute,
