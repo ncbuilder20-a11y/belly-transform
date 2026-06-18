@@ -45,7 +45,7 @@ import do5 from "@/assets/do5.jpg.asset.json";
 import do6a from "@/assets/do6a.jpg.asset.json";
 import do6b from "@/assets/do6b.jpg.asset.json";
 
-const PAY_URL = "https://pay.vimoreau.com/connect/form?site=pay.vimoreau.com&amount=9.99&symbol=EUR&vat=0&riderect_success=https%3A%2F%2Fvimoreau.com%2Fpaiement-echoue&riderect_failed=https%3A%2F%2Fvimoreau.com%2Fpaiement-echoue&riderect_back=https%3A%2F%2Fvimoreau.com%2Fen&billing_country=GB";
+const PAY_URL = "https://pay.vimoreau.com/connect/form?site=pay.vimoreau.com&amount=9.99&symbol=USD&vat=0&riderect_success=https%3A%2F%2Fvimoreau.com%2Fpaiement-echoue&riderect_failed=https%3A%2F%2Fvimoreau.com%2Fpaiement-echoue&riderect_back=https%3A%2F%2Fvimoreau.com%2Fen&billing_country=US";
 
 export const Route = createFileRoute("/en")({
   head: () => ({
@@ -117,10 +117,10 @@ function PriceBlock({ light = false }: { light?: boolean }) {
       <span className={`label-eyebrow ${light ? "text-white/60" : ""}`}>Launch price</span>
       <div className="flex items-baseline gap-3">
         <span className="font-display text-5xl md:text-6xl font-semibold leading-none" style={{ color: "var(--color-terra)" }}>
-          €9.99
+          $9.99
         </span>
         <span className={`text-lg line-through ${light ? "text-white/50" : ""}`} style={!light ? { color: "var(--color-ink-muted)" } : {}}>
-          €99
+          $99
         </span>
       </div>
     </div>
@@ -292,7 +292,7 @@ function BonusOffer() {
                   <Gift size={22} className="text-white" strokeWidth={1.5} />
                 </div>
                 <div>
-                  <p className="label-eyebrow" style={{ color: "var(--color-terra)" }}>Bonus #1 — free (€39 value)</p>
+                  <p className="label-eyebrow" style={{ color: "var(--color-terra)" }}>Bonus #1 — free ($39 value)</p>
                   <h3 className="font-display text-xl md:text-[1.4rem] mt-1 leading-snug">“Anti-Stress Breathing” Meditation</h3>
                   <p className="mt-3 text-sm" style={{ color: "var(--color-ink-muted)" }}>
                     A deep breathing technique to release diaphragm tension in 10 minutes.
@@ -307,7 +307,7 @@ function BonusOffer() {
                   <Play size={20} className="text-white" strokeWidth={1.5} />
                 </div>
                 <div>
-                  <p className="label-eyebrow" style={{ color: "var(--color-terra)" }}>Bonus #2 — free (€49 value)</p>
+                  <p className="label-eyebrow" style={{ color: "var(--color-terra)" }}>Bonus #2 — free ($49 value)</p>
                   <h3 className="font-display text-xl md:text-[1.4rem] mt-1 leading-snug">Live open class with Victoire</h3>
                   <p className="mt-3 text-sm" style={{ color: "var(--color-ink-muted)" }}>
                     An exclusive live session to ask questions, practise together and get personal advice.
@@ -318,7 +318,7 @@ function BonusOffer() {
           </div>
 
           <div className="mt-10">
-            <CTA>Get the bonuses + program — €9.99</CTA>
+            <CTA>Get the bonuses + program — $9.99</CTA>
           </div>
         </Reveal>
       </div>
@@ -951,8 +951,8 @@ function FinalCTA() {
             <div className="flex flex-col items-center">
               <span className="label-eyebrow text-white/60">Launch price</span>
               <div className="flex items-baseline gap-3 mt-1">
-                <span className="font-display text-6xl font-semibold" style={{ color: "var(--color-terra)" }}>€9.99</span>
-                <span className="text-lg line-through text-white/50">€99</span>
+                <span className="font-display text-6xl font-semibold" style={{ color: "var(--color-terra)" }}>$9.99</span>
+                <span className="text-lg line-through text-white/50">$99</span>
               </div>
             </div>
             <CTA>Enrol now</CTA>
@@ -1062,12 +1062,12 @@ function StickyBuyBar() {
     >
       <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between gap-3">
         <div className="flex items-baseline gap-2 min-w-0">
-          <span className="font-display text-xl md:text-2xl" style={{ color: "var(--color-terra)" }}>€9.99</span>
-          <span className="text-xs md:text-sm line-through" style={{ color: "var(--color-ink-muted)" }}>€99</span>
+          <span className="font-display text-xl md:text-2xl" style={{ color: "var(--color-terra)" }}>$9.99</span>
+          <span className="text-xs md:text-sm line-through" style={{ color: "var(--color-ink-muted)" }}>$99</span>
           <span className="hidden sm:inline text-xs uppercase tracking-wider" style={{ color: "var(--color-ink-muted)" }}>· Instant access</span>
         </div>
         <a href={PAY_URL} className="btn-primary btn-primary-hover shrink-0" style={{ padding: "12px 18px", fontSize: "0.72rem" }}>
-          Buy for €9.99
+          Buy for $9.99
         </a>
       </div>
     </div>
