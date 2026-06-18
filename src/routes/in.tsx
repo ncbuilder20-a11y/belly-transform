@@ -1082,6 +1082,186 @@ function StickyBuyBar() {
   );
 }
 
+/* ---------- BUY MODAL ---------- */
+function BuyModal() {
+  const [open, setOpen] = useState(false);
+  const [step, setStep] = useState<"email" | "pay">("email");
+  const [email, setEmail] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const sendLead = useServerFn(sendLeadToTelegram);
+
+  useEffect(() => {
+    const onOpen = () => {
+      setStep("email");
+      setError(null);
+      setOpen(true);
+    };
+    window.addEventListener("openBuyModal", onOpen as EventListener);
+    return () => window.removeEventListener("openBuyModal", onOpen as EventListener);
+  }, []);
+
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  if (!open) return null;
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const value = email.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+    setSubmitting(true);
+    setError(null);
+    try {
+      await sendLead({ data: { email: value, source: "in" } });
+      setStep("pay");
+    } catch {
+      // Even if Telegram fails, let the user proceed to payment.
+      setStep("pay");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <div
+      className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center p-0 sm:p-4"
+      style={{ background: "rgba(28,26,24,0.55)" }}
+      onClick={() => setOpen(false)}
+    >
+      <div
+        className="relative w-full sm:max-w-md bg-white shadow-xl sm:rounded-sm rounded-t-2xl max-h-[92vh] overflow-y-auto"
+        onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+      >
+        <button
+          type="button"
+          onClick={() => setOpen(false)}
+          aria-label="Close"
+          className="absolute right-3 top-3 p-2 rounded-full hover:bg-[var(--color-surface)] transition"
+        >
+          <X size={20} style={{ color: "var(--color-ink-muted)" }} />
+        </button>
+
+        {step === "email" ? (
+          <div className="p-6 sm:p-8 pt-10">
+            <p className="label-eyebrow" style={{ color: "var(--color-terra)" }}>Step 1 of 2</p>
+            <h3 className="mt-2 font-display text-2xl sm:text-[1.7rem] leading-tight">
+              Enter your email to continue
+            </h3>
+            <ol className="mt-5 space-y-3 text-sm" style={{ color: "var(--color-ink-muted)" }}>
+              <li className="flex gap-3">
+                <span className="shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-white text-xs" style={{ background: "var(--color-terra)" }}>1</span>
+                <span>Enter your email — we'll send your access there.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-white text-xs" style={{ background: "var(--color-terra)" }}>2</span>
+                <span>Complete a secure payment of ₹249.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-white text-xs" style={{ background: "var(--color-terra)" }}>3</span>
+                <span>Get instant access to your member area and live classes.</span>
+              </li>
+            </ol>
+
+            <form onSubmit={handleSubmit} className="mt-6">
+              <label htmlFor="buy-email" className="label-eyebrow">Email address</label>
+              <div className="mt-2 relative">
+                <Mail size={16} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: "var(--color-ink-muted)" }} />
+                <input
+                  id="buy-email"
+                  type="email"
+                  inputMode="email"
+                  autoComplete="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="you@example.com"
+                  className="w-full h-12 pl-10 pr-3 text-base border bg-white outline-none focus:border-[var(--color-terra)]"
+                  style={{ borderColor: "var(--input)" }}
+                />
+              </div>
+              {error && <p className="mt-2 text-sm" style={{ color: "var(--color-terra-dark)" }}>{error}</p>}
+
+              <button
+                type="submit"
+                disabled={submitting}
+                className="btn-primary btn-primary-hover w-full mt-5 justify-center"
+              >
+                {submitting ? "Sending…" : "Continue"}
+                <ArrowRight size={16} strokeWidth={1.5} />
+              </button>
+
+              <p className="mt-3 flex items-center justify-center gap-1.5 text-xs" style={{ color: "var(--color-ink-muted)" }}>
+                <Lock size={12} /> Your email is safe with us.
+              </p>
+            </form>
+          </div>
+        ) : (
+          <div className="p-6 sm:p-8 pt-10">
+            <p className="label-eyebrow" style={{ color: "var(--color-terra)" }}>Step 2 of 2</p>
+            <h3 className="mt-2 font-display text-2xl sm:text-[1.7rem] leading-tight">
+              Almost there — complete your payment
+            </h3>
+            <p className="mt-4 text-sm" style={{ color: "var(--color-ink-muted)" }}>
+              After payment you will receive an email at <strong style={{ color: "var(--color-ink)" }}>{email}</strong> with
+              access to your personal member area, where the live classes take place.
+            </p>
+
+            <ul className="mt-5 space-y-3 text-sm">
+              <li className="flex gap-3">
+                <CheckCircle2 size={18} className="shrink-0 mt-0.5" style={{ color: "var(--color-sage)" }} />
+                <span>Login link to your personal cabinet</span>
+              </li>
+              <li className="flex gap-3">
+                <CheckCircle2 size={18} className="shrink-0 mt-0.5" style={{ color: "var(--color-sage)" }} />
+                <span>Schedule and access to upcoming live classes</span>
+              </li>
+              <li className="flex gap-3">
+                <Gift size={18} className="shrink-0 mt-0.5" style={{ color: "var(--color-terra)" }} />
+                <span>Free bonuses from Victoire — meditation & open class</span>
+              </li>
+            </ul>
+
+            <div className="mt-6 p-4 border" style={{ background: "var(--color-surface)", borderColor: "rgba(193,122,90,0.25)" }}>
+              <div className="flex items-baseline gap-2">
+                <span className="font-display text-3xl" style={{ color: "var(--color-terra)" }}>₹249</span>
+                <span className="text-sm line-through" style={{ color: "var(--color-ink-muted)" }}>₹2499</span>
+              </div>
+              <p className="mt-1 text-xs" style={{ color: "var(--color-ink-muted)" }}>One-time payment · Instant access</p>
+            </div>
+
+            <a
+              href={PAY_URL}
+              className="btn-primary btn-primary-hover w-full mt-5 justify-center"
+            >
+              Pay securely — ₹249
+              <ArrowRight size={16} strokeWidth={1.5} />
+            </a>
+
+            <p className="mt-3 flex items-center justify-center gap-1.5 text-xs" style={{ color: "var(--color-ink-muted)" }}>
+              <Lock size={12} /> Secure payment · 14-day money-back guarantee
+            </p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 /* ---------- PAGE ---------- */
 function LandingPage() {
   return (
@@ -1113,6 +1293,7 @@ function LandingPage() {
       <FAQ />
       <Footer />
       <StickyBuyBar />
+      <BuyModal />
     </main>
   );
 }
