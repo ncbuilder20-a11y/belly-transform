@@ -17,6 +17,7 @@ import { Route as PaymentFailedRouteImport } from './routes/payment-failed'
 import { Route as PaiementEchoueRouteImport } from './routes/paiement-echoue'
 import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
 import { Route as LegalNoticeRouteImport } from './routes/legal-notice'
+import { Route as InRouteImport } from './routes/in'
 import { Route as EnRouteImport } from './routes/en'
 import { Route as ConfidentialiteRouteImport } from './routes/confidentialite'
 import { Route as CgvRouteImport } from './routes/cgv'
@@ -62,6 +63,11 @@ const LegalNoticeRoute = LegalNoticeRouteImport.update({
   path: '/legal-notice',
   getParentRoute: () => rootRouteImport,
 } as any)
+const InRoute = InRouteImport.update({
+  id: '/in',
+  path: '/in',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EnRoute = EnRouteImport.update({
   id: '/en',
   path: '/en',
@@ -88,6 +94,7 @@ export interface FileRoutesByFullPath {
   '/cgv': typeof CgvRoute
   '/confidentialite': typeof ConfidentialiteRoute
   '/en': typeof EnRoute
+  '/in': typeof InRoute
   '/legal-notice': typeof LegalNoticeRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/paiement-echoue': typeof PaiementEchoueRoute
@@ -102,6 +109,7 @@ export interface FileRoutesByTo {
   '/cgv': typeof CgvRoute
   '/confidentialite': typeof ConfidentialiteRoute
   '/en': typeof EnRoute
+  '/in': typeof InRoute
   '/legal-notice': typeof LegalNoticeRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/paiement-echoue': typeof PaiementEchoueRoute
@@ -117,6 +125,7 @@ export interface FileRoutesById {
   '/cgv': typeof CgvRoute
   '/confidentialite': typeof ConfidentialiteRoute
   '/en': typeof EnRoute
+  '/in': typeof InRoute
   '/legal-notice': typeof LegalNoticeRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/paiement-echoue': typeof PaiementEchoueRoute
@@ -133,6 +142,7 @@ export interface FileRouteTypes {
     | '/cgv'
     | '/confidentialite'
     | '/en'
+    | '/in'
     | '/legal-notice'
     | '/mentions-legales'
     | '/paiement-echoue'
@@ -147,6 +157,7 @@ export interface FileRouteTypes {
     | '/cgv'
     | '/confidentialite'
     | '/en'
+    | '/in'
     | '/legal-notice'
     | '/mentions-legales'
     | '/paiement-echoue'
@@ -161,6 +172,7 @@ export interface FileRouteTypes {
     | '/cgv'
     | '/confidentialite'
     | '/en'
+    | '/in'
     | '/legal-notice'
     | '/mentions-legales'
     | '/paiement-echoue'
@@ -176,6 +188,7 @@ export interface RootRouteChildren {
   CgvRoute: typeof CgvRoute
   ConfidentialiteRoute: typeof ConfidentialiteRoute
   EnRoute: typeof EnRoute
+  InRoute: typeof InRoute
   LegalNoticeRoute: typeof LegalNoticeRoute
   MentionsLegalesRoute: typeof MentionsLegalesRoute
   PaiementEchoueRoute: typeof PaiementEchoueRoute
@@ -244,6 +257,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LegalNoticeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/in': {
+      id: '/in'
+      path: '/in'
+      fullPath: '/in'
+      preLoaderRoute: typeof InRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/en': {
       id: '/en'
       path: '/en'
@@ -280,6 +300,7 @@ const rootRouteChildren: RootRouteChildren = {
   CgvRoute: CgvRoute,
   ConfidentialiteRoute: ConfidentialiteRoute,
   EnRoute: EnRoute,
+  InRoute: InRoute,
   LegalNoticeRoute: LegalNoticeRoute,
   MentionsLegalesRoute: MentionsLegalesRoute,
   PaiementEchoueRoute: PaiementEchoueRoute,
