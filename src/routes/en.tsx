@@ -1024,10 +1024,10 @@ function Footer() {
             <p>Email: support@vimoreau.com</p>
           </div>
           <div className="flex flex-wrap gap-x-5 gap-y-2 text-xs md:justify-end md:items-start">
-            <Link to="/mentions-legales" className="hover:text-white">Legal notice</Link>
-            <Link to="/confidentialite" className="hover:text-white">Privacy policy</Link>
-            <Link to="/cgv" className="hover:text-white">Terms</Link>
-            <Link to="/remboursement" className="hover:text-white">Refund policy</Link>
+            <Link to="/legal-notice" className="hover:text-white">Legal notice</Link>
+            <Link to="/privacy-policy" className="hover:text-white">Privacy policy</Link>
+            <Link to="/terms" className="hover:text-white">Terms</Link>
+            <Link to="/refund-policy" className="hover:text-white">Refund policy</Link>
           </div>
         </div>
         <p className="mt-10 text-xs text-white/40">© 2026 Victoire Moreau. All rights reserved.</p>
