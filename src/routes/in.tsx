@@ -1,12 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useServerFn } from "@tanstack/react-start";
 import useEmblaCarousel from "embla-carousel-react";
 import {
   Shield, Star, Wind, Scissors, Dumbbell, HandHeart, Baby,
-  Clock, Repeat, Smartphone, CheckCircle2,
+  Clock, Repeat, Smartphone, CheckCircle2, Mail, Lock,
   CreditCard, UserCircle, Play, Calendar, Menu, X, ChevronDown, ArrowRight,
   ChevronLeft, ChevronRight, Gift, MessageCircle,
 } from "lucide-react";
+import { sendLeadToTelegram } from "@/lib/telegram-lead.functions";
 import heroWaistBg from "@/assets/hero-waist-bg.jpg";
 import symptomWaist from "@/assets/symptom-waist.jpg";
 import symptomBloating from "@/assets/symptom-bloating.jpg";
