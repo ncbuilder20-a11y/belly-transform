@@ -1074,9 +1074,9 @@ function StickyBuyBar() {
           <span className="text-xs md:text-sm line-through" style={{ color: "var(--color-ink-muted)" }}>₹2499</span>
           <span className="hidden sm:inline text-xs uppercase tracking-wider" style={{ color: "var(--color-ink-muted)" }}>· Instant access</span>
         </div>
-        <a href={PAY_URL} className="btn-primary btn-primary-hover shrink-0" style={{ padding: "12px 18px", fontSize: "0.72rem" }}>
+        <button type="button" onClick={openBuyModal} className="btn-primary btn-primary-hover shrink-0" style={{ padding: "12px 18px", fontSize: "0.72rem" }}>
           Buy for ₹249
-        </a>
+        </button>
       </div>
     </div>
   );
