@@ -183,9 +183,9 @@ function Header() {
                 {n.label}
               </a>
             ))}
-            <a href={PAY_URL} onClick={() => setOpen(false)} className="btn-primary btn-primary-hover mt-2 text-center">
+            <button type="button" onClick={() => { setOpen(false); openBuyModal(); }} className="btn-primary btn-primary-hover mt-2 text-center">
               Start the program
-            </a>
+            </button>
           </div>
         </div>
       )}
