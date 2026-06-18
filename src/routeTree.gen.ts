@@ -9,17 +9,36 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as RemboursementRouteImport } from './routes/remboursement'
+import { Route as RefundPolicyRouteImport } from './routes/refund-policy'
+import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as PaiementEchoueRouteImport } from './routes/paiement-echoue'
 import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
+import { Route as LegalNoticeRouteImport } from './routes/legal-notice'
 import { Route as EnRouteImport } from './routes/en'
 import { Route as ConfidentialiteRouteImport } from './routes/confidentialite'
 import { Route as CgvRouteImport } from './routes/cgv'
 import { Route as IndexRouteImport } from './routes/index'
 
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RemboursementRoute = RemboursementRouteImport.update({
   id: '/remboursement',
   path: '/remboursement',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RefundPolicyRoute = RefundPolicyRouteImport.update({
+  id: '/refund-policy',
+  path: '/refund-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PaiementEchoueRoute = PaiementEchoueRouteImport.update({
@@ -30,6 +49,11 @@ const PaiementEchoueRoute = PaiementEchoueRouteImport.update({
 const MentionsLegalesRoute = MentionsLegalesRouteImport.update({
   id: '/mentions-legales',
   path: '/mentions-legales',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LegalNoticeRoute = LegalNoticeRouteImport.update({
+  id: '/legal-notice',
+  path: '/legal-notice',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EnRoute = EnRouteImport.update({
@@ -58,18 +82,26 @@ export interface FileRoutesByFullPath {
   '/cgv': typeof CgvRoute
   '/confidentialite': typeof ConfidentialiteRoute
   '/en': typeof EnRoute
+  '/legal-notice': typeof LegalNoticeRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/paiement-echoue': typeof PaiementEchoueRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
+  '/refund-policy': typeof RefundPolicyRoute
   '/remboursement': typeof RemboursementRoute
+  '/terms': typeof TermsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/cgv': typeof CgvRoute
   '/confidentialite': typeof ConfidentialiteRoute
   '/en': typeof EnRoute
+  '/legal-notice': typeof LegalNoticeRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/paiement-echoue': typeof PaiementEchoueRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
+  '/refund-policy': typeof RefundPolicyRoute
   '/remboursement': typeof RemboursementRoute
+  '/terms': typeof TermsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -77,9 +109,13 @@ export interface FileRoutesById {
   '/cgv': typeof CgvRoute
   '/confidentialite': typeof ConfidentialiteRoute
   '/en': typeof EnRoute
+  '/legal-notice': typeof LegalNoticeRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/paiement-echoue': typeof PaiementEchoueRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
+  '/refund-policy': typeof RefundPolicyRoute
   '/remboursement': typeof RemboursementRoute
+  '/terms': typeof TermsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -88,27 +124,39 @@ export interface FileRouteTypes {
     | '/cgv'
     | '/confidentialite'
     | '/en'
+    | '/legal-notice'
     | '/mentions-legales'
     | '/paiement-echoue'
+    | '/privacy-policy'
+    | '/refund-policy'
     | '/remboursement'
+    | '/terms'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/cgv'
     | '/confidentialite'
     | '/en'
+    | '/legal-notice'
     | '/mentions-legales'
     | '/paiement-echoue'
+    | '/privacy-policy'
+    | '/refund-policy'
     | '/remboursement'
+    | '/terms'
   id:
     | '__root__'
     | '/'
     | '/cgv'
     | '/confidentialite'
     | '/en'
+    | '/legal-notice'
     | '/mentions-legales'
     | '/paiement-echoue'
+    | '/privacy-policy'
+    | '/refund-policy'
     | '/remboursement'
+    | '/terms'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -116,18 +164,43 @@ export interface RootRouteChildren {
   CgvRoute: typeof CgvRoute
   ConfidentialiteRoute: typeof ConfidentialiteRoute
   EnRoute: typeof EnRoute
+  LegalNoticeRoute: typeof LegalNoticeRoute
   MentionsLegalesRoute: typeof MentionsLegalesRoute
   PaiementEchoueRoute: typeof PaiementEchoueRoute
+  PrivacyPolicyRoute: typeof PrivacyPolicyRoute
+  RefundPolicyRoute: typeof RefundPolicyRoute
   RemboursementRoute: typeof RemboursementRoute
+  TermsRoute: typeof TermsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/remboursement': {
       id: '/remboursement'
       path: '/remboursement'
       fullPath: '/remboursement'
       preLoaderRoute: typeof RemboursementRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/refund-policy': {
+      id: '/refund-policy'
+      path: '/refund-policy'
+      fullPath: '/refund-policy'
+      preLoaderRoute: typeof RefundPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy-policy': {
+      id: '/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PrivacyPolicyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/paiement-echoue': {
@@ -142,6 +215,13 @@ declare module '@tanstack/react-router' {
       path: '/mentions-legales'
       fullPath: '/mentions-legales'
       preLoaderRoute: typeof MentionsLegalesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/legal-notice': {
+      id: '/legal-notice'
+      path: '/legal-notice'
+      fullPath: '/legal-notice'
+      preLoaderRoute: typeof LegalNoticeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/en': {
@@ -180,9 +260,13 @@ const rootRouteChildren: RootRouteChildren = {
   CgvRoute: CgvRoute,
   ConfidentialiteRoute: ConfidentialiteRoute,
   EnRoute: EnRoute,
+  LegalNoticeRoute: LegalNoticeRoute,
   MentionsLegalesRoute: MentionsLegalesRoute,
   PaiementEchoueRoute: PaiementEchoueRoute,
+  PrivacyPolicyRoute: PrivacyPolicyRoute,
+  RefundPolicyRoute: RefundPolicyRoute,
   RemboursementRoute: RemboursementRoute,
+  TermsRoute: TermsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
