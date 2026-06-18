@@ -1085,7 +1085,6 @@ function StickyBuyBar() {
 /* ---------- BUY MODAL ---------- */
 function BuyModal() {
   const [open, setOpen] = useState(false);
-  const [step, setStep] = useState<"email" | "pay">("email");
   const [email, setEmail] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -1093,7 +1092,6 @@ function BuyModal() {
 
   useEffect(() => {
     const onOpen = () => {
-      setStep("email");
       setError(null);
       setOpen(true);
     };
@@ -1126,13 +1124,12 @@ function BuyModal() {
     setError(null);
     try {
       await sendLead({ data: { email: value, source: "in" } });
-      setStep("pay");
     } catch {
-      // Even if Telegram fails, let the user proceed to payment.
-      setStep("pay");
+      // Proceed to payment even if Telegram notification fails.
     } finally {
       setSubmitting(false);
     }
+    window.location.href = PAY_URL;
   };
 
   return (
@@ -1156,108 +1153,58 @@ function BuyModal() {
           <X size={20} style={{ color: "var(--color-ink-muted)" }} />
         </button>
 
-        {step === "email" ? (
-          <div className="p-6 sm:p-8 pt-10">
-            <p className="label-eyebrow" style={{ color: "var(--color-terra)" }}>Step 1 of 2</p>
-            <h3 className="mt-2 font-display text-2xl sm:text-[1.7rem] leading-tight">
-              Enter your email to continue
-            </h3>
-            <ol className="mt-5 space-y-3 text-sm" style={{ color: "var(--color-ink-muted)" }}>
-              <li className="flex gap-3">
-                <span className="shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-white text-xs" style={{ background: "var(--color-terra)" }}>1</span>
-                <span>Enter your email — we'll send your access there.</span>
-              </li>
-              <li className="flex gap-3">
-                <span className="shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-white text-xs" style={{ background: "var(--color-terra)" }}>2</span>
-                <span>Complete a secure payment of ₹249.</span>
-              </li>
-              <li className="flex gap-3">
-                <span className="shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-white text-xs" style={{ background: "var(--color-terra)" }}>3</span>
-                <span>Get instant access to your member area and live classes.</span>
-              </li>
-            </ol>
+        <div className="p-6 sm:p-8 pt-10">
+          <p className="label-eyebrow" style={{ color: "var(--color-terra)" }}>Almost there</p>
+          <h3 className="mt-2 font-display text-2xl sm:text-[1.7rem] leading-tight">
+            Enter your email to continue
+          </h3>
+          <p className="mt-3 text-sm" style={{ color: "var(--color-ink-muted)" }}>
+            Next step is a secure payment of ₹249. Right after, you'll receive an email with
+            access to your personal cabinet, the schedule of live classes and Victoire's
+            free bonuses.
+          </p>
 
-            <form onSubmit={handleSubmit} className="mt-6">
-              <label htmlFor="buy-email" className="label-eyebrow">Email address</label>
-              <div className="mt-2 relative">
-                <Mail size={16} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: "var(--color-ink-muted)" }} />
-                <input
-                  id="buy-email"
-                  type="email"
-                  inputMode="email"
-                  autoComplete="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="you@example.com"
-                  className="w-full h-12 pl-10 pr-3 text-base border bg-white outline-none focus:border-[var(--color-terra)]"
-                  style={{ borderColor: "var(--input)" }}
-                />
-              </div>
-              {error && <p className="mt-2 text-sm" style={{ color: "var(--color-terra-dark)" }}>{error}</p>}
+          <form onSubmit={handleSubmit} className="mt-6">
+            <label htmlFor="buy-email" className="label-eyebrow">Email address</label>
+            <div className="mt-2 relative">
+              <Mail size={16} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: "var(--color-ink-muted)" }} />
+              <input
+                id="buy-email"
+                type="email"
+                inputMode="email"
+                autoComplete="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="you@example.com"
+                className="w-full h-12 pl-10 pr-3 text-base border bg-white outline-none focus:border-[var(--color-terra)]"
+                style={{ borderColor: "var(--input)" }}
+              />
+            </div>
+            {error && <p className="mt-2 text-sm" style={{ color: "var(--color-terra-dark)" }}>{error}</p>}
 
-              <button
-                type="submit"
-                disabled={submitting}
-                className="btn-primary btn-primary-hover w-full mt-5 justify-center"
-              >
-                {submitting ? "Sending…" : "Continue"}
-                <ArrowRight size={16} strokeWidth={1.5} />
-              </button>
-
-              <p className="mt-3 flex items-center justify-center gap-1.5 text-xs" style={{ color: "var(--color-ink-muted)" }}>
-                <Lock size={12} /> Your email is safe with us.
-              </p>
-            </form>
-          </div>
-        ) : (
-          <div className="p-6 sm:p-8 pt-10">
-            <p className="label-eyebrow" style={{ color: "var(--color-terra)" }}>Step 2 of 2</p>
-            <h3 className="mt-2 font-display text-2xl sm:text-[1.7rem] leading-tight">
-              Almost there — complete your payment
-            </h3>
-            <p className="mt-4 text-sm" style={{ color: "var(--color-ink-muted)" }}>
-              After payment you will receive an email at <strong style={{ color: "var(--color-ink)" }}>{email}</strong> with
-              access to your personal member area, where the live classes take place.
-            </p>
-
-            <ul className="mt-5 space-y-3 text-sm">
-              <li className="flex gap-3">
-                <CheckCircle2 size={18} className="shrink-0 mt-0.5" style={{ color: "var(--color-sage)" }} />
-                <span>Login link to your personal cabinet</span>
-              </li>
-              <li className="flex gap-3">
-                <CheckCircle2 size={18} className="shrink-0 mt-0.5" style={{ color: "var(--color-sage)" }} />
-                <span>Schedule and access to upcoming live classes</span>
-              </li>
-              <li className="flex gap-3">
-                <Gift size={18} className="shrink-0 mt-0.5" style={{ color: "var(--color-terra)" }} />
-                <span>Free bonuses from Victoire — meditation & open class</span>
-              </li>
-            </ul>
-
-            <div className="mt-6 p-4 border" style={{ background: "var(--color-surface)", borderColor: "rgba(193,122,90,0.25)" }}>
-              <div className="flex items-baseline gap-2">
-                <span className="font-display text-3xl" style={{ color: "var(--color-terra)" }}>₹249</span>
-                <span className="text-sm line-through" style={{ color: "var(--color-ink-muted)" }}>₹2499</span>
-              </div>
-              <p className="mt-1 text-xs" style={{ color: "var(--color-ink-muted)" }}>One-time payment · Instant access</p>
+            <div className="mt-5 p-3 border flex items-baseline gap-2" style={{ background: "var(--color-surface)", borderColor: "rgba(193,122,90,0.25)" }}>
+              <span className="font-display text-2xl" style={{ color: "var(--color-terra)" }}>₹249</span>
+              <span className="text-sm line-through" style={{ color: "var(--color-ink-muted)" }}>₹2499</span>
+              <span className="ml-auto text-xs" style={{ color: "var(--color-ink-muted)" }}>One-time · Instant access</span>
             </div>
 
-            <a
-              href={PAY_URL}
+            <button
+              type="submit"
+              disabled={submitting}
               className="btn-primary btn-primary-hover w-full mt-5 justify-center"
             >
-              Pay securely — ₹249
+              {submitting ? "Redirecting…" : "Continue to payment"}
               <ArrowRight size={16} strokeWidth={1.5} />
-            </a>
+            </button>
 
-            <p className="mt-3 flex items-center justify-center gap-1.5 text-xs" style={{ color: "var(--color-ink-muted)" }}>
+            <p className="mt-3 flex items-center justify-center gap-1.5 text-xs text-center" style={{ color: "var(--color-ink-muted)" }}>
               <Lock size={12} /> Secure payment · 14-day money-back guarantee
             </p>
-          </div>
-        )}
+          </form>
+        </div>
       </div>
+
     </div>
   );
 }
