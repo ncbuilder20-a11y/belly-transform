@@ -104,12 +104,18 @@ function Eyebrow({ children }: { children: ReactNode }) {
   return <p className="label-eyebrow">{children}</p>;
 }
 
+function openBuyModal() {
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new CustomEvent("openBuyModal"));
+  }
+}
+
 function CTA({ children = "Start the program", className = "" }: { children?: ReactNode; className?: string }) {
   return (
-    <a href={PAY_URL} className={`btn-primary btn-primary-hover ${className}`}>
+    <button type="button" onClick={openBuyModal} className={`btn-primary btn-primary-hover ${className}`}>
       {children}
       <ArrowRight size={16} strokeWidth={1.5} />
-    </a>
+    </button>
   );
 }
 
