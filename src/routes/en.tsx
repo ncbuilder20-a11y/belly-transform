@@ -120,7 +120,7 @@ function PriceBlock({ light = false }: { light?: boolean }) {
           $4.99
         </span>
         <span className={`text-lg line-through ${light ? "text-white/50" : ""}`} style={!light ? { color: "var(--color-ink-muted)" } : {}}>
-          $99
+          $49
         </span>
       </div>
     </div>
