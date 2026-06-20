@@ -1327,7 +1327,6 @@ function LandingPage() {
       <LazyMount minHeight={700}><FAQ /></LazyMount>
       <Footer />
       <StickyBuyBar />
-      <BuyModal />
     </main>
   );
 }
