@@ -114,6 +114,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     scripts: [
       {
         children: `window.addEventListener('load', function() {
+  if (window.location.pathname === '/in') return;
   var loadConsentManager = function() {
     var css = document.createElement('link');
     css.rel = 'stylesheet';
