@@ -147,15 +147,22 @@
   from { opacity: 0; transform: translateY(16px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+/* Reveal is visible by default — animation is progressive enhancement.
+   Never hide content based on JS-only state: if hydration fails or the
+   IntersectionObserver never fires, the page must still be readable. */
 .reveal {
+  opacity: 1;
+}
+.js-reveal-enabled .reveal:not(.is-visible) {
   opacity: 0;
 }
-.reveal.is-visible {
+.js-reveal-enabled .reveal.is-visible {
   animation: fade-up 600ms ease-out forwards;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal, .reveal.is-visible {
+  .js-reveal-enabled .reveal,
+  .js-reveal-enabled .reveal.is-visible {
     opacity: 1;
     animation: none;
   }

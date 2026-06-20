@@ -60,8 +60,13 @@ function tomorrowFr() {
 function Reveal({ children, className = "", as: As = "div" }: { children: ReactNode; className?: string; as?: any }) {
   const ref = useRef<HTMLElement | null>(null);
   useEffect(() => {
+    document.documentElement.classList.add("js-reveal-enabled");
     const el = ref.current;
     if (!el) return;
+    if (!("IntersectionObserver" in window)) {
+      el.classList.add("is-visible");
+      return;
+    }
     const obs = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
