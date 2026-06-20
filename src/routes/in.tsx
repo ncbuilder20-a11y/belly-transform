@@ -7,7 +7,8 @@ import {
   Clock, Repeat, Smartphone, CheckCircle2, Mail, Lock,
   CreditCard, UserCircle, Play, Calendar, Menu, X, ChevronDown, ArrowRight,
   ChevronLeft, ChevronRight, Gift, MessageCircle,
-} from "lucide-react";
+} from "@/components/inline-icons";
+import { LazyMount } from "@/components/LazyMount";
 
 import heroWaistBg from "@/assets/hero-waist-bg.jpg";
 import symptomWaist from "@/assets/symptom-waist.jpg";
