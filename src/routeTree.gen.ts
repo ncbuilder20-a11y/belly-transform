@@ -23,6 +23,7 @@ import { Route as ConfidentialiteRouteImport } from './routes/confidentialite'
 import { Route as CgvRouteImport } from './routes/cgv'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as InIndexRouteImport } from './routes/in.index'
+import { Route as InCheckoutRouteImport } from './routes/in.checkout'
 import { Route as ApiPublicLeadTelegramRouteImport } from './routes/api/public/lead-telegram'
 
 const TermsRoute = TermsRouteImport.update({
@@ -95,6 +96,11 @@ const InIndexRoute = InIndexRouteImport.update({
   path: '/',
   getParentRoute: () => InRoute,
 } as any)
+const InCheckoutRoute = InCheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
+  getParentRoute: () => InRoute,
+} as any)
 const ApiPublicLeadTelegramRoute = ApiPublicLeadTelegramRouteImport.update({
   id: '/api/public/lead-telegram',
   path: '/api/public/lead-telegram',
@@ -115,6 +121,7 @@ export interface FileRoutesByFullPath {
   '/refund-policy': typeof RefundPolicyRoute
   '/remboursement': typeof RemboursementRoute
   '/terms': typeof TermsRoute
+  '/in/checkout': typeof InCheckoutRoute
   '/in/': typeof InIndexRoute
   '/api/public/lead-telegram': typeof ApiPublicLeadTelegramRoute
 }
@@ -131,6 +138,7 @@ export interface FileRoutesByTo {
   '/refund-policy': typeof RefundPolicyRoute
   '/remboursement': typeof RemboursementRoute
   '/terms': typeof TermsRoute
+  '/in/checkout': typeof InCheckoutRoute
   '/in': typeof InIndexRoute
   '/api/public/lead-telegram': typeof ApiPublicLeadTelegramRoute
 }
@@ -149,6 +157,7 @@ export interface FileRoutesById {
   '/refund-policy': typeof RefundPolicyRoute
   '/remboursement': typeof RemboursementRoute
   '/terms': typeof TermsRoute
+  '/in/checkout': typeof InCheckoutRoute
   '/in/': typeof InIndexRoute
   '/api/public/lead-telegram': typeof ApiPublicLeadTelegramRoute
 }
@@ -168,6 +177,7 @@ export interface FileRouteTypes {
     | '/refund-policy'
     | '/remboursement'
     | '/terms'
+    | '/in/checkout'
     | '/in/'
     | '/api/public/lead-telegram'
   fileRoutesByTo: FileRoutesByTo
@@ -184,6 +194,7 @@ export interface FileRouteTypes {
     | '/refund-policy'
     | '/remboursement'
     | '/terms'
+    | '/in/checkout'
     | '/in'
     | '/api/public/lead-telegram'
   id:
@@ -201,6 +212,7 @@ export interface FileRouteTypes {
     | '/refund-policy'
     | '/remboursement'
     | '/terms'
+    | '/in/checkout'
     | '/in/'
     | '/api/public/lead-telegram'
   fileRoutesById: FileRoutesById
@@ -322,6 +334,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof InIndexRouteImport
       parentRoute: typeof InRoute
     }
+    '/in/checkout': {
+      id: '/in/checkout'
+      path: '/checkout'
+      fullPath: '/in/checkout'
+      preLoaderRoute: typeof InCheckoutRouteImport
+      parentRoute: typeof InRoute
+    }
     '/api/public/lead-telegram': {
       id: '/api/public/lead-telegram'
       path: '/api/public/lead-telegram'
@@ -333,10 +352,12 @@ declare module '@tanstack/react-router' {
 }
 
 interface InRouteChildren {
+  InCheckoutRoute: typeof InCheckoutRoute
   InIndexRoute: typeof InIndexRoute
 }
 
 const InRouteChildren: InRouteChildren = {
+  InCheckoutRoute: InCheckoutRoute,
   InIndexRoute: InIndexRoute,
 }
 
