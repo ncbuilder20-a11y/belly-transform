@@ -128,7 +128,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       {
         children: `window.addEventListener('load', function() {
-  if (window.location.pathname === '/in') return;
+  var path = window.location.pathname;
+  if (path === '/in' || path.indexOf('/in/') === 0) return;
   var loadConsentManager = function() {
     var css = document.createElement('link');
     css.rel = 'stylesheet';
@@ -203,13 +204,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       {
         children: `window.addEventListener('load', function() {
-  // Skip Facebook Pixel on checkout page to avoid Safari "Advanced Privacy Protections" warning.
-  if (window.location.pathname.indexOf('/checkout') !== -1) return;
+  var path = window.location.pathname;
+  // Skip Facebook Pixel on /in and checkout pages.
+  if (path === '/in' || path.indexOf('/in/') === 0 || path.indexOf('/checkout') !== -1) return;
   var loadPixel = function() {
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','2074805606463580');fbq('track','PageView');
   };
-  // Defer heavily on /in (Indian mobile traffic) — pixel still fires within seconds, page becomes interactive first.
-  var delay = window.location.pathname === '/in' ? 3500 : 1500;
+  var delay = 1500;
   if ('requestIdleCallback' in window) {
     requestIdleCallback(loadPixel, { timeout: delay });
   } else {

@@ -19,21 +19,6 @@ function buildPayUrl(email: string, orderId: string) {
 }
 
 export function InCheckoutPage() {
-  useEffect(() => {
-    const style = document.createElement("style");
-    style.id = "hide-silktide-on-checkout";
-    style.textContent = `
-      #silktide-backdrop,
-      #silktide-wrapper,
-      .silktide-backdrop,
-      .silktide-wrapper,
-      [class*="silktide"] { display: none !important; visibility: hidden !important; }
-    `;
-    document.head.appendChild(style);
-    return () => {
-      style.remove();
-    };
-  }, []);
   const [email, setEmail] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
