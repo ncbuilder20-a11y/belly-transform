@@ -22,6 +22,7 @@ import { Route as EnRouteImport } from './routes/en'
 import { Route as ConfidentialiteRouteImport } from './routes/confidentialite'
 import { Route as CgvRouteImport } from './routes/cgv'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as InCheckoutRouteImport } from './routes/in.checkout'
 import { Route as ApiPublicLeadTelegramRouteImport } from './routes/api/public/lead-telegram'
 
 const TermsRoute = TermsRouteImport.update({
@@ -89,6 +90,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const InCheckoutRoute = InCheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
+  getParentRoute: () => InRoute,
+} as any)
 const ApiPublicLeadTelegramRoute = ApiPublicLeadTelegramRouteImport.update({
   id: '/api/public/lead-telegram',
   path: '/api/public/lead-telegram',
@@ -100,7 +106,7 @@ export interface FileRoutesByFullPath {
   '/cgv': typeof CgvRoute
   '/confidentialite': typeof ConfidentialiteRoute
   '/en': typeof EnRoute
-  '/in': typeof InRoute
+  '/in': typeof InRouteWithChildren
   '/legal-notice': typeof LegalNoticeRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/paiement-echoue': typeof PaiementEchoueRoute
@@ -109,6 +115,7 @@ export interface FileRoutesByFullPath {
   '/refund-policy': typeof RefundPolicyRoute
   '/remboursement': typeof RemboursementRoute
   '/terms': typeof TermsRoute
+  '/in/checkout': typeof InCheckoutRoute
   '/api/public/lead-telegram': typeof ApiPublicLeadTelegramRoute
 }
 export interface FileRoutesByTo {
@@ -116,7 +123,7 @@ export interface FileRoutesByTo {
   '/cgv': typeof CgvRoute
   '/confidentialite': typeof ConfidentialiteRoute
   '/en': typeof EnRoute
-  '/in': typeof InRoute
+  '/in': typeof InRouteWithChildren
   '/legal-notice': typeof LegalNoticeRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/paiement-echoue': typeof PaiementEchoueRoute
@@ -125,6 +132,7 @@ export interface FileRoutesByTo {
   '/refund-policy': typeof RefundPolicyRoute
   '/remboursement': typeof RemboursementRoute
   '/terms': typeof TermsRoute
+  '/in/checkout': typeof InCheckoutRoute
   '/api/public/lead-telegram': typeof ApiPublicLeadTelegramRoute
 }
 export interface FileRoutesById {
@@ -133,7 +141,7 @@ export interface FileRoutesById {
   '/cgv': typeof CgvRoute
   '/confidentialite': typeof ConfidentialiteRoute
   '/en': typeof EnRoute
-  '/in': typeof InRoute
+  '/in': typeof InRouteWithChildren
   '/legal-notice': typeof LegalNoticeRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/paiement-echoue': typeof PaiementEchoueRoute
@@ -142,6 +150,7 @@ export interface FileRoutesById {
   '/refund-policy': typeof RefundPolicyRoute
   '/remboursement': typeof RemboursementRoute
   '/terms': typeof TermsRoute
+  '/in/checkout': typeof InCheckoutRoute
   '/api/public/lead-telegram': typeof ApiPublicLeadTelegramRoute
 }
 export interface FileRouteTypes {
@@ -160,6 +169,7 @@ export interface FileRouteTypes {
     | '/refund-policy'
     | '/remboursement'
     | '/terms'
+    | '/in/checkout'
     | '/api/public/lead-telegram'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -176,6 +186,7 @@ export interface FileRouteTypes {
     | '/refund-policy'
     | '/remboursement'
     | '/terms'
+    | '/in/checkout'
     | '/api/public/lead-telegram'
   id:
     | '__root__'
@@ -192,6 +203,7 @@ export interface FileRouteTypes {
     | '/refund-policy'
     | '/remboursement'
     | '/terms'
+    | '/in/checkout'
     | '/api/public/lead-telegram'
   fileRoutesById: FileRoutesById
 }
@@ -200,7 +212,7 @@ export interface RootRouteChildren {
   CgvRoute: typeof CgvRoute
   ConfidentialiteRoute: typeof ConfidentialiteRoute
   EnRoute: typeof EnRoute
-  InRoute: typeof InRoute
+  InRoute: typeof InRouteWithChildren
   LegalNoticeRoute: typeof LegalNoticeRoute
   MentionsLegalesRoute: typeof MentionsLegalesRoute
   PaiementEchoueRoute: typeof PaiementEchoueRoute
@@ -305,6 +317,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/in/checkout': {
+      id: '/in/checkout'
+      path: '/checkout'
+      fullPath: '/in/checkout'
+      preLoaderRoute: typeof InCheckoutRouteImport
+      parentRoute: typeof InRoute
+    }
     '/api/public/lead-telegram': {
       id: '/api/public/lead-telegram'
       path: '/api/public/lead-telegram'
@@ -315,12 +334,22 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface InRouteChildren {
+  InCheckoutRoute: typeof InCheckoutRoute
+}
+
+const InRouteChildren: InRouteChildren = {
+  InCheckoutRoute: InCheckoutRoute,
+}
+
+const InRouteWithChildren = InRoute._addFileChildren(InRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CgvRoute: CgvRoute,
   ConfidentialiteRoute: ConfidentialiteRoute,
   EnRoute: EnRoute,
-  InRoute: InRoute,
+  InRoute: InRouteWithChildren,
   LegalNoticeRoute: LegalNoticeRoute,
   MentionsLegalesRoute: MentionsLegalesRoute,
   PaiementEchoueRoute: PaiementEchoueRoute,
@@ -334,13 +363,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

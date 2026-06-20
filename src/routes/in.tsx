@@ -111,18 +111,20 @@ function Eyebrow({ children }: { children: ReactNode }) {
   return <p className="label-eyebrow">{children}</p>;
 }
 
+const CHECKOUT_URL = "/in/checkout";
+
 function openBuyModal() {
   if (typeof window !== "undefined") {
-    window.dispatchEvent(new CustomEvent("openBuyModal"));
+    window.location.assign(CHECKOUT_URL);
   }
 }
 
 function CTA({ children = "Start the program", className = "" }: { children?: ReactNode; className?: string }) {
   return (
-    <button type="button" onClick={openBuyModal} className={`btn-primary btn-primary-hover ${className}`}>
+    <a href={CHECKOUT_URL} className={`btn-primary btn-primary-hover ${className}`}>
       {children}
       <ArrowRight size={16} strokeWidth={1.5} />
-    </button>
+    </a>
   );
 }
 
