@@ -182,10 +182,12 @@ function Header() {
 
 /* ---------- PRE-HEADER ---------- */
 function PreHeaderStrip() {
+  const [date, setDate] = useState<string | null>(null);
+  useEffect(() => { setDate(tomorrowFr()); }, []);
   return (
     <div className="w-full py-2.5 px-4 text-center text-xs md:text-sm text-white" style={{ background: "var(--color-terra)" }}>
-      <span className="tracking-wide">
-        Cours en ligne · Début : {tomorrowFr()} · Accès immédiat après paiement
+      <span className="tracking-wide" suppressHydrationWarning>
+        Cours en ligne{date ? ` · Début : ${date}` : ""} · Accès immédiat après paiement
       </span>
     </div>
   );
