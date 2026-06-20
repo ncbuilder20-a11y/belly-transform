@@ -55,11 +55,6 @@ export const Route = createFileRoute("/in")({
       { title: "Waist Transformation — 14-Day Program | Victoire Moreau" },
       { name: "description", content: "Online 14-day program to eliminate visceral fat, activate deep muscles and improve digestion. Just 5 minutes a day." },
     ],
-    links: [
-      { rel: "preload", as: "image", href: heroWaistBg, fetchPriority: "high" },
-      { rel: "preconnect", href: "https://pay.vimoreau.com" },
-      { rel: "dns-prefetch", href: "https://pay.vimoreau.com" },
-    ],
   }),
   component: LandingPage,
 });
