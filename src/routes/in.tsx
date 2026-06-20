@@ -195,10 +195,12 @@ function Header() {
 
 /* ---------- PRE-HEADER ---------- */
 function PreHeaderStrip() {
+  const [date, setDate] = useState<string | null>(null);
+  useEffect(() => { setDate(tomorrowEn()); }, []);
   return (
     <div className="w-full py-2.5 px-4 text-center text-xs md:text-sm text-white" style={{ background: "var(--color-terra)" }}>
-      <span className="tracking-wide">
-        Online course · Starts: {tomorrowEn()} · Instant access after payment
+      <span className="tracking-wide" suppressHydrationWarning>
+        Online course{date ? ` · Starts: ${date}` : ""} · Instant access after payment
       </span>
     </div>
   );
