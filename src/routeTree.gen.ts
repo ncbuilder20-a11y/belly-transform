@@ -17,7 +17,6 @@ import { Route as PaymentFailedRouteImport } from './routes/payment-failed'
 import { Route as PaiementEchoueRouteImport } from './routes/paiement-echoue'
 import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
 import { Route as LegalNoticeRouteImport } from './routes/legal-notice'
-import { Route as InRouteImport } from './routes/in'
 import { Route as EnRouteImport } from './routes/en'
 import { Route as ConfidentialiteRouteImport } from './routes/confidentialite'
 import { Route as CgvRouteImport } from './routes/cgv'
@@ -65,11 +64,6 @@ const LegalNoticeRoute = LegalNoticeRouteImport.update({
   path: '/legal-notice',
   getParentRoute: () => rootRouteImport,
 } as any)
-const InRoute = InRouteImport.update({
-  id: '/in',
-  path: '/in',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const EnRoute = EnRouteImport.update({
   id: '/en',
   path: '/en',
@@ -91,9 +85,9 @@ const IndexRoute = IndexRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const InIndexRoute = InIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => InRoute,
+  id: '/in/',
+  path: '/in/',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPublicLeadTelegramRoute = ApiPublicLeadTelegramRouteImport.update({
   id: '/api/public/lead-telegram',
@@ -106,7 +100,6 @@ export interface FileRoutesByFullPath {
   '/cgv': typeof CgvRoute
   '/confidentialite': typeof ConfidentialiteRoute
   '/en': typeof EnRoute
-  '/in': typeof InRouteWithChildren
   '/legal-notice': typeof LegalNoticeRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/paiement-echoue': typeof PaiementEchoueRoute
@@ -140,7 +133,6 @@ export interface FileRoutesById {
   '/cgv': typeof CgvRoute
   '/confidentialite': typeof ConfidentialiteRoute
   '/en': typeof EnRoute
-  '/in': typeof InRouteWithChildren
   '/legal-notice': typeof LegalNoticeRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/paiement-echoue': typeof PaiementEchoueRoute
@@ -159,7 +151,6 @@ export interface FileRouteTypes {
     | '/cgv'
     | '/confidentialite'
     | '/en'
-    | '/in'
     | '/legal-notice'
     | '/mentions-legales'
     | '/paiement-echoue'
@@ -192,7 +183,6 @@ export interface FileRouteTypes {
     | '/cgv'
     | '/confidentialite'
     | '/en'
-    | '/in'
     | '/legal-notice'
     | '/mentions-legales'
     | '/paiement-echoue'
@@ -210,7 +200,6 @@ export interface RootRouteChildren {
   CgvRoute: typeof CgvRoute
   ConfidentialiteRoute: typeof ConfidentialiteRoute
   EnRoute: typeof EnRoute
-  InRoute: typeof InRouteWithChildren
   LegalNoticeRoute: typeof LegalNoticeRoute
   MentionsLegalesRoute: typeof MentionsLegalesRoute
   PaiementEchoueRoute: typeof PaiementEchoueRoute
@@ -219,6 +208,7 @@ export interface RootRouteChildren {
   RefundPolicyRoute: typeof RefundPolicyRoute
   RemboursementRoute: typeof RemboursementRoute
   TermsRoute: typeof TermsRoute
+  InIndexRoute: typeof InIndexRoute
   ApiPublicLeadTelegramRoute: typeof ApiPublicLeadTelegramRoute
 }
 
@@ -280,13 +270,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LegalNoticeRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/in': {
-      id: '/in'
-      path: '/in'
-      fullPath: '/in'
-      preLoaderRoute: typeof InRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/en': {
       id: '/en'
       path: '/en'
@@ -317,10 +300,10 @@ declare module '@tanstack/react-router' {
     }
     '/in/': {
       id: '/in/'
-      path: '/'
+      path: '/in'
       fullPath: '/in/'
       preLoaderRoute: typeof InIndexRouteImport
-      parentRoute: typeof InRoute
+      parentRoute: typeof rootRouteImport
     }
     '/api/public/lead-telegram': {
       id: '/api/public/lead-telegram'
@@ -332,22 +315,11 @@ declare module '@tanstack/react-router' {
   }
 }
 
-interface InRouteChildren {
-  InIndexRoute: typeof InIndexRoute
-}
-
-const InRouteChildren: InRouteChildren = {
-  InIndexRoute: InIndexRoute,
-}
-
-const InRouteWithChildren = InRoute._addFileChildren(InRouteChildren)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CgvRoute: CgvRoute,
   ConfidentialiteRoute: ConfidentialiteRoute,
   EnRoute: EnRoute,
-  InRoute: InRouteWithChildren,
   LegalNoticeRoute: LegalNoticeRoute,
   MentionsLegalesRoute: MentionsLegalesRoute,
   PaiementEchoueRoute: PaiementEchoueRoute,
@@ -356,6 +328,7 @@ const rootRouteChildren: RootRouteChildren = {
   RefundPolicyRoute: RefundPolicyRoute,
   RemboursementRoute: RemboursementRoute,
   TermsRoute: TermsRoute,
+  InIndexRoute: InIndexRoute,
   ApiPublicLeadTelegramRoute: ApiPublicLeadTelegramRoute,
 }
 export const routeTree = rootRouteImport
