@@ -51,7 +51,7 @@ import heroWaistMobile from "@/assets/hero-waist-mobile.webp.asset.json";
 
 
 
-export const Route = createFileRoute("/in")({
+export const Route = createFileRoute("/in/")({
   head: () => ({
     meta: [
       { title: "Waist Transformation — 14-Day Program | Victoire Moreau" },
