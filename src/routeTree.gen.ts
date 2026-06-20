@@ -22,6 +22,7 @@ import { Route as EnRouteImport } from './routes/en'
 import { Route as ConfidentialiteRouteImport } from './routes/confidentialite'
 import { Route as CgvRouteImport } from './routes/cgv'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiPublicLeadTelegramRouteImport } from './routes/api/public/lead-telegram'
 
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
@@ -88,6 +89,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicLeadTelegramRoute = ApiPublicLeadTelegramRouteImport.update({
+  id: '/api/public/lead-telegram',
+  path: '/api/public/lead-telegram',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -103,6 +109,7 @@ export interface FileRoutesByFullPath {
   '/refund-policy': typeof RefundPolicyRoute
   '/remboursement': typeof RemboursementRoute
   '/terms': typeof TermsRoute
+  '/api/public/lead-telegram': typeof ApiPublicLeadTelegramRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -118,6 +125,7 @@ export interface FileRoutesByTo {
   '/refund-policy': typeof RefundPolicyRoute
   '/remboursement': typeof RemboursementRoute
   '/terms': typeof TermsRoute
+  '/api/public/lead-telegram': typeof ApiPublicLeadTelegramRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -134,6 +142,7 @@ export interface FileRoutesById {
   '/refund-policy': typeof RefundPolicyRoute
   '/remboursement': typeof RemboursementRoute
   '/terms': typeof TermsRoute
+  '/api/public/lead-telegram': typeof ApiPublicLeadTelegramRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -151,6 +160,7 @@ export interface FileRouteTypes {
     | '/refund-policy'
     | '/remboursement'
     | '/terms'
+    | '/api/public/lead-telegram'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -166,6 +176,7 @@ export interface FileRouteTypes {
     | '/refund-policy'
     | '/remboursement'
     | '/terms'
+    | '/api/public/lead-telegram'
   id:
     | '__root__'
     | '/'
@@ -181,6 +192,7 @@ export interface FileRouteTypes {
     | '/refund-policy'
     | '/remboursement'
     | '/terms'
+    | '/api/public/lead-telegram'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -197,6 +209,7 @@ export interface RootRouteChildren {
   RefundPolicyRoute: typeof RefundPolicyRoute
   RemboursementRoute: typeof RemboursementRoute
   TermsRoute: typeof TermsRoute
+  ApiPublicLeadTelegramRoute: typeof ApiPublicLeadTelegramRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -292,6 +305,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/lead-telegram': {
+      id: '/api/public/lead-telegram'
+      path: '/api/public/lead-telegram'
+      fullPath: '/api/public/lead-telegram'
+      preLoaderRoute: typeof ApiPublicLeadTelegramRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -309,6 +329,7 @@ const rootRouteChildren: RootRouteChildren = {
   RefundPolicyRoute: RefundPolicyRoute,
   RemboursementRoute: RemboursementRoute,
   TermsRoute: TermsRoute,
+  ApiPublicLeadTelegramRoute: ApiPublicLeadTelegramRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
