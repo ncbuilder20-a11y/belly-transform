@@ -49,7 +49,7 @@ import do6a from "@/assets/do6a.jpg.asset.json";
 import do6b from "@/assets/do6b.jpg.asset.json";
 import heroWaistMobile from "@/assets/hero-waist-mobile.webp.asset.json";
 
-const PAY_URL = "https://pay.vimoreau.com/connect/form?site=pay.vimoreau.com&amount=249&symbol=INR&vat=0&riderect_success=https%3A%2F%2Fvimoreau.com%2Fpayment-failed&riderect_failed=https%3A%2F%2Fvimoreau.com%2Fpayment-failed&riderect_back=https%3A%2F%2Fvimoreau.com%2Fin&billing_country=IN";
+
 
 export const Route = createFileRoute("/in")({
   head: () => ({
