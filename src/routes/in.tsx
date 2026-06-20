@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
-import { useServerFn } from "@tanstack/react-start";
+
 import useEmblaCarousel from "embla-carousel-react";
 import {
   Shield, Star, Wind, Scissors, Dumbbell, HandHeart, Baby,
