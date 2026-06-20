@@ -7,7 +7,8 @@ import {
   Clock, Repeat, Smartphone, CheckCircle2, Mail, Lock,
   CreditCard, UserCircle, Play, Calendar, Menu, X, ChevronDown, ArrowRight,
   ChevronLeft, ChevronRight, Gift, MessageCircle,
-} from "lucide-react";
+} from "@/components/inline-icons";
+import { LazyMount } from "@/components/LazyMount";
 
 import heroWaistBg from "@/assets/hero-waist-bg.jpg";
 import symptomWaist from "@/assets/symptom-waist.jpg";
@@ -1255,23 +1256,23 @@ function LandingPage() {
       <Divider />
       <Guarantee />
       <Divider />
-      <SocialProof />
+      <LazyMount minHeight={700}><SocialProof /></LazyMount>
       <Divider />
-      <VisceralProblem />
-      <Symptoms />
-      <BeforeAfter />
-      <ProgramDescription />
-      <AuthorQuote />
-      <AuthorBio />
-      <ForWho />
-      <ProblemsGrid />
-      <ProgramAccordion />
-      <HowItWorks />
-      <Results />
-      <Simplicity />
-      <SecondCarousel />
-      <FinalCTA />
-      <FAQ />
+      <LazyMount minHeight={800}><VisceralProblem /></LazyMount>
+      <LazyMount minHeight={900}><Symptoms /></LazyMount>
+      <LazyMount minHeight={700}><BeforeAfter /></LazyMount>
+      <LazyMount minHeight={600}><ProgramDescription /></LazyMount>
+      <LazyMount minHeight={500}><AuthorQuote /></LazyMount>
+      <LazyMount minHeight={900}><AuthorBio /></LazyMount>
+      <LazyMount minHeight={700}><ForWho /></LazyMount>
+      <LazyMount minHeight={800}><ProblemsGrid /></LazyMount>
+      <LazyMount minHeight={900}><ProgramAccordion /></LazyMount>
+      <LazyMount minHeight={600}><HowItWorks /></LazyMount>
+      <LazyMount minHeight={600}><Results /></LazyMount>
+      <LazyMount minHeight={400}><Simplicity /></LazyMount>
+      <LazyMount minHeight={700}><SecondCarousel /></LazyMount>
+      <LazyMount minHeight={600}><FinalCTA /></LazyMount>
+      <LazyMount minHeight={700}><FAQ /></LazyMount>
       <Footer />
       <StickyBuyBar />
       <BuyModal />
