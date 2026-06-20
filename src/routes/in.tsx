@@ -116,7 +116,7 @@ const CHECKOUT_URL = "/in/checkout";
 
 function CTA({ children = "Start the program", className = "" }: { children?: ReactNode; className?: string }) {
   return (
-    <a href={CHECKOUT_URL} className={`btn-primary btn-primary-hover ${className}`}>
+    <a target="_top" href={CHECKOUT_URL} className={`btn-primary btn-primary-hover ${className}`}>
       {children}
       <ArrowRight size={16} strokeWidth={1.5} />
     </a>
@@ -170,7 +170,7 @@ function Header() {
         </nav>
         <div className="hidden md:block">
           {scrolled && (
-            <a href={CHECKOUT_URL} className="btn-primary btn-primary-hover" style={{ padding: "10px 22px", fontSize: "0.72rem" }}>
+            <a target="_top" href={CHECKOUT_URL} className="btn-primary btn-primary-hover" style={{ padding: "10px 22px", fontSize: "0.72rem" }}>
               Start the program
             </a>
           )}
@@ -187,7 +187,7 @@ function Header() {
                 {n.label}
               </a>
             ))}
-            <a href={CHECKOUT_URL} onClick={() => setOpen(false)} className="btn-primary btn-primary-hover mt-2 text-center">
+            <a target="_top" href={CHECKOUT_URL} onClick={() => setOpen(false)} className="btn-primary btn-primary-hover mt-2 text-center">
               Start the program
             </a>
           </div>
@@ -1090,7 +1090,7 @@ function StickyBuyBar() {
           <span className="text-xs md:text-sm line-through" style={{ color: "var(--color-ink-muted)" }}>₹2499</span>
           <span className="hidden sm:inline text-xs uppercase tracking-wider" style={{ color: "var(--color-ink-muted)" }}>· Instant access</span>
         </div>
-        <a href={CHECKOUT_URL} className="btn-primary btn-primary-hover shrink-0" style={{ padding: "12px 18px", fontSize: "0.72rem" }}>
+        <a target="_top" href={CHECKOUT_URL} className="btn-primary btn-primary-hover shrink-0" style={{ padding: "12px 18px", fontSize: "0.72rem" }}>
           Buy for ₹249
         </a>
       </div>
