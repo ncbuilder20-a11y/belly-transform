@@ -1215,10 +1215,9 @@ function BuyModal() {
 
             <button
               type="submit"
-              disabled={submitting}
               className="btn-primary btn-primary-hover w-full mt-5 justify-center"
             >
-              {submitting ? "Redirecting…" : "Continue to payment"}
+              Continue to payment
               <ArrowRight size={16} strokeWidth={1.5} />
             </button>
 
