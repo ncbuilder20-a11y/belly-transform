@@ -203,14 +203,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       {
         children: `window.addEventListener('load', function() {
-  if (window.location.pathname === '/in') return;
   var loadPixel = function() {
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','2074805606463580');fbq('track','PageView');
   };
+  // Defer heavily on /in (Indian mobile traffic) — pixel still fires within seconds, page becomes interactive first.
+  var delay = window.location.pathname === '/in' ? 3500 : 1500;
   if ('requestIdleCallback' in window) {
-    requestIdleCallback(loadPixel, { timeout: 2500 });
+    requestIdleCallback(loadPixel, { timeout: delay });
   } else {
-    setTimeout(loadPixel, 1500);
+    setTimeout(loadPixel, delay);
   }
 });`,
       },
