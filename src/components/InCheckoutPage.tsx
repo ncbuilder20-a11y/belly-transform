@@ -69,11 +69,8 @@ export function InCheckoutPage() {
               access to your personal cabinet, the schedule of live classes and Victoire's free bonuses.
             </p>
 
-            <form onSubmit={handleSubmit} action={PAY_URL} method="get" target="_top" className="mt-6">
-              {Object.entries(PAY_PARAMS).map(([k, v]) => (
-                <input key={k} type="hidden" name={k} value={v} />
-              ))}
-              <input type="hidden" name="order_id" value={orderIdRef.current || ""} />
+            <form onSubmit={handleSubmit} className="mt-6">
+
 
               <label htmlFor="checkout-email" className="label-eyebrow">Email address</label>
               <div className="mt-2">
