@@ -4,7 +4,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import {
   Shield, Star, Wind, Scissors, Dumbbell, HandHeart, Baby,
-  Clock, Repeat, Smartphone, CheckCircle2, Mail, Lock,
+  Clock, Repeat, Smartphone, CheckCircle2,
   CreditCard, UserCircle, Play, Calendar, Menu, X, ChevronDown, ArrowRight,
   ChevronLeft, ChevronRight, Gift, MessageCircle,
 } from "@/components/inline-icons";
