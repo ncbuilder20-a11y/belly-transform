@@ -113,11 +113,6 @@ function Eyebrow({ children }: { children: ReactNode }) {
 
 const CHECKOUT_URL = "/in/checkout";
 
-function openBuyModal() {
-  if (typeof window !== "undefined") {
-    window.location.assign(CHECKOUT_URL);
-  }
-}
 
 function CTA({ children = "Start the program", className = "" }: { children?: ReactNode; className?: string }) {
   return (
