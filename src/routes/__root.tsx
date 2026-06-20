@@ -146,7 +146,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     script.onload = function() {
       if (!window.silktideConsentManager) return;
       window.silktideConsentManager.init({
-    backdrop: { show: true },
+    backdrop: { show: false },
     icon: { position: "bottomLeft" },
     prompt: { position: "bottomRight" },
     consentTypes: [
