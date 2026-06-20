@@ -1093,9 +1093,8 @@ function StickyBuyBar() {
 function BuyModal() {
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
-  const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const sendLead = useServerFn(sendLeadToTelegram);
+
 
   useEffect(() => {
     const onOpen = () => {
