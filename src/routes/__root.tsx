@@ -93,7 +93,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" },
     ],
     styles: [
       {
@@ -112,6 +111,23 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
     ],
     scripts: [
+      {
+        children: `window.addEventListener('load', function() {
+  var loadFonts = function() {
+    if (document.getElementById('brand-fonts')) return;
+    var link = document.createElement('link');
+    link.id = 'brand-fonts';
+    link.rel = 'stylesheet';
+    link.href = 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap';
+    document.head.appendChild(link);
+  };
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(loadFonts, { timeout: 1500 });
+  } else {
+    setTimeout(loadFonts, 600);
+  }
+});`,
+      },
       {
         children: `window.addEventListener('load', function() {
   if (window.location.pathname === '/in') return;
