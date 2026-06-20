@@ -1,47 +1,31 @@
 import { Link } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 
-const PAY_URL = "https://pay.vimoreau.com/connect/form?site=pay.vimoreau.com&amount=249.00&symbol=INR&vat=0&riderect_success=https%3A%2F%2Fvimoreau.com%2Fpayment-failed&riderect_failed=https%3A%2F%2Fvimoreau.com%2Fpayment-failed&riderect_back=https%3A%2F%2Fvimoreau.com%2Fin&billing_country=IN";
+const PAY_ACTION = "https://pay.vimoreau.com/connect/form";
+const PAY_PARAMS: Record<string, string> = {
+  site: "pay.vimoreau.com",
+  amount: "249.00",
+  symbol: "INR",
+  vat: "0",
+  riderect_success: "https://vimoreau.com/payment-failed",
+  riderect_failed: "https://vimoreau.com/payment-failed",
+  riderect_back: "https://vimoreau.com/in",
+  billing_country: "IN",
+};
 
 export function InCheckoutPage() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState<string | null>(null);
-  const [submitting, setSubmitting] = useState(false);
-  const [fallbackUrl, setFallbackUrl] = useState<string | null>(null);
-
-  const notifyLead = (value: string) => {
-    try {
-      const payload = JSON.stringify({ email: value, source: "in" });
-      const blob = new Blob([payload], { type: "application/json" });
-      const sent = typeof navigator !== "undefined" && navigator.sendBeacon
-        ? navigator.sendBeacon("/api/public/lead-telegram", blob)
-        : false;
-      if (!sent) {
-        fetch("/api/public/lead-telegram", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: payload,
-          keepalive: true,
-        }).catch(() => {});
-      }
-    } catch { /* never block redirect */ }
-  };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
     const value = email.trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+      e.preventDefault();
       setError("Please enter a valid email address.");
       return;
     }
     setError(null);
-    setSubmitting(true);
-    setFallbackUrl(PAY_URL);
-    notifyLead(value);
-    if (typeof window !== "undefined") {
-      try { (window.top || window).location.href = PAY_URL; }
-      catch { window.location.href = PAY_URL; }
-    }
+    // let the browser perform a native GET submission to PAY_ACTION
   };
 
   return (
@@ -69,8 +53,16 @@ export function InCheckoutPage() {
               access to your personal cabinet, the schedule of live classes and Victoire's free bonuses.
             </p>
 
-            <form onSubmit={handleSubmit} className="mt-6">
-
+            <form
+              action={PAY_ACTION}
+              method="get"
+              target="_top"
+              onSubmit={handleSubmit}
+              className="mt-6"
+            >
+              {Object.entries(PAY_PARAMS).map(([k, v]) => (
+                <input key={k} type="hidden" name={k} value={v} />
+              ))}
 
               <label htmlFor="checkout-email" className="label-eyebrow">Email address</label>
               <div className="mt-2">
@@ -97,16 +89,8 @@ export function InCheckoutPage() {
               </div>
 
               <button type="submit" className="btn-primary btn-primary-hover w-full mt-5 justify-center">
-                {submitting ? "Redirecting…" : "Continue to payment →"}
+                Continue to payment →
               </button>
-
-              {fallbackUrl && (
-                <p className="mt-4 text-center text-sm">
-                  <a href={fallbackUrl} target="_top" rel="noopener" className="underline font-medium" style={{ color: "var(--color-terra)" }}>
-                    Click here if the payment page didn't open →
-                  </a>
-                </p>
-              )}
 
               <p className="mt-3 text-xs text-center" style={{ color: "var(--color-ink-muted)" }}>
                 🔒 Secure payment · 14-day money-back guarantee
