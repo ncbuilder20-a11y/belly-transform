@@ -1106,11 +1106,15 @@ function BuyModal() {
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [fallbackUrl, setFallbackUrl] = useState<string | null>(null);
 
 
   useEffect(() => {
     const onOpen = () => {
       setError(null);
+      setFallbackUrl(null);
+      setSubmitting(false);
       setOpen(true);
     };
     window.addEventListener("openBuyModal", onOpen as EventListener);
@@ -1131,19 +1135,12 @@ function BuyModal() {
 
   if (!open) return null;
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    const value = email.trim();
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-      setError("Please enter a valid email address.");
-      return;
-    }
-    setError(null);
-
+  const buildPayUrl = (value: string) => {
     const orderId = `${Date.now()}${Math.floor(Math.random() * 1000)}`;
-    const payUrl = `${PAY_URL}&order_id=${orderId}&billing_email=${encodeURIComponent(value)}`;
+    return `${PAY_URL}&order_id=${orderId}&billing_email=${encodeURIComponent(value)}`;
+  };
 
-    // Fire-and-forget the lead notification via sendBeacon — survives navigation.
+  const notifyLead = (value: string) => {
     try {
       const payload = JSON.stringify({ email: value, source: "in" });
       const blob = new Blob([payload], { type: "application/json" });
@@ -1151,7 +1148,6 @@ function BuyModal() {
         ? navigator.sendBeacon("/api/public/lead-telegram", blob)
         : false;
       if (!sent) {
-        // Fallback: fetch with keepalive so it survives navigation too.
         fetch("/api/public/lead-telegram", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -1160,11 +1156,43 @@ function BuyModal() {
         }).catch(() => {});
       }
     } catch {
-      // ignore — never block the redirect
+      /* never block redirect */
     }
+  };
 
-    // Redirect immediately — user sees no loading state.
-    window.location.href = payUrl;
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    const value = email.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+    setError(null);
+    setSubmitting(true);
+
+    const payUrl = buildPayUrl(value);
+    setFallbackUrl(payUrl);
+
+    notifyLead(value);
+
+    try { window.location.assign(payUrl); } catch { /* noop */ }
+
+    window.setTimeout(() => {
+      try {
+        if (document.visibilityState !== "hidden") {
+          window.location.href = payUrl;
+        }
+      } catch { /* noop */ }
+    }, 150);
+
+    window.setTimeout(() => {
+      try {
+        if (document.visibilityState !== "hidden") {
+          const w = window.open(payUrl, "_top");
+          if (!w) setSubmitting(false);
+        }
+      } catch { /* noop */ }
+    }, 1200);
   };
 
 
@@ -1200,12 +1228,20 @@ function BuyModal() {
             free bonuses.
           </p>
 
-          <form onSubmit={handleSubmit} className="mt-6">
+          {/* Native form action = bulletproof fallback if JS fails */}
+          <form
+            onSubmit={handleSubmit}
+            action={PAY_URL}
+            method="get"
+            target="_top"
+            className="mt-6"
+          >
             <label htmlFor="buy-email" className="label-eyebrow">Email address</label>
             <div className="mt-2 relative">
               <Mail size={16} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: "var(--color-ink-muted)" }} />
               <input
                 id="buy-email"
+                name="billing_email"
                 type="email"
                 inputMode="email"
                 autoComplete="email"
@@ -1229,9 +1265,23 @@ function BuyModal() {
               type="submit"
               className="btn-primary btn-primary-hover w-full mt-5 justify-center"
             >
-              Continue to payment
+              {submitting ? "Redirecting…" : "Continue to payment"}
               <ArrowRight size={16} strokeWidth={1.5} />
             </button>
+
+            {fallbackUrl && (
+              <p className="mt-4 text-center text-sm">
+                <a
+                  href={fallbackUrl}
+                  target="_top"
+                  rel="noopener"
+                  className="underline font-medium"
+                  style={{ color: "var(--color-terra)" }}
+                >
+                  Click here if the payment page didn't open →
+                </a>
+              </p>
+            )}
 
             <p className="mt-3 flex items-center justify-center gap-1.5 text-xs text-center" style={{ color: "var(--color-ink-muted)" }}>
               <Lock size={12} /> Secure payment · 14-day money-back guarantee
