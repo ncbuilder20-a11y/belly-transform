@@ -175,9 +175,9 @@ function Header() {
         </nav>
         <div className="hidden md:block">
           {scrolled && (
-            <button type="button" onClick={openBuyModal} className="btn-primary btn-primary-hover" style={{ padding: "10px 22px", fontSize: "0.72rem" }}>
+            <a href={CHECKOUT_URL} className="btn-primary btn-primary-hover" style={{ padding: "10px 22px", fontSize: "0.72rem" }}>
               Start the program
-            </button>
+            </a>
           )}
         </div>
         <button onClick={() => setOpen((v) => !v)} className="md:hidden p-2 -mr-2 shrink-0" aria-label="Menu">
