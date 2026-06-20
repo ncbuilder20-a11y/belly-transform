@@ -1122,15 +1122,23 @@ function BuyModal() {
     }
     setSubmitting(true);
     setError(null);
-    try {
-      await sendLead({ data: { email: value, source: "in" } });
-    } catch {
-      // Proceed to payment even if Telegram notification fails.
-    } finally {
-      setSubmitting(false);
-    }
+
     const orderId = `${Date.now()}${Math.floor(Math.random() * 1000)}`;
-    window.location.href = `${PAY_URL}&order_id=${orderId}&billing_email=${encodeURIComponent(value)}`;
+    const payUrl = `${PAY_URL}&order_id=${orderId}&billing_email=${encodeURIComponent(value)}`;
+
+    // Fire Telegram notification but never let it block the redirect.
+    // Race against a short timeout so users always reach the payment page,
+    // even if the server function is slow / fails.
+    try {
+      await Promise.race([
+        Promise.resolve(sendLead({ data: { email: value, source: "in" } })).catch(() => null),
+        new Promise((resolve) => setTimeout(resolve, 1200)),
+      ]);
+    } catch {
+      // ignore
+    }
+
+    window.location.href = payUrl;
   };
 
   return (
