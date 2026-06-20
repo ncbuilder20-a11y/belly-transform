@@ -8,7 +8,7 @@ import {
   CreditCard, UserCircle, Play, Calendar, Menu, X, ChevronDown, ArrowRight,
   ChevronLeft, ChevronRight, Gift, MessageCircle,
 } from "lucide-react";
-import { sendLeadToTelegram } from "@/lib/telegram-lead.functions";
+
 import heroWaistBg from "@/assets/hero-waist-bg.jpg";
 import symptomWaist from "@/assets/symptom-waist.jpg";
 import symptomBloating from "@/assets/symptom-bloating.jpg";
