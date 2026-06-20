@@ -109,7 +109,7 @@ function Eyebrow({ children }: { children: ReactNode }) {
 
 function CTA({ children = "Start the program", className = "" }: { children?: ReactNode; className?: string }) {
   return (
-    <a href={PAY_URL} className={`btn-primary btn-primary-hover ${className}`}>
+    <a href={PAY_URL} target="_top" rel="noopener" className={`btn-primary btn-primary-hover ${className}`}>
       {children}
       <ArrowRight size={16} strokeWidth={1.5} />
     </a>
@@ -163,7 +163,7 @@ function Header() {
         </nav>
         <div className="hidden md:block">
           {scrolled && (
-            <a href={PAY_URL} className="btn-primary btn-primary-hover" style={{ padding: "10px 22px", fontSize: "0.72rem" }}>
+            <a href={PAY_URL} target="_top" rel="noopener" className="btn-primary btn-primary-hover" style={{ padding: "10px 22px", fontSize: "0.72rem" }}>
               Start the program
             </a>
           )}
@@ -180,7 +180,7 @@ function Header() {
                 {n.label}
               </a>
             ))}
-            <a href={PAY_URL} onClick={() => setOpen(false)} className="btn-primary btn-primary-hover mt-2 text-center">
+            <a href={PAY_URL} target="_top" rel="noopener" onClick={() => setOpen(false)} className="btn-primary btn-primary-hover mt-2 text-center">
               Start the program
             </a>
           </div>
@@ -1073,7 +1073,7 @@ function StickyBuyBar() {
           <span className="text-xs md:text-sm line-through" style={{ color: "var(--color-ink-muted)" }}>$49</span>
           <span className="hidden sm:inline text-xs uppercase tracking-wider" style={{ color: "var(--color-ink-muted)" }}>· Instant access</span>
         </div>
-        <a href={PAY_URL} className="btn-primary btn-primary-hover shrink-0" style={{ padding: "12px 18px", fontSize: "0.72rem" }}>
+        <a href={PAY_URL} target="_top" rel="noopener" className="btn-primary btn-primary-hover shrink-0" style={{ padding: "12px 18px", fontSize: "0.72rem" }}>
           Buy for $4.99
         </a>
       </div>
