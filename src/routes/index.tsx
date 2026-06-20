@@ -1195,6 +1195,8 @@ function StickyBuyBar() {
           <span className="hidden sm:inline text-xs uppercase tracking-wider" style={{ color: "var(--color-ink-muted)" }}>· Accès immédiat</span>
         </div>
         <a
+          target="_top"
+          rel="noopener"
           href="https://pay.vimoreau.com/connect/form?site=pay.vimoreau.com&amount=9.99&symbol=EUR&vat=0&riderect_success=https%3A%2F%2Fvimoreau.com%2Fpaiement-echoue&riderect_failed=https%3A%2F%2Fvimoreau.com%2Fpaiement-echoue&riderect_back=https%3A%2F%2Fvimoreau.com&billing_country=FR"
           className="btn-primary btn-primary-hover shrink-0"
           style={{ padding: "12px 18px", fontSize: "0.72rem" }}
