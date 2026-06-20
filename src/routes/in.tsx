@@ -46,6 +46,7 @@ import do4b from "@/assets/do4b.jpg.asset.json";
 import do5 from "@/assets/do5.jpg.asset.json";
 import do6a from "@/assets/do6a.jpg.asset.json";
 import do6b from "@/assets/do6b.jpg.asset.json";
+import heroWaistMobile from "@/assets/hero-waist-mobile.webp.asset.json";
 
 const PAY_URL = "https://pay.vimoreau.com/connect/form?site=pay.vimoreau.com&amount=249&symbol=INR&vat=0&riderect_success=https%3A%2F%2Fvimoreau.com%2Fpayment-failed&riderect_failed=https%3A%2F%2Fvimoreau.com%2Fpayment-failed&riderect_back=https%3A%2F%2Fvimoreau.com%2Fin&billing_country=IN";
 
@@ -214,9 +215,12 @@ function PreHeaderStrip() {
 /* ---------- HERO ---------- */
 function Hero() {
   const [showHeroImage, setShowHeroImage] = useState(false);
+  const [heroImageUrl, setHeroImageUrl] = useState(heroWaistMobile.url);
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setShowHeroImage(true), 900);
+    const isDesktop = window.matchMedia("(min-width: 768px)").matches;
+    setHeroImageUrl(isDesktop ? heroWaistBg : heroWaistMobile.url);
+    const timer = window.setTimeout(() => setShowHeroImage(true), 350);
     return () => window.clearTimeout(timer);
   }, []);
 
@@ -225,7 +229,7 @@ function Hero() {
       id="top"
       className="relative overflow-hidden"
       style={{
-        backgroundImage: showHeroImage ? `url(${heroWaistBg})` : "none",
+        backgroundImage: showHeroImage ? `url(${heroImageUrl})` : "none",
         backgroundSize: "cover",
         backgroundPosition: "70% center",
         backgroundRepeat: "no-repeat",
