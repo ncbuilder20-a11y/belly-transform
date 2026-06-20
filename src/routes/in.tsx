@@ -213,12 +213,19 @@ function PreHeaderStrip() {
 
 /* ---------- HERO ---------- */
 function Hero() {
+  const [showHeroImage, setShowHeroImage] = useState(false);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => setShowHeroImage(true), 900);
+    return () => window.clearTimeout(timer);
+  }, []);
+
   return (
     <section
       id="top"
       className="relative overflow-hidden"
       style={{
-        backgroundImage: `url(${heroWaistBg})`,
+        backgroundImage: showHeroImage ? `url(${heroWaistBg})` : "none",
         backgroundSize: "cover",
         backgroundPosition: "70% center",
         backgroundRepeat: "no-repeat",
