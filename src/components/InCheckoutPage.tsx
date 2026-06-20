@@ -1,35 +1,13 @@
 import { Link } from "@tanstack/react-router";
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 
-const PAY_URL = "https://pay.vimoreau.com/connect/form";
-const PAY_PARAMS: Record<string, string> = {
-  site: "pay.vimoreau.com",
-  amount: "249",
-  symbol: "INR",
-  vat: "0",
-  riderect_success: "https://vimoreau.com/payment-failed",
-  riderect_failed: "https://vimoreau.com/payment-failed",
-  riderect_back: "https://vimoreau.com/in",
-  billing_country: "IN",
-};
-
-function buildPayUrl(email: string, orderId: string) {
-  const params = new URLSearchParams({ ...PAY_PARAMS, order_id: orderId, billing_email: email });
-  return `${PAY_URL}?${params.toString()}`;
-}
+const PAY_URL = "https://pay.vimoreau.com/connect/form?site=pay.vimoreau.com&amount=249.00&symbol=INR&vat=0&riderect_success=https%3A%2F%2Fvimoreau.com%2Fpayment-failed&riderect_failed=https%3A%2F%2Fvimoreau.com%2Fpayment-failed&riderect_back=https%3A%2F%2Fvimoreau.com%2Fin&billing_country=IN";
 
 export function InCheckoutPage() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [fallbackUrl, setFallbackUrl] = useState<string | null>(null);
-  const orderIdRef = useRef<string>(`${Date.now()}${Math.floor(Math.random() * 1000)}`);
-
-  useEffect(() => {
-    if (!orderIdRef.current) {
-      orderIdRef.current = `${Date.now()}${Math.floor(Math.random() * 1000)}`;
-    }
-  }, []);
 
   const notifyLead = (value: string) => {
     try {
@@ -50,18 +28,20 @@ export function InCheckoutPage() {
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     const value = email.trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-      e.preventDefault();
       setError("Please enter a valid email address.");
       return;
     }
     setError(null);
     setSubmitting(true);
-    const orderId = orderIdRef.current || `${Date.now()}${Math.floor(Math.random() * 1000)}`;
-    const payUrl = buildPayUrl(value, orderId);
-    setFallbackUrl(payUrl);
+    setFallbackUrl(PAY_URL);
     notifyLead(value);
+    if (typeof window !== "undefined") {
+      try { (window.top || window).location.href = PAY_URL; }
+      catch { window.location.href = PAY_URL; }
+    }
   };
 
   return (
@@ -89,11 +69,8 @@ export function InCheckoutPage() {
               access to your personal cabinet, the schedule of live classes and Victoire's free bonuses.
             </p>
 
-            <form onSubmit={handleSubmit} action={PAY_URL} method="get" target="_top" className="mt-6">
-              {Object.entries(PAY_PARAMS).map(([k, v]) => (
-                <input key={k} type="hidden" name={k} value={v} />
-              ))}
-              <input type="hidden" name="order_id" value={orderIdRef.current || ""} />
+            <form onSubmit={handleSubmit} className="mt-6">
+
 
               <label htmlFor="checkout-email" className="label-eyebrow">Email address</label>
               <div className="mt-2">
