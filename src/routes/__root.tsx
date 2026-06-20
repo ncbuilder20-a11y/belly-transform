@@ -93,15 +93,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "preconnect", href: "https://cdn.jsdelivr.net", crossOrigin: "" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" },
-      {
-        rel: "stylesheet",
-        id: "silktide-consent-manager-css",
-        href: "https://cdn.jsdelivr.net/gh/silktide/consent-manager@v2.0.0/silktide-consent-manager.css",
-        integrity: "sha384-IO1E/jCrQXyH5rwcI0SXP7OXw47JFqQNDQcKhbFvqnL2IunBxxwE2Ne5XyAmCqKs",
-        crossOrigin: "anonymous",
-      },
     ],
     styles: [
       {
@@ -121,14 +113,24 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     scripts: [
       {
-        src: "https://cdn.jsdelivr.net/gh/silktide/consent-manager@v2.0.0/silktide-consent-manager.js",
-        integrity: "sha384-j4NIMOecmtzMWe9GJADIIe5hTlHG63aiTQ/2XorW10RNyQJg+IU+xwFVDy45wBah",
-        crossOrigin: "anonymous",
-      },
-      {
         children: `window.addEventListener('load', function() {
-  if (!window.silktideConsentManager) return;
-  window.silktideConsentManager.init({
+  var loadConsentManager = function() {
+    var css = document.createElement('link');
+    css.rel = 'stylesheet';
+    css.id = 'silktide-consent-manager-css';
+    css.href = 'https://cdn.jsdelivr.net/gh/silktide/consent-manager@v2.0.0/silktide-consent-manager.css';
+    css.integrity = 'sha384-IO1E/jCrQXyH5rwcI0SXP7OXw47JFqQNDQcKhbFvqnL2IunBxxwE2Ne5XyAmCqKs';
+    css.crossOrigin = 'anonymous';
+    document.head.appendChild(css);
+
+    var script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/gh/silktide/consent-manager@v2.0.0/silktide-consent-manager.js';
+    script.integrity = 'sha384-j4NIMOecmtzMWe9GJADIIe5hTlHG63aiTQ/2XorW10RNyQJg+IU+xwFVDy45wBah';
+    script.crossOrigin = 'anonymous';
+    script.async = true;
+    script.onload = function() {
+      if (!window.silktideConsentManager) return;
+      window.silktideConsentManager.init({
     backdrop: { show: true },
     icon: { position: "bottomLeft" },
     prompt: { position: "bottomRight" },
@@ -173,7 +175,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         creditLinkAccessibleLabel: "Get this banner for free"
       }
     }
-  });
+      });
+    };
+    document.head.appendChild(script);
+  };
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(loadConsentManager, { timeout: 2500 });
+  } else {
+    setTimeout(loadConsentManager, 1200);
+  }
 });`,
       },
       {
