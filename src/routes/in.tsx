@@ -1120,33 +1120,42 @@ function BuyModal() {
 
   if (!open) return null;
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     const value = email.trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
       setError("Please enter a valid email address.");
       return;
     }
-    setSubmitting(true);
     setError(null);
 
     const orderId = `${Date.now()}${Math.floor(Math.random() * 1000)}`;
     const payUrl = `${PAY_URL}&order_id=${orderId}&billing_email=${encodeURIComponent(value)}`;
 
-    // Fire Telegram notification but never let it block the redirect.
-    // Race against a short timeout so users always reach the payment page,
-    // even if the server function is slow / fails.
+    // Fire-and-forget the lead notification via sendBeacon — survives navigation.
     try {
-      await Promise.race([
-        Promise.resolve(sendLead({ data: { email: value, source: "in" } })).catch(() => null),
-        new Promise((resolve) => setTimeout(resolve, 1200)),
-      ]);
+      const payload = JSON.stringify({ email: value, source: "in" });
+      const blob = new Blob([payload], { type: "application/json" });
+      const sent = typeof navigator !== "undefined" && navigator.sendBeacon
+        ? navigator.sendBeacon("/api/public/lead-telegram", blob)
+        : false;
+      if (!sent) {
+        // Fallback: fetch with keepalive so it survives navigation too.
+        fetch("/api/public/lead-telegram", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: payload,
+          keepalive: true,
+        }).catch(() => {});
+      }
     } catch {
-      // ignore
+      // ignore — never block the redirect
     }
 
+    // Redirect immediately — user sees no loading state.
     window.location.href = payUrl;
   };
+
 
   return (
     <div
