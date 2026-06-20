@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
-import { useServerFn } from "@tanstack/react-start";
+
 import useEmblaCarousel from "embla-carousel-react";
 import {
   Shield, Star, Wind, Scissors, Dumbbell, HandHeart, Baby,
@@ -8,7 +8,7 @@ import {
   CreditCard, UserCircle, Play, Calendar, Menu, X, ChevronDown, ArrowRight,
   ChevronLeft, ChevronRight, Gift, MessageCircle,
 } from "lucide-react";
-import { sendLeadToTelegram } from "@/lib/telegram-lead.functions";
+
 import heroWaistBg from "@/assets/hero-waist-bg.jpg";
 import symptomWaist from "@/assets/symptom-waist.jpg";
 import symptomBloating from "@/assets/symptom-bloating.jpg";
@@ -1093,9 +1093,8 @@ function StickyBuyBar() {
 function BuyModal() {
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
-  const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const sendLead = useServerFn(sendLeadToTelegram);
+
 
   useEffect(() => {
     const onOpen = () => {
@@ -1120,33 +1119,42 @@ function BuyModal() {
 
   if (!open) return null;
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     const value = email.trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
       setError("Please enter a valid email address.");
       return;
     }
-    setSubmitting(true);
     setError(null);
 
     const orderId = `${Date.now()}${Math.floor(Math.random() * 1000)}`;
     const payUrl = `${PAY_URL}&order_id=${orderId}&billing_email=${encodeURIComponent(value)}`;
 
-    // Fire Telegram notification but never let it block the redirect.
-    // Race against a short timeout so users always reach the payment page,
-    // even if the server function is slow / fails.
+    // Fire-and-forget the lead notification via sendBeacon — survives navigation.
     try {
-      await Promise.race([
-        Promise.resolve(sendLead({ data: { email: value, source: "in" } })).catch(() => null),
-        new Promise((resolve) => setTimeout(resolve, 1200)),
-      ]);
+      const payload = JSON.stringify({ email: value, source: "in" });
+      const blob = new Blob([payload], { type: "application/json" });
+      const sent = typeof navigator !== "undefined" && navigator.sendBeacon
+        ? navigator.sendBeacon("/api/public/lead-telegram", blob)
+        : false;
+      if (!sent) {
+        // Fallback: fetch with keepalive so it survives navigation too.
+        fetch("/api/public/lead-telegram", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: payload,
+          keepalive: true,
+        }).catch(() => {});
+      }
     } catch {
-      // ignore
+      // ignore — never block the redirect
     }
 
+    // Redirect immediately — user sees no loading state.
     window.location.href = payUrl;
   };
+
 
   return (
     <div
@@ -1207,10 +1215,9 @@ function BuyModal() {
 
             <button
               type="submit"
-              disabled={submitting}
               className="btn-primary btn-primary-hover w-full mt-5 justify-center"
             >
-              {submitting ? "Redirecting…" : "Continue to payment"}
+              Continue to payment
               <ArrowRight size={16} strokeWidth={1.5} />
             </button>
 
