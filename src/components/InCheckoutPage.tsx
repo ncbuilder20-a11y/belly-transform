@@ -25,7 +25,29 @@ export function InCheckoutPage() {
       return;
     }
     setError(null);
-    // let the browser perform a native GET submission to PAY_ACTION
+
+    // Fire Facebook Pixel Purchase event before redirecting to the payment page.
+    try {
+      const w = window as unknown as { fbq?: (...args: unknown[]) => void };
+      if (!w.fbq) {
+        /* eslint-disable */
+        // @ts-ignore
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        // @ts-ignore
+        window.fbq('init','2074805606463580');
+        /* eslint-enable */
+      }
+      (window as unknown as { fbq?: (...args: unknown[]) => void }).fbq?.('track', 'Purchase', { value: 3.5, currency: 'USD' });
+    } catch {
+      // ignore — never block the redirect
+    }
+
+    // Defer native form submission briefly so the pixel request can leave the browser.
+    e.preventDefault();
+    const form = e.currentTarget;
+    setTimeout(() => {
+      form.submit();
+    }, 350);
   };
 
   return (
