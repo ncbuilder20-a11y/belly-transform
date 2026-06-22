@@ -26,6 +26,23 @@ export function InCheckoutPage() {
     }
     setError(null);
 
+    // Notify Telegram (fire-and-forget, survives navigation via sendBeacon).
+    try {
+      const payload = JSON.stringify({ email: value, source: "in" });
+      const blob = new Blob([payload], { type: "application/json" });
+      const sent = navigator.sendBeacon?.("/api/public/lead-telegram", blob);
+      if (!sent) {
+        fetch("/api/public/lead-telegram", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: payload,
+          keepalive: true,
+        }).catch(() => {});
+      }
+    } catch {
+      // never block the redirect
+    }
+
     // Fire Facebook Pixel Purchase event before redirecting to the payment page.
     try {
       const w = window as unknown as { fbq?: (...args: unknown[]) => void };
@@ -42,13 +59,14 @@ export function InCheckoutPage() {
       // ignore — never block the redirect
     }
 
-    // Defer native form submission briefly so the pixel request can leave the browser.
+    // Defer native form submission briefly so pixel + beacon requests can leave the browser.
     e.preventDefault();
     const form = e.currentTarget;
     setTimeout(() => {
       form.submit();
     }, 350);
   };
+
 
   return (
     <main className="min-h-screen flex flex-col" style={{ background: "var(--color-bg)" }}>
